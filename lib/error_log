@@ -1,0 +1,144 @@
+[27-Aug-2016 15:56:43 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[27-Aug-2016 15:56:43 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(163): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('seguromovil')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[01-Dec-2016 20:29:08 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[01-Dec-2016 20:29:08 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[01-Dec-2016 23:34:53 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[01-Dec-2016 23:34:53 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[02-Dec-2016 13:39:05 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[02-Dec-2016 13:39:05 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[02-Dec-2016 17:28:00 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[02-Dec-2016 17:28:00 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[05-Dec-2016 01:36:19 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[05-Dec-2016 01:36:19 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[11-Dec-2016 03:00:21 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[11-Dec-2016 03:00:21 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[12-Dec-2016 04:36:29 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[12-Dec-2016 04:36:29 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[26-Dec-2016 17:09:50 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[26-Dec-2016 17:09:50 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[26-Dec-2016 17:10:28 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[26-Dec-2016 17:10:28 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[27-Dec-2016 20:42:40 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[27-Dec-2016 20:42:40 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
+[27-Dec-2016 20:43:00 Etc/GMT] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 281
+[27-Dec-2016 20:43:00 Etc/GMT] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect Error 1045: Access denied for user 'root'@'localhost' (using password: NO)' in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php:284
+Stack trace:
+#0 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(300): MysqliDb->connect()
+#1 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1815): MysqliDb->mysqli()
+#2 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(1427): MysqliDb->_prepareQuery()
+#3 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(600): MysqliDb->_buildQuery(1)
+#4 /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php(625): MysqliDb->get('categoria', 1, '*')
+#5 /home/seguroparavoscom/public_html/demo/lib/api.php(160): MysqliDb->getOne('categoria')
+#6 /home/seguroparavoscom/public_html/demo/lib/api.php(22): getCategoryByNameslug('segurobici')
+#7 {main}
+  thrown in /home/seguroparavoscom/public_html/demo/lib/MysqliDb.php on line 284
