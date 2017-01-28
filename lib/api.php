@@ -2,18 +2,13 @@
 require_once 'MysqliDb.php';
 require_once './PHPMailer-master/PHPMailerAutoload.php';
 require_once './helper.php';
+require_once '../config.php';
 
 $modelo    = isset ($_POST['modelo']) ? $_POST['modelo'] : null;
 $categoria = isset ($_POST['categoria']) ? $_POST['categoria'] : null;
 $accion    = isset ($_POST['accion']) ? $_POST['accion'] : null;
 
-$db = new MysqliDb (Array (
-	'host'     => 'localhost',
-	'username' => 'root', 
-	'password' => '',
-	'db'       => 'seguropa_db',
-	'charset'  => 'utf8'
-));
+$db = new MysqliDb ($dbsettings);
 
 if (!empty ($accion)) {
 	switch ($accion) {
