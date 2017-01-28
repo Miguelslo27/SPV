@@ -1,5 +1,5 @@
 <?php
-Array (
+$dbsettings = Array (
 	'host'     => 'localhost',
 	'username' => 'root', 
 	'password' => '',

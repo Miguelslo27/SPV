@@ -2,14 +2,9 @@
 require_once './lib/MysqliDb.php';
 require_once './lib/PHPMailer-master/PHPMailerAutoload.php';
 require_once './lib/helper.php';
+require_once 'config.php';
 
-$db = new MysqliDb (Array (
-	'host'     => 'localhost',
-	'username' => 'root', 
-	'password' => '',
-	'db'       => 'seguropa_db',
-	'charset'  => 'utf8'
-));
+$db = new MysqliDb ($dbsettings);
 
 $db->where('estado', 1);
 $categorias = $db->get('categoria');
