@@ -118,33 +118,6 @@
 			</div>
 		</div>
 
-		<!-- <div class="center razones" id="_razones">
-			<div class="sombra"></div>
-			<div class="content-inner">
-				<h2>10 Razones para contratar <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span></h2>	
-				<h4>#1 / CONTRATACIÓN ONLINE</h4>
-				<p>SegurosOnline te ofrece la posibilidad de contratar desde el primer momento. ¡Sin necesidad de registrarte! Introduces los datos, obtienes un presupuesto y contratas online o telefónicamente.</p>
-				<h4>#2 / FÁCIL</h4>
-				<p>Simple, sencilla, directa. Sin necesidad de largos cuestionarios, basta rellenar unos pocos datos, sin identificación personal alguna, pulsar aceptar y el resultado de la cotización salta a tu pantalla en unos pocos segundos. Las características funcionales y de ahorro de tiempo de SegurosOnline, le permitirán una introducción de datos mínima para la presentación de una oferta clara y comparable, facilitándote una toma de decisión. Ante cualquier duda ya sea por chat on-line o por línea telefónica lo guiarán gustosamente.</p>
-				<h4>#3 / ESTÁNDAR</h4>
-				<p>Te encuentras en un sitio web, dinámico, para que fácilmente puedas optar por la cobertura que más se adapta a su necesidad y posibilidad. Enlazamos online a las compañías de seguros seleccionadas, agilizamos los procesos y minimizamos su trabajo de búsqueda y comparación. El uso de un estándar del sistema te evita equívocos a la hora de comparar las diferentes coberturas. También te evita interpretaciones erróneas de coberturas, exclusiones, y las condiciones de diferentes contratos.</p>
-				<h4>#4 / ATENCIÓN PERSONALIZADA POST-CONTRATACIÓN</h4>
-				<p>Nuestros profesionales atienden y resuelven tus dudas de forma personalizada dedicándote todo el tiempo que precises. Además, SegurosOnline te ayudará a ser mucho más ágil en el tiempo de respuesta y acción ante emergencias o situaciones críticas. Nosotros siempre estamos y estaremos a tu lado, desde el momento que ingresas a nuestro sitio y fundamentalmente cuando te surja cualquier percance.</p>
-				<h4>#5 / GARANTÍA DE COMPROMISO</h4>
-				<p>El tener contratado un buen seguro es clave en tu tranquilidad. Trabajamos con las mejores aseguradoras para ofrecerte el seguro que mejor se adapte a tus necesidades. Tenemos en cuenta las opiniones de nuestros clientes y tanto para ellos como para ti hemos desarrollado segurosonline.com.uy, la web más eficaz e innovadora del mercado. Cuando es necesario solventar un problema, lo último que deseas es que te pongan obstáculos inoportunos, por ello, nuestros profesionales realizan todas las acciones necesarias para resolver con la mayor eficiencia tu problema.</p>
-				<h4>#6 / SOLVENCIA, PROFESIONALIDAD, FIABILIDAD Y CONFIANZA</h4>
-				<p>Uno de nuestros principales principios es la seriedad en todos nuestros actos, perseguimos con ello tu credibilidad. Porque la relación lleva a la confianza y el creciente conocimiento mutuo, nos permitirá ofrecerte los mejores productos. Nuestra experiencia y profesionalidad sumada a la solvencia de las compañías seleccionadas, primeras marcas nacionales y pertenecientes a los primeros grupos internacionales en seguros, es la garantía que tú necesitas.</p>
-				<h4>#7 / EXCELENTES COBERTURAS Y SERVICIOS</h4>
-				<p>La selección de la compañía, nuestras normas de calidad propias, la dedicación de nuestros profesionales, el conocimiento y estudio permanente del mercado nos permiten disponer de unas ofertas en coberturas adaptadas a sus necesidades. Todos nuestros procesos se revisan continua y exhaustivamente, incluyendo toda la documentación que le entregamos al contratar la póliza. Disponemos de diferentes tecnologías integradas entre sí para darte siempre el mejor servicio.</p>
-				<h4>#8 / SEGURIDAD</h4>
-				<p>El acceso a los servicios transaccionales y aquellos que incluyen la captura de datos personales cuando contratas con nosotros se realiza en un entorno seguro utilizando protocolos por demás confiables. El servidor seguro establece una conexión de modo que la información se transmite cifrada. Esto asegura que el contenido transmitido es sólo inteligible entre tu computadora y nuestro servidor.</p>
-				<h4>#9 / PRIVACIDAD</h4>
-				<p>Manteniendo siempre nuestra independencia, estamos integrados con las aseguradoras para permitir trabajar sin esfuerzos adicionales a nuestros profesionales con información online sobre las situaciones a analizar. Tenemos establecidos los mejores flujos de trabajo mediante la integración con los centros operativos de siniestros, respetando en todo momento tu privacidad.</p>
-				<h4>#10 / LA ÚLTIMA RAZÓN LA TIENES TÚ</h4>
-				<p>Esperamos que estas reflexiones te animen a dar el click y contratar a través de SegurosOnline el mejor seguro que se adapte a tus necesidades. Y si aún no te animas a contratar con nosotros te agradecemos el tiempo que le has dedicado a conocer nuestra Web.</p>
-			</div>
-		</div> -->
-
 		<div class="center contacto" id="_contacto">
 			<!-- <div class="sombra"></div> -->
 			<div class="content-inner">
