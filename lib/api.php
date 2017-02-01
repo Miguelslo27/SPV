@@ -4,8 +4,10 @@ require_once './PHPMailer-master/PHPMailerAutoload.php';
 require_once './helper.php';
 require_once '../config.php';
 
-$modelo    = isset ($_POST['modelo']) ? $_POST['modelo'] : null;
-$categoria = isset ($_POST['categoria']) ? $_POST['categoria'] : null;
+// $modelo    = isset ($_POST['modelo']) ? $_POST['modelo'] : null;
+$modelo    = isset ($_POST['data']) && isset ($_POST['data']['modelo']) ? $_POST['data']['modelo'] : null;
+$categoria = isset ($_POST['data']) && isset ($_POST['data']['categoria']) ? $_POST['data']['categoria'] : null;
+$seguros   = isset ($_POST['data']) && isset ($_POST['data']['seguros']) ? $_POST['data']['seguros'] : null;
 $accion    = isset ($_POST['accion']) ? $_POST['accion'] : null;
 
 $db = new MysqliDb ($dbsettings);
@@ -23,7 +25,7 @@ if (!empty ($accion)) {
 	<div class="content-inner">
 		<form id="cotizar">
 			<div class="left-side-title">
-				<span class="fa fa-mobile left-side-icon"></span>
+				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
 				<h3>
 					<span><?php echo str_replace(' ', '</span><span>', $categoria['nombre']) ?></span>
 				</h3>
@@ -53,74 +55,55 @@ if (!empty ($accion)) {
 		case 'contratar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
-			// Obtener los seguros
-			$seguros   = getProductsByCategory($categoria['id']);
+			// Obtener los atributos por id del seguro
+			$atributos = getAttributesByParentID($seguros);
 			?>
 
 <div class="center asegurar" id="_contratar">
 	<div class="content-inner">
-		<form action="/send-email.php">
+		<form id="contratar">
 			<div class="left-side-title">
-				<span class="fa fa-mobile left-side-icon"></span>
+				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
 				<h3>
-					<span>Seguro</span><strong>Móvil</strong>
+					<span><?php echo str_replace(' ', '</span><span>', $categoria['nombre']) ?></span>
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">2</span> Ingresá tus datos y contratalo</h2>
 				<h3>Ingresa tus datos personales</h3>
+
+				<!-- TODO Atributos modelo usuario -->
+				<?php foreach ($atributos as $atindx => $atributo) { ?>
+				<?php if ($atributo['modelo'] == 'usuario') : ?>
 				<div class="form-line border-bottom input-text input-large">
-					<label for="nombre">Nombre:</label>
-					<input type="text" id="nombre" name="nombre">
+					<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
+					<input type="text" id="<?php echo $atributo['atributo']; ?>" name="<?php echo $atributo['atributo']; ?>">
 				</div>
+				<?php endif; ?>
+				<?php } ?>
+				<div class="form-line border-bottom"></div>
+				<?php foreach ($atributos as $atindx => $atributo) { ?>
+				<?php if ($atributo['modelo'] == 'cotizacion') : ?>
 				<div class="form-line border-bottom input-text input-large">
-					<label for="apellido">Apellido:</label>
-					<input type="text" id="apellido" name="apellido">
+					<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
+					<input type="text" id="<?php echo $atributo['atributo']; ?>" name="<?php echo $atributo['atributo']; ?>">
 				</div>
+				<?php endif; ?>
+				<?php } ?>
+				<div class="form-line border-bottom"></div>
+				<?php foreach ($atributos as $atindx => $atributo) { ?>
+				<?php if ($atributo['modelo'] == 'poliza') : ?>
 				<div class="form-line border-bottom input-text input-large">
-					<label for="documento">Cédula:</label>
-					<input type="text" id="documento" name="documento">
+					<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
+					<input type="text" id="<?php echo $atributo['atributo']; ?>" name="<?php echo $atributo['atributo']; ?>">
 				</div>
-				<div class="form-line border-bottom input-text input-large">
-					<label for="numero-celular">Nº Celular:</label>
-					<input type="text" id="numero-celular" name="numero-celular">
-				</div>
-				<div class="form-line border-bottom input-text input-large">
-					<label for="marca-celular">Marca:</label>
-					<!-- <input type="text" id="marca-celular" name="marca-celular"> -->
-					<select name="marca-celular" id="marca-celular">
-						<option value="">Samsung</option>
-						<option value="">Apple</option>
-						<option value="">Haweii</option>
-						<option value="">HTC</option>
-					</select>
-				</div>
-				<div class="form-line border-bottom input-text input-large">
-					<label for="modelo-celular">Modelo:</label>
-					<select name="modelo-celular" id="modelo-celular">
-						<option value="">Samsung</option>
-						<option value="">Apple</option>
-						<option value="">Haweii</option>
-						<option value="">HTC</option>
-					</select>
-				</div>
-				<div class="form-line border-bottom input-text input-large">
-					<label for="imei-celular">IMEI:</label>
-					<input type="text" id="imei-celular" name="imei-celular">
-				</div>
-				<div class="form-line border-bottom input-text input-medium">
-					<label for="monto-asegurado">Monto Asegurado:</label>
-					<input type="text" id="monto-asegurado" name="monto-asegurado">
-				</div>
-				<div class="form-line border-bottom input-text input-medium">
-					<label for="precio-seguro">Precio del Seguro:</label>
-					<input type="text" id="precio-seguro" name="precio-seguro">
-				</div>
+				<?php endif; ?>
+				<?php } ?>
+				<div class="form-line border-bottom"></div>
 				<div class="form-line border-bottom input-text input-medium">
 					<label for="adjuntar">Adjuntar Comprobantes:</label>
 					<input type="text" id="adjuntar" name="adjuntar">
 				</div>
-				
 				<div class="form-line border-bottom input-check right-message">
 					<input type="checkbox" id="todo-riesgo" name="todo-riesgo">
 					<label for="todo-riesgo">Acepto los <a href="javasceript:void();">Términos y condiciones</a></label>
@@ -156,6 +139,10 @@ function getCategoryByNameslug($nameslug) {
 	return $categoria;
 }
 
+function getProductById($id) {
+	// TODO
+}
+
 function getProductsByCategory($catid) {
 	global $db;
 	// Traer los seruguros según la categoría
@@ -164,4 +151,20 @@ function getProductsByCategory($catid) {
 	$seguros = $db->get('seguro');
 	return $seguros;
 }
+
+function getAttributesByParentID($prods) {
+	global $db;
+	$atributos = $db->get('variable');
+	$atrs_aplicable = array();
+	// Traer los atributos según los seguros
+	foreach ($prods as $prod) {
+		foreach ($atributos as $atr) {
+			if (in_array($prod['id'], explode(',', $atr['aplicacion'])) && !in_array($atr, $atrs_aplicable)) {
+				$atrs_aplicable[] = $atr;
+			}
+		}
+	}
+	return $atrs_aplicable;
+}
+
 ?>

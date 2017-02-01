@@ -71,8 +71,7 @@ $(document).on('ready', function() {
 			} else {
 				// Check for ajax type hash
 				if($this.attr('href').indexOf('#/') != -1) {
-					console.log($('#' + $this.data('objetformid')));
-					processActionHash($this.attr('href'));
+					processActionHash($this.attr('href'), $('#' + $this.data('objetformid')));
 				} else {
 					document.location.href = $this.attr('href');
 				}
@@ -152,26 +151,63 @@ function showScrollUpCommand() {
 	}
 }
 
-function processActionHash(hash, data) {
+function processActionHash(hash, $form) {
 	document.location.hash = hash;
 	var requestData = hash.split('/');
 
 	$('header .navegacion').find('a.activo').removeClass('activo');
 	$('header .navegacion').find('a[href=#seguros]').addClass('activo');
 
+	var seguros    = null;
+	var cotizacion = null;
+	var usuario    = null;
+
+	if ($form && $form.length) {
+		seguros = [];
+		cotizacion = {};
+		usuario = {};
+		
+		if ($form.attr('id') == 'cotizar') {
+			$form.find('input:checked').each(function() {
+				seguros.push({
+					id: $(this).val(),
+					name: $(this).next().text()
+				});
+			});
+		}
+
+		if ($form.attr('id') == 'contratar') {
+			// TODO - Agarrar los atributos de cotización y crear el objeto
+			// TODO - Agarrar los atributos de usuario y crear el objeto
+			
+			// $form.find('input:checked').each(function() {
+			// 	seguros.push({
+			// 		id: $(this).val(),
+			// 		name: $(this).next().text()
+			// 	});
+			// });
+		}
+	}
+
 	var modelo    = (requestData[1] ? requestData[1] : null),
 		categoria = (requestData[2] ? requestData[2] : null),
 		accion    = (requestData[3] ? requestData[3] : null),
-		data      = (data ? data : (localStorage.getItem(modelo + '::' + categoria) ? JSON.parse(localStorage.getItem(modelo + '::' + categoria)) : {
+		data      = (localStorage.getItem(modelo + '::' + categoria) ? JSON.parse(localStorage.getItem(modelo + '::' + categoria)) : {
 			'modelo': modelo,
 			'categoria': categoria,
-			'cotizacion': [],
-			'seguro': {},
+			'seguros': [],
+			'cotizacion': {},
 			'usuario': {}
-		}));
+		});
+
+	data.seguros    = seguros ? seguros : data.seguros;
+	data.cotizacion = cotizacion ? cotizacion : data.cotizacion;
+	data.usuario    = usuario ? usuario : data.usuario;
 
 	// Set storage for this model
 	localStorage.setItem(modelo + '::' + categoria, JSON.stringify(data));
+
+	console.log(data);
 
 	switch(accion) {
 		case 'cotizar':
@@ -187,7 +223,7 @@ function processActionHash(hash, data) {
 			}, 500);
 
 			// Save form request promise
-			var form_html_req = getFormAction(modelo, categoria, accion);
+			var form_html_req = getFormAction(accion, data);
 				// On form request done ...
 				form_html_req.done(function(response, status, request) {
 					// On form request success
@@ -218,15 +254,14 @@ function processActionHash(hash, data) {
 	}
 }
 
-function getFormAction(modelo, categoria, accion) {
+function getFormAction(accion, data) {
 	// Get this ajax event
 	return $.ajax({
 		url: '/lib/api.php',
 		method: 'post',
 		data: {
-			modelo:    modelo,
-			categoria: categoria,
-			accion:    accion
+			accion:    accion,
+			data:      data
 		}
 	});
 }

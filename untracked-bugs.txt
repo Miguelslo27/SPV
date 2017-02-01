@@ -1,0 +1,9 @@
+Tasks a agregar a backlog:
+==========================
+
+** Una vez que estos bugs se pasen a backlog eliminarlos de esta lista **
+
+==========================
+
+- BUG - Siguiendo el proceso de contratación, si el usuario elige un seguro,
+  selecciona continuar y luego hace click en atrás, los seguros se comportan de forma errática
