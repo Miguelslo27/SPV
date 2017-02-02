@@ -194,6 +194,11 @@ function getAttributeHTML($atributo, $modelo) {
 			 name="<?php echo $atributo['atributo']; ?>">
 			<?php else : ?>
 			<select
+			 data-customtype="<?php echo $tipo; ?>"
+			 data-customdependency="<?php echo $dependencia; ?>"
+			 data-customadd="<?php echo $adhiere; ?>"
+			 data-customcurrency="<?php echo $moneda; ?>"
+			 data-customsave="<?php echo $cubre;5 ?>"
 			 id="<?php echo $atributo['atributo']; ?>"
 			 name="<?php echo $atributo['atributo']; ?>">
 			 	<?php foreach ($valores as $key => $val) { ?>
