@@ -732,18 +732,20 @@ h3.titulo-seguro span + span + span,
 }
 
 /* FORMULARIOS */
-.content-inner form {}
-.content-inner form h2 {
+.content-inner {
+	overflow: hidden;
+}
+.content-inner h2 {
 	border: none;
     padding: 0;
 }
-.content-inner form h3 {
+.content-inner h3 {
 	text-align: left;
 	padding-left: 60px;
 	font-weight: lighter;
 	font-family: "Raleway-regular";
 }
-.content-inner form .left-side-title {
+.content-inner .left-side-title {
     border-right: 1px solid #ccc;
     box-sizing: border-box;
     display: block;
@@ -751,7 +753,7 @@ h3.titulo-seguro span + span + span,
     text-align: center;
     width: 300px;
 }
-.content-inner form .left-side-icon {
+.content-inner .left-side-icon {
 	margin: 0 0 20px;
 	background: #9c3;
     border-radius: 100px;
@@ -761,10 +763,10 @@ h3.titulo-seguro span + span + span,
     line-height: 200px;
     width: 200px;
 }
-.content-inner form .left-side-icon.fa-mobile {
+.content-inner .left-side-icon.fa-mobile {
 	font-size: 130px;
 }
-.content-inner form .left-side-title h3 {
+.content-inner .left-side-title h3 {
 	font-family: "Raleway-Regular";
 	margin: 0;
     text-transform: uppercase;

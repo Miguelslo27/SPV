@@ -122,6 +122,29 @@ if (!empty ($accion)) {
 </div>
 		<?php
 		break;
+		case 'finalizar':
+			// Obtener la categoría
+			$categoria = getCategoryByNameslug($categoria);
+			// Obtener los seguros
+			// $seguros   = getProductsByCategory($categoria['id']);
+?>
+<div class="center contratar">
+	<div class="content-inner">
+		<form id="contratar">
+			<div class="left-side-title">
+				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
+				<h3>
+					<span><?php echo str_replace(' ', '</span><span>', $categoria['nombre']) ?></span>
+				</h3>
+			</div>
+			<div class="form-inputs right-side-inputs">
+				<h2><span class="number-globe">3</span> Confirá tu pago y ¡ya estás asegurado!</h2>
+			</div>
+		</form>
+	</div>
+</div>
+<?php
+		break;
 	}
 }
 
