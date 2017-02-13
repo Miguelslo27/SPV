@@ -5,8 +5,5 @@ Tasks a agregar a backlog:
 
 ==========================
 
-- BUG - Siguiendo el proceso de contratación, si el usuario elige un seguro,
+- BUG - Siguiendo el proceso de contratación, si el usuario elije un seguro,
   selecciona continuar y luego hace click en atrás, los seguros se comportan de forma errática
-- BUG - Cuando muestra el formulario con los atributos del seguro, los separa en tres bloques
-  Usuario, Cotización, Póliza. El tema es cuando no hay atributos para alguno de los bloques
-  igual se muestra el título, debería desaparecer el título si no hay atributos relacionados

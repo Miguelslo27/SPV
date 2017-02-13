@@ -54,9 +54,25 @@ if (!empty ($accion)) {
 
 		case 'contratar':
 			// Obtener la categoría
-			$categoria = getCategoryByNameslug($categoria);
+			$categoria      = getCategoryByNameslug($categoria);
 			// Obtener los atributos por id del seguro
-			$atributos = getAttributesByParentID($seguros);
+			$atributos      = getAttributesByParentID($seguros);
+			$atr_usuarios   = array ();
+			$atr_cotizacion = array ();
+			$atr_poliza     = array ();
+			foreach ($atributos as $atindx => $atr) {
+				switch ($atr['modelo']) {
+					case 'usuario':
+						$atr_usuarios[] = $atr;
+					break;
+					case 'cotizacion':
+						$atr_cotizacion[] = $atr;
+					break;
+					case 'poliza':
+						$atr_poliza[] = $atr;
+					break;
+				}
+			}
 			?>
 
 <div class="center asegurar" id="_contratar">
@@ -72,27 +88,31 @@ if (!empty ($accion)) {
 				<h2><span class="number-globe">2</span> Ingresá tus datos y contratalo</h2>
 
 				<!-- Atributos modelo usuario -->
+				<?php if (count($atr_usuarios)) : ?>
 				<h3>Ingresa tus datos personales</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
-				foreach ($atributos as $atindx => $atributo) {
-					getAttributeHTML($atributo, 'usuario');
+				foreach ($atr_usuarios as $atindx => $atributo) {
+					getAttributeHTML($atributo);
 				}
 				?>
+				<?php endif; ?>
 				<!-- Atributos modelo cotizacion -->
+				<?php if (count($atr_cotizacion)) : ?>
 				<h3>Ingresa datos de cotización</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
-				foreach ($atributos as $atindx => $atributo) {
-					getAttributeHTML($atributo, 'cotizacion');
+				foreach ($atr_cotizacion as $atindx => $atributo) {
+					getAttributeHTML($atributo);
 				}
 				?>
+				<?php endif; ?>
 				<!-- Atributos modelo poliza -->
 				<h3>Ingresa datos de la póliza</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
-				foreach ($atributos as $atindx => $atributo) {
-					getAttributeHTML($atributo, 'poliza');
+				foreach ($atr_poliza as $atindx => $atributo) {
+					getAttributeHTML($atributo);
 				}
 				?>
 				<div class="form-line border-bottom input-text input-medium">
@@ -189,49 +209,47 @@ function getAttributesByParentID($prods) {
 	return $atrs_aplicable;
 }
 
-function getAttributeHTML($atributo, $modelo) {
-	if ($atributo['modelo'] == $modelo) {
-		$validacion  = $atributo['validacion'];
-		$tipo        = $atributo['tipo'];
-		$valores     = null;
-		$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
-		$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
-		$moneda      = $atributo['moneda'] != '' ? $atributo['moneda'] : null;
-		$cubre       = $atributo['cubre'] ? $atributo['cubre'] : null;
+function getAttributeHTML($atributo) {
+	$validacion  = $atributo['validacion'];
+	$tipo        = $atributo['tipo'];
+	$valores     = null;
+	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
+	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
+	$moneda      = $atributo['moneda'] != '' ? $atributo['moneda'] : null;
+	$cubre       = $atributo['cubre'] ? $atributo['cubre'] : null;
 
-		if ($tipo == 'lista') {
-			$valores = json_decode($atributo['valores']);
-		}
-		?>
-		<div class="form-line border-bottom input-text input-large">
-			<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
-			<?php if ($tipo != 'lista') : ?>
-			<input
-			 type="text"
-			 data-customtype="<?php echo $tipo; ?>"
-			 data-customdependency="<?php echo $dependencia; ?>"
-			 data-customadd="<?php echo $adhiere; ?>"
-			 data-customcurrency="<?php echo $moneda; ?>"
-			 data-customsave="<?php echo $cubre;5 ?>"
-			 id="<?php echo $atributo['atributo']; ?>"
-			 name="<?php echo $atributo['atributo']; ?>">
-			<?php else : ?>
-			<select
-			 data-customtype="<?php echo $tipo; ?>"
-			 data-customdependency="<?php echo $dependencia; ?>"
-			 data-customadd="<?php echo $adhiere; ?>"
-			 data-customcurrency="<?php echo $moneda; ?>"
-			 data-customsave="<?php echo $cubre;5 ?>"
-			 id="<?php echo $atributo['atributo']; ?>"
-			 name="<?php echo $atributo['atributo']; ?>">
-			 	<?php foreach ($valores as $key => $val) { ?>
-			 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-			 	<?php } ?>
-			</select>
-			<?php endif; ?>
-		</div>
-		<?php
+	if ($tipo == 'lista') {
+		$valores = json_decode($atributo['valores']);
 	}
+	?>
+	<div class="form-line border-bottom input-text input-large">
+		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
+		<?php if ($tipo != 'lista') : ?>
+		<input
+		 type="text"
+		 data-customtype="<?php echo $tipo; ?>"
+		 data-customdependency="<?php echo $dependencia; ?>"
+		 data-customadd="<?php echo $adhiere; ?>"
+		 data-customcurrency="<?php echo $moneda; ?>"
+		 data-customsave="<?php echo $cubre;5 ?>"
+		 id="<?php echo $atributo['atributo']; ?>"
+		 name="<?php echo $atributo['atributo']; ?>">
+		<?php else : ?>
+		<select
+		 data-customtype="<?php echo $tipo; ?>"
+		 data-customdependency="<?php echo $dependencia; ?>"
+		 data-customadd="<?php echo $adhiere; ?>"
+		 data-customcurrency="<?php echo $moneda; ?>"
+		 data-customsave="<?php echo $cubre;5 ?>"
+		 id="<?php echo $atributo['atributo']; ?>"
+		 name="<?php echo $atributo['atributo']; ?>">
+		 	<?php foreach ($valores as $key => $val) { ?>
+		 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+		 	<?php } ?>
+		</select>
+		<?php endif; ?>
+	</div>
+	<?php
 }
 
 ?>
