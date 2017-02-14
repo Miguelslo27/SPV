@@ -2,6 +2,7 @@
 require_once 'MysqliDb.php';
 require_once './PHPMailer-master/PHPMailerAutoload.php';
 require_once './helper.php';
+require_once './functions.php';
 require_once '../config.php';
 
 // $modelo    = isset ($_POST['modelo']) ? $_POST['modelo'] : null;
@@ -145,7 +146,7 @@ if (!empty ($accion)) {
 		case 'finalizar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
-			// Obtener los seguros
+			// Obtener la póliza que se guardó en el paso anterior
 			// $seguros   = getProductsByCategory($categoria['id']);
 ?>
 <div class="center contratar">
@@ -158,7 +159,21 @@ if (!empty ($accion)) {
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">3</span> Confirá tu pago y ¡ya estás asegurado!</h2>
+				<h2><span class="number-globe">3</span> Confirá tu pago y <span class="green-style">¡ya estás asegurado!</span></h2>
+				<h3>Resumen de tu seguro</h3>
+				<div class="push-60-left">
+					<p>Seguro contratado: <strong>Seguro <span class="green-style">Móvil</span></strong>.</p>
+					<p>Cobertura: <strong>Protección de Pantalla</strong>.</p>
+				</div>
+				<h3 class="green-style">Solicitud enviada</h3>
+				<div class="form-line border-bottom"></div>
+				<h3 class="green-style">Muchas gracias</h3>
+				<div class="push-60-left">
+					<p>El equipo de <span class="site-title"><span class="t-seguro">Seguro</span><span class="t-para">Para</span><span class="t-vos">Vos</span></span>.</p>
+				</div>
+				<div class="form-line">
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="cotizar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -166,90 +181,6 @@ if (!empty ($accion)) {
 <?php
 		break;
 	}
-}
-
-function getCategoryByNameslug($nameslug) {
-	global $db;
-	// Traer la categoría según el nombre del registro
-	$db->where('nombre_sano', $nameslug);
-	$db->where('estado', 1);
-	$categoria = $db->getOne('categoria');
-	return $categoria;
-}
-
-function getProductById($id) {
-	// TODO
-}
-
-function getProductsByCategory($catid) {
-	global $db;
-	// Traer los seruguros según la categoría
-	$db->where('categoria', $catid);
-	$db->where('estado', 1);
-
-	$seguros = $db->get('seguro');
-	return $seguros;
-}
-
-function getAttributesByParentID($prods) {
-	global $db;
-	$db->where('estado', 1);
-
-	$atributos = $db->get('variable');
-	$atrs_aplicable = array();
-
-	// Traer los atributos según los seguros
-	foreach ($prods as $prod) {
-		foreach ($atributos as $atr) {
-			if (in_array($prod['id'], explode(',', $atr['aplicacion'])) && !in_array($atr, $atrs_aplicable)) {
-				$atrs_aplicable[] = $atr;
-			}
-		}
-	}
-	return $atrs_aplicable;
-}
-
-function getAttributeHTML($atributo) {
-	$validacion  = $atributo['validacion'];
-	$tipo        = $atributo['tipo'];
-	$valores     = null;
-	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
-	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
-	$moneda      = $atributo['moneda'] != '' ? $atributo['moneda'] : null;
-	$cubre       = $atributo['cubre'] ? $atributo['cubre'] : null;
-
-	if ($tipo == 'lista') {
-		$valores = json_decode($atributo['valores']);
-	}
-	?>
-	<div class="form-line border-bottom input-text input-large">
-		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
-		<?php if ($tipo != 'lista') : ?>
-		<input
-		 type="text"
-		 data-customtype="<?php echo $tipo; ?>"
-		 data-customdependency="<?php echo $dependencia; ?>"
-		 data-customadd="<?php echo $adhiere; ?>"
-		 data-customcurrency="<?php echo $moneda; ?>"
-		 data-customsave="<?php echo $cubre;5 ?>"
-		 id="<?php echo $atributo['atributo']; ?>"
-		 name="<?php echo $atributo['atributo']; ?>">
-		<?php else : ?>
-		<select
-		 data-customtype="<?php echo $tipo; ?>"
-		 data-customdependency="<?php echo $dependencia; ?>"
-		 data-customadd="<?php echo $adhiere; ?>"
-		 data-customcurrency="<?php echo $moneda; ?>"
-		 data-customsave="<?php echo $cubre;5 ?>"
-		 id="<?php echo $atributo['atributo']; ?>"
-		 name="<?php echo $atributo['atributo']; ?>">
-		 	<?php foreach ($valores as $key => $val) { ?>
-		 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-		 	<?php } ?>
-		</select>
-		<?php endif; ?>
-	</div>
-	<?php
 }
 
 ?>

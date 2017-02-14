@@ -210,8 +210,6 @@ function processActionHash(hash, $form) {
 	// Set storage for this model
 	localStorage.setItem(modelo + '::' + categoria, JSON.stringify(data));
 
-	console.log(data);
-
 	switch(accion) {
 		case 'cotizar':
 		case 'contratar':
@@ -244,6 +242,7 @@ function processActionHash(hash, $form) {
 				});
 		break;
 		case 'cancelar':
+		case 'terminar':
 			// Remove loading
 			$('#_' + modelo).find('.loading').remove();
 			if(form_html_req) {

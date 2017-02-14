@@ -61,7 +61,7 @@ h4 {
     padding: 0 10px;
 }
 p {
-	padding: 0 10px;
+	/*padding: 0 10px;*/
 	margin: 0 0 20px;
 	font-size: 14px;
 }
@@ -141,19 +141,24 @@ body {
 	transform: scale(1, -1);
 }
 .mirror img {}
+
 .site-title {
 	text-transform: uppercase;
 }
-.site-title .seguro {
+.site-title .seguro,
+.site-title .t-seguro {
 	font-family: 'Raleway-Bold';
 }
-.site-title .para {
+.site-title .para,
+.site-title .t-para {
 	font-family: 'Raleway-Light';
 }
-.site-title .vos {
+.site-title .vos,
+.site-title .t-vos {
 	font-family: 'Raleway-Bold';
 	color: #9c3;
 }
+
 .loading {
 	display: none;
 	background: rgba(255,255,255,.8);
@@ -180,6 +185,12 @@ body {
 .loading .fa {
 	margin: 10px 0;
 	animation: 1s linear 0s normal none infinite running fa-spin;
+}
+.push-60-left {
+	padding-left: 60px;
+}
+.green-style {
+	color: #9c3;
 }
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
