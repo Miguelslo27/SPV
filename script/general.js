@@ -243,6 +243,9 @@ function processActionHash(hash, $form) {
 		break;
 		case 'cancelar':
 		case 'terminar':
+			// Reset hash
+			document.location.hash = '#seguro';
+
 			// Remove loading
 			$('#_' + modelo).find('.loading').remove();
 			if(form_html_req) {
