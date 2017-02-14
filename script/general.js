@@ -92,11 +92,14 @@ $(document).on('ready', function() {
 
 	var selecteds = [];
 	$('body').on('click', 'input[type=checkbox]', function() {
-		// resest selecteds
+		// get all variables needed
 		var thisvalue     = parseInt($(this).val()),
 			isthischecked = $(this).prop('checked'),
 			$thisform     = $(this).parents('form'),
 			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalue + ']');
+
+		// resest selecteds
+		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop('checked', false);
 			
 		if($.inArray(thisvalue, selecteds) == -1 && isthischecked) {
 			selecteds.push(thisvalue);
