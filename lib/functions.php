@@ -25,6 +25,7 @@ function getProductsByCategory($catid) {
 function getAttributesByParentID($prods) {
 	global $db;
 	$db->where('estado', 1);
+	$db->orderBy('orden', 'asc');
 
 	$atributos = $db->get('variable');
 	$atrs_aplicable = array();
