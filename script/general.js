@@ -71,8 +71,7 @@ $(document).on('ready', function() {
 			} else {
 				// Check for ajax type hash
 				if($this.attr('href').indexOf('#/') != -1) {
-					console.log($('#' + $this.data('objetformid')));
-					processActionHash($this.attr('href'));
+					processActionHash($this.attr('href'), $('#' + $this.data('objetformid')));
 				} else {
 					document.location.href = $this.attr('href');
 				}
@@ -93,11 +92,14 @@ $(document).on('ready', function() {
 
 	var selecteds = [];
 	$('body').on('click', 'input[type=checkbox]', function() {
-		// resest selecteds
+		// get all variables needed
 		var thisvalue     = parseInt($(this).val()),
 			isthischecked = $(this).prop('checked'),
 			$thisform     = $(this).parents('form'),
 			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalue + ']');
+
+		// resest selecteds
+		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop('checked', false);
 			
 		if($.inArray(thisvalue, selecteds) == -1 && isthischecked) {
 			selecteds.push(thisvalue);
@@ -152,31 +154,105 @@ function showScrollUpCommand() {
 	}
 }
 
-function processActionHash(hash, data) {
+function processActionHash(hash, $form) {
 	document.location.hash = hash;
 	var requestData = hash.split('/');
 
 	$('header .navegacion').find('a.activo').removeClass('activo');
 	$('header .navegacion').find('a[href=#seguros]').addClass('activo');
 
+	var seguros    = null;
+	var cotizacion = null;
+	var usuario    = null;
+
+	if ($form && $form.length) {
+		seguros = [];
+		cotizacion = {};
+		usuario = {};
+
+		if ($form.attr('id') == 'asegurar') {
+			$form.find('input:checked').each(function() {
+				seguros.push({
+					id: $(this).val(),
+					name: $(this).next().text()
+				});
+			});
+		}
+
+		if ($form.attr('id') == 'cotizar') {
+			var requiredfields = false;
+			
+			$form
+			 .find('input, select, textarea')
+			 .each(function(index, input) {
+			 	if(($(input).data('customrequired') && $.trim($(input).val()) == '') || requiredfields) {
+			 		requiredfields = true;
+			 		return false;
+			 	}
+			 });
+
+			if (requiredfields) {
+				// Show error
+				$form.find('.required-message .required-fields-error').remove();
+				$form.find('.required-message').append('<div class="required-fields-error">Hay campos requeridos sin completar</div>');
+
+				// Animate up to show the message
+				$('html, body').animate({
+					scrollTop: $('#_seguro').offset().top - 50
+				}, 500);
+
+				// Change hash to `erve the current location
+				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
+
+				return;
+			}
+
+			// TODO - Agarrar los atributos de cotización y crear el objeto
+			// TODO - Agarrar los atributos de usuario y crear el objeto
+			
+			// $form.find('input:checked').each(function() {
+			// 	seguros.push({
+			// 		id: $(this).val(),
+			// 		name: $(this).next().text()
+			// 	});
+			// });
+		}
+
+		if ($form.attr('id') == 'contratar') {
+			// TODO - Agarrar los atributos de cotización y crear el objeto
+			// TODO - Agarrar los atributos de usuario y crear el objeto
+			
+			// $form.find('input:checked').each(function() {
+			// 	seguros.push({
+			// 		id: $(this).val(),
+			// 		name: $(this).next().text()
+			// 	});
+			// });
+		}
+	}
+
 	var modelo    = (requestData[1] ? requestData[1] : null),
 		categoria = (requestData[2] ? requestData[2] : null),
 		accion    = (requestData[3] ? requestData[3] : null),
-		data      = (data ? data : (localStorage.getItem(modelo + '::' + categoria) ? JSON.parse(localStorage.getItem(modelo + '::' + categoria)) : {
+		data      = (localStorage.getItem(modelo + '::' + categoria) ? JSON.parse(localStorage.getItem(modelo + '::' + categoria)) : {
 			'modelo': modelo,
 			'categoria': categoria,
-			'cotizacion': [],
-			'seguro': {},
+			'seguros': [],
+			'cotizacion': {},
 			'usuario': {}
-		}));
+		});
+
+	data.seguros    = seguros ? seguros : data.seguros;
+	data.cotizacion = cotizacion ? cotizacion : data.cotizacion;
+	data.usuario    = usuario ? usuario : data.usuario;
 
 	// Set storage for this model
 	localStorage.setItem(modelo + '::' + categoria, JSON.stringify(data));
 
 	switch(accion) {
+		case 'asegurar':
 		case 'cotizar':
 		case 'contratar':
-		case 'finalizar':
 			// Set loading
 			$('#_' + modelo).append('<div class="loading"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i><br><span>Cargando <h3 class="titulo-seguro"><span>' + modelo + '</span><strong>' + categoria.replace('seguro', '') + '</strong></h3></span><br><span><a href="#/' + modelo + '/' + categoria + '/cancelar">Cancelar</a></span></div>');
 			$('#_' + modelo).find('.loading').fadeIn();
@@ -187,7 +263,7 @@ function processActionHash(hash, data) {
 			}, 500);
 
 			// Save form request promise
-			var form_html_req = getFormAction(modelo, categoria, accion);
+			var form_html_req = getFormAction(accion, data);
 				// On form request done ...
 				form_html_req.done(function(response, status, request) {
 					// On form request success
@@ -205,6 +281,10 @@ function processActionHash(hash, data) {
 				});
 		break;
 		case 'cancelar':
+		case 'terminar':
+			// Reset hash
+			document.location.hash = '#seguro';
+
 			// Remove loading
 			$('#_' + modelo).find('.loading').remove();
 			if(form_html_req) {
@@ -218,15 +298,14 @@ function processActionHash(hash, data) {
 	}
 }
 
-function getFormAction(modelo, categoria, accion) {
+function getFormAction(accion, data) {
 	// Get this ajax event
 	return $.ajax({
 		url: '/lib/api.php',
 		method: 'post',
 		data: {
-			modelo:    modelo,
-			categoria: categoria,
-			accion:    accion
+			accion:    accion,
+			data:      data
 		}
 	});
 }

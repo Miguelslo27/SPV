@@ -61,7 +61,7 @@ h4 {
     padding: 0 10px;
 }
 p {
-	padding: 0 10px;
+	/*padding: 0 10px;*/
 	margin: 0 0 20px;
 	font-size: 14px;
 }
@@ -141,18 +141,30 @@ body {
 	transform: scale(1, -1);
 }
 .mirror img {}
+
 .site-title {
 	text-transform: uppercase;
 }
-.site-title .seguro {
+.site-title .seguro,
+.site-title .t-seguro {
 	font-family: 'Raleway-Bold';
 }
-.site-title .para {
+.site-title .para,
+.site-title .t-para {
 	font-family: 'Raleway-Light';
 }
-.site-title .vos {
+.site-title .vos,
+.site-title .t-vos {
 	font-family: 'Raleway-Bold';
 	color: #9c3;
+}
+.required-fields-error {
+	background: #fed2d3;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px;
+	color: #b20000;
+	border: 1px solid #b20000;
 }
 .loading {
 	display: none;
@@ -180,6 +192,12 @@ body {
 .loading .fa {
 	margin: 10px 0;
 	animation: 1s linear 0s normal none infinite running fa-spin;
+}
+.push-60-left {
+	padding-left: 60px;
+}
+.green-style {
+	color: #9c3;
 }
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
@@ -732,13 +750,20 @@ h3.titulo-seguro span + span + span,
 }
 
 /* FORMULARIOS */
-.content-inner form {}
-.content-inner form h2 {
+.content-inner {
+	overflow: hidden;
+}
+.content-inner h2 {
 	border: none;
     padding: 0;
 }
-.content-inner form h3 {}
-.content-inner form .left-side-title {
+.content-inner h3 {
+	text-align: left;
+	padding-left: 60px;
+	font-weight: lighter;
+	font-family: "Raleway-regular";
+}
+.content-inner .left-side-title {
     border-right: 1px solid #ccc;
     box-sizing: border-box;
     display: block;
@@ -746,7 +771,7 @@ h3.titulo-seguro span + span + span,
     text-align: center;
     width: 300px;
 }
-.content-inner form .left-side-icon {
+.content-inner .left-side-icon {
 	margin: 0 0 20px;
 	background: #9c3;
     border-radius: 100px;
@@ -756,10 +781,10 @@ h3.titulo-seguro span + span + span,
     line-height: 200px;
     width: 200px;
 }
-.content-inner form .left-side-icon.fa-mobile {
+.content-inner .left-side-icon.fa-mobile {
 	font-size: 130px;
 }
-.content-inner form .left-side-title h3 {
+.content-inner .left-side-title h3 {
 	font-family: "Raleway-Regular";
 	margin: 0;
     text-transform: uppercase;
@@ -778,6 +803,14 @@ h3.titulo-seguro span + span + span,
 .content-inner form .form-inputs .form-line {
 	overflow: hidden;
 }
+.content-inner form .form-inputs .form-line.input-required label {
+	color: #b20000;
+}
+.content-inner form .form-inputs .form-line.input-required label .required {
+	font-size: 22px;
+	font-weight: bold;
+	color: #b20000;
+}
 .content-inner form .form-inputs .border-bottom {
 	border-bottom: 2px solid #999;
 }
@@ -791,6 +824,10 @@ h3.titulo-seguro span + span + span,
 	font-size: 16px;
     line-height: 28px;
     padding: 0;
+}
+.content-inner form .form-inputs .form-line.required-message p {
+	color: #b20000;
+	margin-bottom: 0;
 }
 .content-inner form .form-inputs .form-line strong {
 	color: #9c3;
