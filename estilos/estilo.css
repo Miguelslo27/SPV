@@ -158,7 +158,14 @@ body {
 	font-family: 'Raleway-Bold';
 	color: #9c3;
 }
-
+.required-fields-error {
+	background: #fed2d3;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px;
+	color: #b20000;
+	border: 1px solid #b20000;
+}
 .loading {
 	display: none;
 	background: rgba(255,255,255,.8);
@@ -796,6 +803,14 @@ h3.titulo-seguro span + span + span,
 .content-inner form .form-inputs .form-line {
 	overflow: hidden;
 }
+.content-inner form .form-inputs .form-line.input-required label {
+	color: #b20000;
+}
+.content-inner form .form-inputs .form-line.input-required label .required {
+	font-size: 22px;
+	font-weight: bold;
+	color: #b20000;
+}
 .content-inner form .form-inputs .border-bottom {
 	border-bottom: 2px solid #999;
 }
@@ -809,6 +824,10 @@ h3.titulo-seguro span + span + span,
 	font-size: 16px;
     line-height: 28px;
     padding: 0;
+}
+.content-inner form .form-inputs .form-line.required-message p {
+	color: #b20000;
+	margin-bottom: 0;
 }
 .content-inner form .form-inputs .form-line strong {
 	color: #9c3;

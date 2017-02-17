@@ -23,7 +23,7 @@ foreach ($categorias as $categoria) {
 				<i class="fa fa-check-circle"></i><?php echo str_replace (array (', ', '[', ']'), array ('</li><li><i class="fa fa-check-circle"></i>', '<br><span class="comentario">', '</span>'), $categoria['caracteristicas']); ?>
 			</li>
 		</ul>
-		<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn">Contratar <span class="fa fa-angle-right"></span></a>
+		<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/asegurar" class="btn">Contratar <span class="fa fa-angle-right"></span></a>
 	</div>
 	<?php
 }
