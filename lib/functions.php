@@ -48,14 +48,14 @@ function getAttributeHTML($atributo) {
 	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
 	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
 	$moneda      = $atributo['moneda'] != '' ? $atributo['moneda'] : null;
-	$cubre       = $atributo['cubre'] ? $atributo['cubre'] : null;
+	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
 
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
 	}
 	?>
-	<div class="form-line border-bottom input-text input-large">
-		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>:</label>
+	<div class="form-line border-bottom input-text input-large <?php echo ($requerido == 'true' ? 'input-required' : ''); ?>">
+		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
 		<?php if ($tipo != 'lista') : ?>
 		<input
 		 type="text"
@@ -63,7 +63,7 @@ function getAttributeHTML($atributo) {
 		 data-customdependency="<?php echo $dependencia; ?>"
 		 data-customadd="<?php echo $adhiere; ?>"
 		 data-customcurrency="<?php echo $moneda; ?>"
-		 data-customsave="<?php echo $cubre;5 ?>"
+		 data-customrequired="<?php echo $requerido ?>"
 		 id="<?php echo $atributo['atributo']; ?>"
 		 name="<?php echo $atributo['atributo']; ?>">
 		<?php else : ?>

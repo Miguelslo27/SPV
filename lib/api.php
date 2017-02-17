@@ -15,7 +15,7 @@ $db = new MysqliDb ($dbsettings);
 
 if (!empty ($accion)) {
 	switch ($accion) {
-		case 'cotizar':
+		case 'asegurar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
 			// Obtener los seguros
@@ -24,7 +24,7 @@ if (!empty ($accion)) {
 
 <div class="center contratar">
 	<div class="content-inner">
-		<form id="cotizar">
+		<form id="asegurar">
 			<div class="left-side-title">
 				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
 				<h3>
@@ -42,7 +42,7 @@ if (!empty ($accion)) {
 				<?php } ?>
 				<div class="form-line">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="btn left"><span class="fa fa-angle-left"></span><span>Cancelar</span></a>
-					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn" data-objetformid="asegurar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -53,7 +53,7 @@ if (!empty ($accion)) {
 			<?php
 		break;
 
-		case 'contratar':
+		case 'cotizar':
 			// Obtener la categoría
 			$categoria      = getCategoryByNameslug($categoria);
 			// Obtener los atributos por id del seguro
@@ -78,7 +78,7 @@ if (!empty ($accion)) {
 
 <div class="center asegurar" id="_contratar">
 	<div class="content-inner">
-		<form id="contratar">
+		<form id="cotizar">
 			<div class="left-side-title">
 				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
 				<h3>
@@ -87,7 +87,9 @@ if (!empty ($accion)) {
 			</div>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">2</span> Ingresá tus datos y contratalo</h2>
-
+				<div class="form-line required-message">
+					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
+				</div>
 				<!-- Atributos modelo usuario -->
 				<?php if (count($atr_usuarios)) : ?>
 				<h3>Ingresa tus datos personales</h3>
@@ -133,8 +135,8 @@ if (!empty ($accion)) {
 					</select>
 				</div>
 				<div class="form-line">
-					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn left"><span class="fa fa-angle-left"></span><span>Atrás</span></a>
-					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/finalizar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/asegurar" class="btn left"><span class="fa fa-angle-left"></span><span>Atrás</span></a>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -143,7 +145,7 @@ if (!empty ($accion)) {
 </div>
 		<?php
 		break;
-		case 'finalizar':
+		case 'contratar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
 			// Obtener la póliza que se guardó en el paso anterior
@@ -172,7 +174,7 @@ if (!empty ($accion)) {
 					<p>El equipo de <span class="site-title"><span class="t-seguro">Seguro</span><span class="t-para">Para</span><span class="t-vos">Vos</span></span>.</p>
 				</div>
 				<div class="form-line">
-					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="cotizar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="contratar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
 		</form>
