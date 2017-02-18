@@ -147,6 +147,8 @@ body {
 }
 .site-title .seguro,
 .site-title .t-seguro {
+	border: none !important;
+	float: none !important;
 	font-family: 'Raleway-Bold';
 }
 .site-title .para,
@@ -418,6 +420,10 @@ header.compressed .navegacion a.fa {
     border: 1px solid #fff;
     box-sizing: border-box;
     position: relative;
+}
+.no-category-content {
+	text-align: center;
+	padding: 160px 0 150px;
 }
 .seguros .sombra {
 	background: #FFF;

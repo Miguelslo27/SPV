@@ -55,6 +55,7 @@
 						include 'seguros.php';
 						?>
 					</div>
+					<div class="formularios"></div>
 				</div>
 			</div>
 		</div>
