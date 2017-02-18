@@ -12,9 +12,3 @@ Tasks a agregar a backlog:
 
 - BUG - Si la categoría tiene tres palabras quedan Negrita, Normal, Negrita Verde, si tiene dos queda
   negrita y normal - Intentar que cuando tiene dos palabras, se vean Negrita y Negrita Verde
-
-- BUG - Mostrar mensaje cuando no hay categorías
-
-- BUG - Mostrar mensaje cuando no hay Seguros
-
-- BUG - Mostrar mensaje si no hay Atributos
