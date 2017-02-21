@@ -96,7 +96,16 @@ $(document).on('ready', function() {
 		var thisvalue     = parseInt($(this).val()),
 			isthischecked = $(this).prop('checked'),
 			$thisform     = $(this).parents('form'),
-			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalue + ']');
+			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalue + ']'),
+			$formtables   = $thisform.parent().find('.tablas:visible'),
+			$thistable    = $thisform.parent().find('#tablas-seg' + thisvalue);
+
+		$formtables.slideUp();
+
+		if (isthischecked) {
+			$thistable.slideDown();
+			$formtables = $thisform.parent().find('.tablas:visible');
+		}
 
 		// resest selecteds
 		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop('checked', false);
