@@ -31,6 +31,7 @@ if (!empty ($accion)) {
 					<span><?php echo str_replace(' ', '</span><span>', $categoria['nombre']) ?></span>
 				</h3>
 			</div>
+			<?php if (count($seguros)) : ?>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">1</span> Elegí tu seguro y cotizalo</h2>
 				<?php foreach ($seguros as $seguro) { ?>
@@ -45,6 +46,13 @@ if (!empty ($accion)) {
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn" data-objetformid="asegurar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
+			<?php else : ?>
+			<div class="no-category-content">
+				<p>Aún no hay seguros para contratar, por favor, comunícate con nosotros por cualquier consulta <a href="#contacto" class="green-style">aquí</a>.</p>
+				<p>El equpipo de <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span>.</p>
+				<p><a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="green-style">Click aquí para cerrar</a>.</p>
+			</div>
+			<?php endif; ?>
 			<div class="clear"></div>
 		</form>
 	</div>
@@ -58,6 +66,7 @@ if (!empty ($accion)) {
 			$categoria      = getCategoryByNameslug($categoria);
 			// Obtener los atributos por id del seguro
 			$atributos      = getAttributesByParentID($seguros);
+
 			$atr_usuarios   = array ();
 			$atr_cotizacion = array ();
 			$atr_poliza     = array ();
@@ -85,6 +94,7 @@ if (!empty ($accion)) {
 					<span><?php echo str_replace(' ', '</span><span>', $categoria['nombre']) ?></span>
 				</h3>
 			</div>
+			<?php if (count($atributos)) : ?> 
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">2</span> Ingresá tus datos y contratalo</h2>
 				<div class="form-line required-message">
@@ -139,6 +149,13 @@ if (!empty ($accion)) {
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
+			<?php else : ?>
+			<div class="no-category-content">
+				<p>Aún no un formulario para cotizar, por favor, comunícate con nosotros por cualquier consulta <a href="#contacto" class="green-style">aquí</a>.</p>
+				<p>El equpipo de <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span>.</p>
+				<p><a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="green-style">Click aquí para cerrar</a>.</p>
+			</div>
+			<?php endif; ?>
 			<div class="clear"></div>
 		</form>
 	</div>
