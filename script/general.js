@@ -180,12 +180,28 @@ function processActionHash(hash, $form) {
 		usuario = {};
 
 		if ($form.attr('id') == 'asegurar') {
-			$form.find('input:checked').each(function() {
-				seguros.push({
-					id: $(this).val(),
-					name: $(this).next().text()
+			if ($form.find('input:checked').length) {
+				$form.find('input:checked').each(function() {
+					seguros.push({
+						id: $(this).val(),
+						name: $(this).next().text()
+					});
 				});
-			});
+			} else {
+				// Show error
+				$form.find('.required-message .required-fields-error').remove();
+				$form.find('.required-message').append('<div class="required-fields-error">Debes seleccionar un tipo de cobertura para continuar.</div>');
+
+				// Animate up to show the message
+				$('html, body').animate({
+					scrollTop: $('#_seguro').offset().top - 50
+				}, 500);
+
+				// Change hash to `erve the current location
+				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/asegurar';
+
+				return;
+			}
 		}
 
 		if ($form.attr('id') == 'cotizar') {

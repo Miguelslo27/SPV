@@ -34,6 +34,7 @@ if (!empty ($accion)) {
 			<?php if (count($seguros)) : ?>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">1</span> Elegí tu seguro y cotizalo</h2>
+				<div class="form-line required-message"></div>
 				<?php foreach ($seguros as $seguro) { ?>
 					<?php $seguro_sano = strtolower (sanear_string(str_replace (' ', '_', $seguro['nombre']))) ?>
 					<div class="form-line border-bottom input-check">
