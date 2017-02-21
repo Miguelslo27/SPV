@@ -55,6 +55,54 @@ if (!empty ($accion)) {
 			<?php endif; ?>
 			<div class="clear"></div>
 		</form>
+		<?php foreach ($seguros as $seguro) { ?>
+			<?php
+				$coberturas = json_decode($seguro['coberturas'], true);
+				$premios    = json_decode($seguro['premio_anual'], true);
+			?>
+			<?php if (count($coberturas) && count($premios)) : ?>
+			<div id="tablas-seg<?php echo $seguro['id']; ?>" class="tablas">
+				<?php if (count($coberturas)) : ?>
+				<div id="cobertura-seg<?php echo $seguro['id']; ?>" class="tabla">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Coberturas</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($coberturas as $key => $value) { ?>
+							<tr>
+								<td class="tabla-label"><?php echo $key; ?></td>
+								<td class="tabla-valor"><?php echo $value; ?></td>
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+				<?php endif; ?>
+				<?php if (count($premios)) : ?>
+				<div id="premios-seg<?php echo $seguro['id']; ?>" class="tabla">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Premio anual a pagar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($premios as $key => $value) { ?>
+							<tr>
+								<td class="tabla-label"><?php echo $key; ?></td>
+								<td class="tabla-valor"><?php echo $value; ?></td>
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+		<?php } ?>
 	</div>
 </div>
 
@@ -165,8 +213,6 @@ if (!empty ($accion)) {
 		case 'contratar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
-			// Obtener la póliza que se guardó en el paso anterior
-			// $seguros   = getProductsByCategory($categoria['id']);
 ?>
 <div class="center contratar">
 	<div class="content-inner">

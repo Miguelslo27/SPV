@@ -96,6 +96,35 @@ body {
 .content-inner {
 	padding: 30px 0;
 }
+.content-inner .tablas {
+	display: none;
+	padding: 0 50px;
+}
+.content-inner .tabla table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+}
+.content-inner .tabla table thead {}
+.content-inner .tabla table tbody {}
+.content-inner .tabla table tr {}
+.content-inner .tabla table th {
+	text-transform: uppercase;
+	border-bottom: 1px solid #555;
+	padding: 6px 0;
+}
+.content-inner .tabla table td {
+	border-bottom: 1px solid #555;
+	padding: 6px 0;
+}
+.content-inner .tabla table td.tabla-label {
+	border-right: 1px solid #555;
+	width: 70%;
+}
+.content-inner .tabla table td.tabla-valor {
+	padding-left: 10px;
+	width: 30%;
+}
 .hover_verde:hover {
 	color: #9c3;
 }
