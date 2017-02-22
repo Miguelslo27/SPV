@@ -182,8 +182,8 @@ if (!empty ($accion)) {
 					<input type="text" id="adjuntar" name="adjuntar">
 				</div>
 				<div class="form-line border-bottom input-check right-message">
-					<input type="checkbox" id="todo-riesgo" name="todo-riesgo">
-					<label for="todo-riesgo">Acepto los <a href="javasceript:void();">Términos y condiciones</a></label>
+					<input type="checkbox" id="terminos" name="terminos" value="true">
+					<label for="terminos">Acepto los <a href="javasceript:void();">Términos y condiciones</a></label>
 				</div>
 
 				<div class="form-line border-bottom input-text input-medium">

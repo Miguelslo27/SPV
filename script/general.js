@@ -93,12 +93,13 @@ $(document).on('ready', function() {
 	var selecteds = [];
 	$('body').on('click', 'input[type=checkbox]', function() {
 		// get all variables needed
-		var thisvalue     = parseInt($(this).val()),
+		var thisvalue     = $(this).val(),
+			thisvalueint  = parseInt(thisvalue),
 			isthischecked = $(this).prop('checked'),
 			$thisform     = $(this).parents('form'),
-			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalue + ']'),
+			$thisinputs   = $thisform.find('input[type=checkbox][data-parent][value!=' + thisvalueint + ']'),
 			$formtables   = $thisform.parent().find('.tablas:visible'),
-			$thistable    = $thisform.parent().find('#tablas-seg' + thisvalue);
+			$thistable    = $thisform.parent().find('#tablas-seg' + thisvalueint);
 
 		$formtables.slideUp();
 
@@ -110,8 +111,8 @@ $(document).on('ready', function() {
 		// resest selecteds
 		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop('checked', false);
 			
-		if($.inArray(thisvalue, selecteds) == -1 && isthischecked) {
-			selecteds.push(thisvalue);
+		if($.inArray(thisvalueint, selecteds) == -1 && isthischecked) {
+			selecteds.push(thisvalueint);
 		}
 
 		// Update selecteds
@@ -143,7 +144,7 @@ $(document).on('ready', function() {
 
 		if(!isthischecked) {
 			selecteds = $.grep(selecteds, function(selected, index) {
-				return selected != thisvalue;
+				return selected != thisvalueint;
 			});
 		}
 	});
