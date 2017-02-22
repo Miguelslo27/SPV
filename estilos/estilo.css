@@ -30,6 +30,9 @@
 	color: #666;
 	font-family: "Raleway-Regular";
 }
+html, body {
+	overflow-x: hidden;
+}
 strong {
 	font-family: "Raleway-Medium";
 }
@@ -225,6 +228,23 @@ body {
 }
 .green-style {
 	color: #9c3;
+}
+.sombreado {
+	position: relative;
+}
+.sombreado:before,
+.sombreado:after {
+	content: url('../imagenes/shadow-bg.png');
+	position: absolute;
+	z-index: 10px;
+	max-width: 100%;
+}
+.sombreado:before {
+	transform: rotate(180deg);
+	top: -27px;
+}
+.sombreado:after {
+	bottom: -27px;
 }
 /* Base for label styling */
 [type="checkbox"]:not(:checked),
@@ -450,24 +470,8 @@ header.compressed .navegacion a.fa {
 	text-align: center;
 	padding: 160px 0 150px;
 }
-.seguros .sombra {
-	background: #FFF;
-    border-radius: 50%;
-    bottom: 25%;
-    -webkit-box-shadow: 0 0 180px 60px;
-    left: 15%;
-    position: absolute;
-    right: 15%;
-    top: 25%;
-}
 .formularios-seguros {
 	display: none;
-}
-/* Hiperfix for darknes shadow in firefox */
-@-moz-document url-prefix() { 
-    .seguros .sombra {
-        box-shadow: 0 0 180px 15px;
-    }
 }
 .seguros .seguro,
 .pasos_seguro .paso {
@@ -611,22 +615,6 @@ h3.titulo-seguro span + span + span,
 	position: relative;
 	margin-bottom: 30px;
 }
-.nosotros .sombra {
-	background: #FFF;
-    border-radius: 50%;
-    bottom: 25%;
-    -webkit-box-shadow: 0 0 130px 75px;
-    left: 15%;
-    position: absolute;
-    right: 15%;
-    top: 25%;
-}
-/* Hiperfix for darknes shadow in firefox */
-@-moz-document url-prefix() { 
-    .nosotros .sombra {
-        box-shadow: 0 0 130px 45px;
-    }
-}
 .nosotros .content-inner {
 	position: relative;
 	background: #fff;
@@ -635,22 +623,6 @@ h3.titulo-seguro span + span + span,
 .razones {
 	position: relative;
 	margin-bottom: 30px;
-}
-.razones .sombra {
-	background: #fff none repeat scroll 0 0;
-    border-radius: 50%;
-    bottom: 6%;
-    -webkit-box-shadow: 0 0 70px 30px;
-    left: 10%;
-    position: absolute;
-    right: 10%;
-    top: 80%;
-}
-/* Hiperfix for darknes shadow in firefox */
-@-moz-document url-prefix() { 
-    .razones .sombra {
-        box-shadow: 0 0 70px 20px;
-    }
 }
 .razones .content-inner {
 	position: relative;
@@ -671,12 +643,6 @@ h3.titulo-seguro span + span + span,
 	float: left;
 	margin: 0;
 	margin-right: 20px;
-}
-/* Hiperfix for darknes shadow in firefox */
-@-moz-document url-prefix() { 
-    .aseguradoras .sombra {
-        box-shadow: 0 0 70px 20px;
-    }
 }
 .aseguradoras .content-inner {
 	position: relative;
