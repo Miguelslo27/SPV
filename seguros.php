@@ -8,7 +8,8 @@ $db = new MysqliDb ($dbsettings);
 
 $db->where('estado', 1);
 $categorias = $db->get('categoria');
-if ($categorias) { ?>
+
+if (count($categorias)) { ?>
 <div class="clear">
 <?php
 foreach ($categorias as $categoria) {
@@ -31,8 +32,9 @@ foreach ($categorias as $categoria) {
 </div>
 <p class="comentario_seguros">(*) Todos los seguros incluyen emergencias domiciliarias (cerrajeria, vidriería, electricidad, sanitaria)</p>
 <?php
-} else ?>
+} else { ?>
 <div class="no-category-content">
 	<p>Aún no hay seguros para contratar, por favor, comunícate con nosotros por cualquier consulta <a href="#contacto" class="green-style">aquí</a>.</p>
 	<p>El equpipo de <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span></p>
 </div>
+<?php } ?>
