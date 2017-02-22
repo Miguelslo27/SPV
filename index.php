@@ -110,14 +110,6 @@
 			</div>
 		</div>
 
-		<div class="center comopagar" id="comopagar">
-			<div class="sombra"></div>
-			<div class="content-inner">
-				<h2>Formas de pago de acuerdo al producto</h2>
-				<p></p>
-			</div>
-		</div>
-
 		<div class="center contacto" id="_contacto">
 			<!-- <div class="sombra"></div> -->
 			<div class="content-inner">
