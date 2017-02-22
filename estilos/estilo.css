@@ -30,7 +30,9 @@
 	color: #666;
 	font-family: "Raleway-Regular";
 }
-html, body {overflow-x: hidden;}
+html, body {
+	overflow-x: hidden;
+}
 strong {
 	font-family: "Raleway-Medium";
 }

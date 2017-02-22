@@ -48,7 +48,11 @@ function getAttributeHTML($atributo) {
 	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
 	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
 	$moneda      = $atributo['moneda'] != '' ? $atributo['moneda'] : null;
+<<<<<<< Updated upstream
 	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
+=======
+	$requerido   = $atributo['requerido'] != '' ? true : false;
+>>>>>>> Stashed changes
 
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
