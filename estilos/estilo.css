@@ -42,8 +42,6 @@ h2 {
 	display: inline-block;
 	clear: both;
 	color: #9c3;
-	border: 2px solid #9c3;
-	padding: 8px 10px;
 	text-transform: uppercase;
 	margin: 0;
 	margin-bottom: 20px;
@@ -61,7 +59,6 @@ h4 {
     padding: 0 10px;
 }
 p {
-	/*padding: 0 10px;*/
 	margin: 0 0 20px;
 	font-size: 14px;
 }
@@ -91,7 +88,6 @@ body {
 	position: relative;
 	margin: auto;
 	width: 1100px;
-	/*overflow: hidden;*/
 }
 .content-inner {
 	padding: 30px 0;
@@ -458,7 +454,6 @@ header.compressed .navegacion a.fa {
 	background: #FFF;
     border-radius: 50%;
     bottom: 25%;
-    /*box-shadow: 0 0 180px 60px;*/
     -webkit-box-shadow: 0 0 180px 60px;
     left: 15%;
     position: absolute;
@@ -481,8 +476,6 @@ header.compressed .navegacion a.fa {
     width: 33.334%;
     height: 440px;
     box-sizing: border-box;
-    /*border-left: solid 1px #999;
-    border-right: solid 1px #999;*/
     text-align: center;
 }
 .seguros .seguro:first-child,
@@ -568,50 +561,6 @@ h3.titulo-seguro span + span + span,
 	margin: 40px 0;
 }
 
-/*
-.seguro_span {
-	font-size: 16px;
-}
-.comentario {
-	font-size: 14px;
-	margin-left: 24px;
-}
-.seguro_movil {
-	float: left;
-	width: 366px;
-	padding-left: 70px;
-	box-sizing: border-box;
-	border-left: solid 1px rgb(148,147,147);
-	margin-bottom: 20px;
-}
-.seguro_img {
-	margin-bottom: 20px;
-}
-.seguro_emergencia {
-	display: inline-block;
-	width: 366px;
-	padding-left: 14px;
-	box-sizing: border-box;
-	border-left: solid 1px rgb(148,147,147);
-	border-right: solid 1px rgb(148,147,147);
-	margin-bottom: 20px;
-}
-#emergencia_fa {
-	margin-left: 10px;
-}
-.seguro_hogar {
-	float: right;
-	width: 366px;
-	padding-left: 61px;
-	box-sizing: border-box;
-	border-right: solid 1px rgb(148,147,147);	
-	margin-bottom: 20px;
-}
-#hogar_fa {
-	margin-bottom: 0;
-}
-*/
-
 /* Proceso pasos para contratar */
 .pasos_seguro_contenedor {
 	margin-top: 25px;
@@ -623,7 +572,7 @@ h3.titulo-seguro span + span + span,
 	margin: auto;
 	padding: 10px;
 	box-sizing: border-box;
-	border: solid 3px #9c3;
+	border: solid 2px #9c3;
 	margin-bottom: 30px;
 	color: #9c3;
 }
@@ -657,31 +606,6 @@ h3.titulo-seguro span + span + span,
     top: -8px;
     width: 50px;
 }
-/*.pasos_seguro img {
-	margin-left: 30px;
-	width: 1040px;
-}*/
-/*.primer_paso {
-	float: left;
-	width: 320px;
-}
-.segundo_paso {
-	margin-left: 70px;
-	display: inline-block;
-	width: 320px;
-}
-.tercer_paso {
-	float: right;
-	width: 320px;
-}
-.tercer_paso b {
-	color: #9c3;
-}
-.borde {
-	border-right: solid 3px #9c3;
-	padding-right: 15px;
-	box-sizing: border-box;
-}*/
 
 .nosotros {
 	position: relative;
@@ -691,7 +615,6 @@ h3.titulo-seguro span + span + span,
 	background: #FFF;
     border-radius: 50%;
     bottom: 25%;
-    /*box-shadow: 0 0 180px 60px;*/
     -webkit-box-shadow: 0 0 130px 75px;
     left: 15%;
     position: absolute;
@@ -734,19 +657,20 @@ h3.titulo-seguro span + span + span,
 	background: #fff;
 }
 
-.aseguradoras {
+.nosotros {
 	position: relative;
 	margin-bottom: 30px;
 }
-.aseguradoras .sombra {
-	background: #fff none repeat scroll 0 0;
-    border-radius: 50%;
-    bottom: 6%;
-    -webkit-box-shadow: 0 0 70px 30px;
-    left: 10%;
-    position: absolute;
-    right: 10%;
-    top: 80%;
+.nosotros p {
+	overflow: hidden;
+}
+.nosotros p img.aseguradora,
+.nosotros p img.pagos {
+	height: 30px;
+	display: block;
+	float: left;
+	margin: 0;
+	margin-right: 20px;
 }
 /* Hiperfix for darknes shadow in firefox */
 @-moz-document url-prefix() { 
@@ -764,33 +688,16 @@ h3.titulo-seguro span + span + span,
 	position: relative;
 	margin-bottom: 30px;
 }
-/*.contacto .sombra {
-	background: #fff none repeat scroll 0 0;
-    border-radius: 50%;
-    bottom: 12%;
-    -webkit-box-shadow: 0 0 70px 30px;
-    left: 10%;
-    position: absolute;
-    right: 10%;
-    top: 80%;
-}
-@-moz-document url-prefix() {
-    .contacto .sombra {
-        box-shadow: 0 0 70px 25px;
-    }
-}*/
 .contacto .content-inner {
 	position: relative;
 	background: #fff;
 }
 
 /* FORMULARIOS */
-.content-inner {
-	overflow: hidden;
-}
-.content-inner h2 {
-	border: none;
-    padding: 0;
+.content-inner > h2 {
+	border: 2px solid #9c3;
+	padding: 8px 10px;
+	margin-left: -10px;
 }
 .content-inner h3 {
 	text-align: left;
@@ -1089,8 +996,6 @@ h3.titulo-seguro span + span + span,
 
 
 /* SEGUNDO PASO*/
-
-
 #valores_segundo_paso {
 	display: inline-block;
 	line-height: 30px;
@@ -1126,8 +1031,6 @@ h3.titulo-seguro span + span + span,
 
 
 /* TERCER PASO */
-
-
 .tercer_paso_img {
 	float: left;
 	margin-left: 72px;

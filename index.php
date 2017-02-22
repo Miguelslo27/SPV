@@ -20,7 +20,7 @@
 					<a class="hover_verde" href="#seguro">Seguros</a>
 					<a class="hover_verde" href="#nosotros">Quiénes somos</a>
 					<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
-					<a class="hover_verde" href="#comopagar">Como Pagar</a>
+					<a class="hover_verde" href="#pagos">Como Pagar</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
 				</nav>
 			</div>
@@ -99,14 +99,14 @@
 				<h2>Visión</h2>	
 				<p>Queremos ser reconocidos como un equipo de trabajo profesional, enfocados en la mejora continua, con tecnología de punta y satisfaciendo las expectativas de nuestros clientes, por medio de una atención personalizada.</p>
 				<p>Reflejando así las bases de una empresa en continuo desarrollo, para alcanzar los más altos estándares de sinergia con las compañías aseguradoras y  satisfacción con el cliente.</p>
-			</div>
-		</div>
-
-		<div class="center aseguradoras" id="_aseguradoras">
-			<div class="content-inner">
-				<h2>Compañías que confían en nosotros</h2>
+				<h2 id="_aseguradoras">Compañías que confían en nosotros</h2>
 				<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> te ofrecemos el abanico más amplio de compañías aseguradoras para que puedas elegir y comparar con nuestro multicotizador online la que más se adapte a tus necesidades.</p>
 				<p>Contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
+				<br><br>
+				<p><img src="/imagenes/logos/aseguradora_mapfre.jpg" class="aseguradora" alt="Mapfre"><img src="/imagenes/logos/aseguradora_uru-asistencia.jpg" class="aseguradora" alt="Uruguay Asistencia"></p>
+				<h2 id="_pagos">Formas de pago de acuerdo al producto</h2>
+				<br><br>
+				<p><img src="/imagenes/logos/pago_redpagos.jpg" class="pagos" alt="RedPagos"><img src="/imagenes/logos/pago_antel.jpg" class="pagos" alt="Antel"><img src="/imagenes/logos/pago_cobrosya.jpg" class="pagos" alt="CobrosYa"></p>
 			</div>
 		</div>
 
