@@ -61,7 +61,7 @@ if (!empty ($accion)) {
 				$coberturas = json_decode($seguro['coberturas'], true);
 				$premios    = json_decode($seguro['premio_anual'], true);
 			?>
-			<?php if (count($coberturas) && count($premios)) : ?>
+			<?php if (count($coberturas) || count($premios)) : ?>
 			<div id="tablas-seg<?php echo $seguro['id']; ?>" class="tablas">
 				<?php if (count($coberturas)) : ?>
 				<div id="cobertura-seg<?php echo $seguro['id']; ?>" class="tabla">
@@ -170,6 +170,7 @@ if (!empty ($accion)) {
 				?>
 				<?php endif; ?>
 				<!-- Atributos modelo poliza -->
+				<?php if (count($atr_poliza)) : ?>
 				<h3>Ingresa datos de la póliza</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
@@ -177,6 +178,7 @@ if (!empty ($accion)) {
 					getAttributeHTML($atributo);
 				}
 				?>
+				<?php endif; ?>
 				<div class="form-line border-bottom input-text input-medium">
 					<label for="adjuntar">Adjuntar Comprobantes:</label>
 					<input type="text" id="adjuntar" name="adjuntar">
