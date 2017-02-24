@@ -52,6 +52,7 @@ function getAttributeHTML($atributo) {
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
 	}
+
 	?>
 	<div class="form-line border-bottom input-text input-large <?php echo ($requerido == 'true' ? 'input-required' : ''); ?>">
 		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
@@ -61,8 +62,9 @@ function getAttributeHTML($atributo) {
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
 		 data-customadd="<?php echo $adhiere; ?>"
-		 data-customcurrency="<?php echo $moneda; ?>"
-		 data-customrequired="<?php echo $requerido ?>"
+		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
+		 data-customrequired="<?php echo $requerido; ?>"
+		 data-customcheck="<?php echo $atributo['validacion']; ?>"
 		 id="<?php echo $atributo['atributo']; ?>"
 		 name="<?php echo $atributo['atributo']; ?>">
 		<?php else : ?>
