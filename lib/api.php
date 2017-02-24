@@ -60,7 +60,7 @@ if (!empty ($accion)) {
 				$coberturas = json_decode($seguro['coberturas'], true);
 				$premios    = json_decode($seguro['premio_anual'], true);
 			?>
-			<?php if (count($coberturas) && count($premios)) : ?>
+			<?php if (count($coberturas) || count($premios)) : ?>
 			<div id="tablas-seg<?php echo $seguro['id']; ?>" class="tablas">
 				<?php if (count($coberturas)) : ?>
 				<div id="cobertura-seg<?php echo $seguro['id']; ?>" class="tabla">
