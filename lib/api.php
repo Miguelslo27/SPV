@@ -108,6 +108,7 @@ if (!empty ($accion)) {
 				?>
 				<?php endif; ?>
 				<!-- Atributos modelo poliza -->
+				<?php if (count($atr_poliza)) : ?>
 				<h3>Ingresa datos de la póliza</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
@@ -115,6 +116,7 @@ if (!empty ($accion)) {
 					getAttributeHTML($atributo);
 				}
 				?>
+				<?php endif; ?>
 				<div class="form-line border-bottom input-text input-medium">
 					<label for="adjuntar">Adjuntar Comprobantes:</label>
 					<input type="text" id="adjuntar" name="adjuntar">
