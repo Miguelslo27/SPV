@@ -466,6 +466,9 @@ header.compressed .navegacion a.fa {
     box-sizing: border-box;
     position: relative;
 }
+.seguros .seguros_inner .content-inner {
+    overflow: hidden;
+}
 .no-category-content {
 	text-align: center;
 	padding: 160px 0 150px;

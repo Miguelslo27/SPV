@@ -198,7 +198,7 @@ function processActionHash(hash, $form) {
 					scrollTop: $('#_seguro').offset().top - 50
 				}, 500);
 
-				// Change hash to `erve the current location
+				// Change hash to stay in the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/asegurar';
 
 				return;
@@ -217,19 +217,30 @@ function processActionHash(hash, $form) {
 			 	}
 			 });
 
-			if (requiredfields) {
-				// Show error
-				$form.find('.required-message .required-fields-error').remove();
-				$form.find('.required-message').append('<div class="required-fields-error">Hay campos requeridos sin completar</div>');
+			// NEEDED, UNCOMMENT AFTER COMPLETE TODO-1
+			// if (requiredfields) {
+			// 	// Show error
+			// 	$form.find('.required-message .required-fields-error').remove();
+			// 	$form.find('.required-message').append('<div class="required-fields-error">Hay campos requeridos sin completar</div>');
 
-				// Animate up to show the message
-				$('html, body').animate({
-					scrollTop: $('#_seguro').offset().top - 50
-				}, 500);
+			// 	// Animate up to show the message
+			// 	$('html, body').animate({
+			// 		scrollTop: $('#_seguro').offset().top - 50
+			// 	}, 500);
+
+			// 	// Change hash to stay in the current location
+			// 	document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
+
+			// 	return;
+			// }
+
+			// TODO-1
+			if (checkFieldsPass($form)) {
+				// TODO-1
+				console.log('Do something here');
 
 				// Change hash to `erve the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
-
 				return;
 			}
 
@@ -322,6 +333,17 @@ function processActionHash(hash, $form) {
 			$('#_' + modelo).find('.formularios').slideUp();
 		break;
 	}
+}
+
+// TODO-1
+function checkFieldsPass($form) {
+	var $form_inputs = $form.find('input, select, textarea');
+
+	$form_inputs.each(function() {
+		// TODO-1
+	});
+
+	return true;
 }
 
 function getFormAction(accion, data) {
