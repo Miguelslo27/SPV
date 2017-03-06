@@ -206,58 +206,27 @@ function processActionHash(hash, $form) {
 		}
 
 		if ($form.attr('id') == 'cotizar') {
-			var requiredfields = false;
-			
-			$form
-			 .find('input, select, textarea')
-			 .each(function(index, input) {
-			 	if(($(input).data('customrequired') && $.trim($(input).val()) == '') || requiredfields) {
-			 		requiredfields = true;
-			 		return false;
-			 	}
-			 });
+			var status = checkFieldsPass($form);
+			if (status.error) {
+				// Show error
+				$form.find('.required-message .required-fields-error').remove();
+				$form.find('.required-message').append('<div class="required-fields-error">' + status.errors.join('') + '</div>');
 
-			// NEEDED, UNCOMMENT AFTER COMPLETE TODO-1
-			// if (requiredfields) {
-			// 	// Show error
-			// 	$form.find('.required-message .required-fields-error').remove();
-			// 	$form.find('.required-message').append('<div class="required-fields-error">Hay campos requeridos sin completar</div>');
+				// Animate up to show the message
+				$('html, body').animate({
+					scrollTop: $('#_seguro').offset().top - 50
+				}, 500);
 
-			// 	// Animate up to show the message
-			// 	$('html, body').animate({
-			// 		scrollTop: $('#_seguro').offset().top - 50
-			// 	}, 500);
-
-			// 	// Change hash to stay in the current location
-			// 	document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
-
-			// 	return;
-			// }
-
-			// TODO-1
-			if (checkFieldsPass($form)) {
-				// TODO-1
-				console.log('Do something here');
-
-				// Change hash to `erve the current location
+				// Change hash to stay in the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
 				return;
 			}
-
-			// TODO - Agarrar los atributos de cotización y crear el objeto
-			// TODO - Agarrar los atributos de usuario y crear el objeto
-			
-			// $form.find('input:checked').each(function() {
-			// 	seguros.push({
-			// 		id: $(this).val(),
-			// 		name: $(this).next().text()
-			// 	});
-			// });
 		}
 
 		if ($form.attr('id') == 'contratar') {
-			// TODO - Agarrar los atributos de cotización y crear el objeto
 			// TODO - Agarrar los atributos de usuario y crear el objeto
+			// TODO - Agarrar los atributos de cotización y crear el objeto
+			// TODO - Agarrar los atirbutos de póliza y crear el objeto
 			
 			// $form.find('input:checked').each(function() {
 			// 	seguros.push({
@@ -338,12 +307,46 @@ function processActionHash(hash, $form) {
 // TODO-1
 function checkFieldsPass($form) {
 	var $form_inputs = $form.find('input, select, textarea');
+	var pass = true;
+	var status = {
+		ok: true,
+		error: false,
+		errors: []
+	}
 
+	// TODO-1
 	$form_inputs.each(function() {
-		// TODO-1
+		var $this = $(this);
+		
+		// Check if required first
+		if ($this.data('customrequired') && $.trim($this.val()) == '') {
+			pass = false;
+			status.ok = false;
+			status.error = true;
+			if (!status.errors.length) {
+				status.errors.push('Hay campos con errores:');
+				status.errors.push('<ul>');
+			}
+			status.errors.push('<li>El campo <strong>"' + $this.data('realname') + '"</strong> es requerido</li>');
+		}
+
+		// Check the type here
+		if ($this.data('customtype')) {
+			status = checkType($this.data('realname'), $this.data('customtype'), $this.val(), status);
+		}
+
+		// Check the customcheck here
+		if ($this.data('customcheck') || $this.data('customcheck') != 'none') {
+			status = checkValidation($this.data('realname'), $this.data('customcheck'), $this.val(), status);
+		}
+
 	});
 
-	return true;
+	if (status.errors.length) {
+		status.errors.push('</ul>');
+	}
+
+	return status;
 }
 
 function getFormAction(accion, data) {
@@ -357,3 +360,82 @@ function getFormAction(accion, data) {
 		}
 	});
 }
+
+function checkType(fieldname, type, value, status) {
+	switch (type) {
+		case 'text':
+			var text_re = /^[a-zA-Z\.]*$/;
+			if (!text_re.test(value)) {
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo alfabético</li>');
+			}
+		break;
+		case 'numero':
+		case 'moneda-peso':
+		case 'moneda-dolar':
+			var number_re = /^[0-9]*\,?[0,9]{0,2}$/;
+			if (!number_re.test(value)) {
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo numérico y como máximo tener 2 decimales (ejemplo: 1000,00)</li>');
+			}
+		default:
+		break;
+	}
+
+	return status;
+}
+
+function checkValidation(fieldname, validation, value, status) {
+	switch (validation) {
+		case 'ci':
+			if (!verifyDNI(value)) {
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> no es una Cédula de Identidad válida, por favor verifica la información.</li>');
+			}
+		break;
+		case 'numero':
+			var number_re = /^[0-9]*\,?[0,9]{0,2}$/;
+			if (!number_re.test(value)) {
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo numérico y como máximo tener 2 decimales (ejemplo: 1000,00)</li>');
+			}
+		break;
+	}
+
+	return status;
+}
+
+function verifyDNI(ci) {
+	var cedula,
+		str_ci,
+		verificador,
+		coeficientes,
+		sumatoria,
+		redondeoMult10;
+
+	cedula       = ci;
+	str_ci       = cedula.toString();
+	verificador  = str_ci[str_ci.length -1];
+	coeficientes = [2,9,8,7,6,3,4];
+	sumatoria    = 0;
+
+	for (var c = 0; c < str_ci.length -1; c++) {
+		sumatoria += str_ci[c] * coeficientes[c];
+	}
+
+	redondeoMult10 = Math.ceil(sumatoria/10) * 10;
+	return redondeoMult10 - sumatoria == verificador;
+}
+

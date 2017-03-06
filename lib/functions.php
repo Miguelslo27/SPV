@@ -53,29 +53,33 @@ function getAttributeHTML($atributo) {
 		$valores = json_decode($atributo['valores']);
 	}
 
+	$atributo_san = str_replace(['.',' '], '_', filter_var(strtolower($atributo['atributo']), FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+
 	?>
 	<div class="form-line border-bottom input-text input-large <?php echo ($requerido == 'true' ? 'input-required' : ''); ?>">
-		<label for="<?php echo $atributo['atributo']; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
+		<label for="<?php echo $atributo_san; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
 		<?php if ($tipo != 'lista') : ?>
 		<input
 		 type="text"
+		 data-realname="<?php echo $atributo['atributo']; ?>"
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
 		 data-customadd="<?php echo $adhiere; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
 		 data-customrequired="<?php echo $requerido; ?>"
 		 data-customcheck="<?php echo $atributo['validacion']; ?>"
-		 id="<?php echo $atributo['atributo']; ?>"
-		 name="<?php echo $atributo['atributo']; ?>">
+		 id="<?php echo $atributo_san; ?>"
+		 name="<?php echo $atributo_san; ?>">
 		<?php else : ?>
 		<select
+		 data-realname="<?php echo $atributo['atributo']; ?>"
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
 		 data-customadd="<?php echo $adhiere; ?>"
 		 data-customcurrency="<?php echo $moneda; ?>"
 		 data-customsave="<?php echo $cubre;5 ?>"
-		 id="<?php echo $atributo['atributo']; ?>"
-		 name="<?php echo $atributo['atributo']; ?>">
+		 id="<?php echo $atributo_san; ?>"
+		 name="<?php echo $atributo_san; ?>">
 		 	<?php foreach ($valores as $key => $val) { ?>
 		 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
 		 	<?php } ?>

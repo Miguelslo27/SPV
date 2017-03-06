@@ -149,8 +149,8 @@ if (!empty ($accion)) {
 				<div class="form-line required-message">
 					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
 				</div>
-				<!-- Atributos modelo usuario -->
 				<?php if (count($atr_usuarios)) : ?>
+				<!-- Atributos modelo usuario -->
 				<h3>Ingresa tus datos personales</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
@@ -159,8 +159,8 @@ if (!empty ($accion)) {
 				}
 				?>
 				<?php endif; ?>
-				<!-- Atributos modelo cotizacion -->
 				<?php if (count($atr_cotizacion)) : ?>
+				<!-- Atributos modelo cotizacion -->
 				<h3>Ingresa datos de cotización</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
@@ -169,8 +169,8 @@ if (!empty ($accion)) {
 				}
 				?>
 				<?php endif; ?>
-				<!-- Atributos modelo poliza -->
 				<?php if (count($atr_poliza)) : ?>
+				<!-- Atributos modelo poliza -->
 				<h3>Ingresa datos de la póliza</h3>
 				<div class="form-line border-bottom"></div>
 				<?php
@@ -179,18 +179,33 @@ if (!empty ($accion)) {
 				}
 				?>
 				<?php endif; ?>
-				<div class="form-line border-bottom input-text input-medium">
-					<label for="adjuntar">Adjuntar Comprobantes:</label>
-					<input type="text" id="adjuntar" name="adjuntar">
+				<div class="form-line border-bottom input-text input-medium input-required">
+					<label for="adjuntar">Adjuntar Comprobantes: <span class="required">*</span></label>
+					<input
+					 type="text"
+					 id="adjuntar"
+					 name="adjuntar"
+					 data-realname="Adjuntar Comprobantes"
+					 data-customrequired="true">
 				</div>
-				<div class="form-line border-bottom input-check right-message">
-					<input type="checkbox" id="terminos" name="terminos" value="true">
-					<label for="terminos">Acepto los <a href="javasceript:void();">Términos y condiciones</a></label>
+				<div class="form-line border-bottom input-check right-message input-required">
+					<input
+					 type="checkbox"
+					 id="terminos"
+					 name="terminos"
+					 value="true"
+					 data-realname="Términos y condiciones"
+					 data-customrequired="true">
+					<label for="terminos">Acepto los <a href="javasceript:void();">Términos y condiciones</a> <span class="required">*</span></label>
 				</div>
 
-				<div class="form-line border-bottom input-text input-medium">
-					<label for="pago">Forma de Pago:</label>
-					<select name="pago" id="pago">
+				<div class="form-line border-bottom input-text input-medium input-required">
+					<label for="pago">Forma de Pago: <span class="required">*</span></label>
+					<select
+					 name="pago"
+					 id="pago"
+					 data-realname="Forma de Pago"
+					 data-customrequired="true">
 						<option value="">Antel</option>
 						<option value="">CobrosYa</option>
 					</select>
