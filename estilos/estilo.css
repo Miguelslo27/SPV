@@ -736,9 +736,13 @@ h3.titulo-seguro span + span + span,
     line-height: 28px;
     padding: 0;
 }
-.content-inner form .form-inputs .form-line.required-message p {
+.content-inner form .form-inputs .form-line.required-message p,
+.content-inner form .form-inputs .form-line.required-message ul li {
 	color: #b20000;
 	margin-bottom: 0;
+}
+.content-inner form .form-inputs .form-line.required-message ul {
+	text-align: left;
 }
 .content-inner form .form-inputs .form-line strong {
 	color: #9c3;
