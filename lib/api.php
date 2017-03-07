@@ -242,7 +242,7 @@ if (!empty ($accion)) {
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">3</span> Confirá tu pago y <span class="green-style">¡ya estás asegurado!</span></h2>
+				<h2><span class="number-globe">3</span> Confirmá tu pago y <span class="green-style">¡contratalo!</span></h2>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
 					<p>Seguro contratado: <strong>Seguro <span class="green-style">Móvil</span></strong>.</p>
