@@ -90,7 +90,7 @@ $(document).on('ready', function() {
 		return false;
 	});
 
-	var selecteds = [];
+	var selected = null;
 	$('body').on('click', 'input[type=checkbox]', function() {
 		// get all variables needed
 		var thisvalue     = $(this).val(),
@@ -105,47 +105,30 @@ $(document).on('ready', function() {
 
 		if (isthischecked) {
 			$thistable.slideDown();
-			$formtables = $thisform.parent().find('.tablas:visible');
 		}
 
-		// resest selecteds
-		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop('checked', false);
-			
-		if($.inArray(thisvalueint, selecteds) == -1 && isthischecked) {
-			selecteds.push(thisvalueint);
-		}
+		// resest selected
+		selected = null;
+		$thisform.find('input[type=checkbox][value!=' + thisvalue + ']:checked').prop({
+			'checked': false,
+			'disabled': false
+		});
 
 		// Update selecteds
-		$thisinputs.each(function() {
-			var updateSelecteds = false;
-
-			for(var i = 0; i < selecteds.length; i++) {
-				if(isthischecked && parseInt($(this).data('parent')) == selecteds[i] && $.inArray($(this).val(), selecteds) == -1) {
-					updateSelecteds = true;
-				}
-			}
-
-			if(updateSelecteds) {
-				selecteds.push(parseInt($(this).val()));
-			}
-		});
+		selected = isthischecked ? thisvalueint : null;
 
 		// Check and disabled items with parents selected
 		$thisinputs.each(function() {
-			for(var i = 0; i < selecteds.length; i++) {
-				if($(this).data('parent') == selecteds[i]) {
-					$(this).prop({
-						'checked': isthischecked,
-						'disabled': isthischecked
-					});
-				}
+			if($(this).data('parent') == thisvalueint) {
+				$(this).prop({
+					'checked': isthischecked,
+					'disabled': isthischecked
+				});
 			}
 		});
 
 		if(!isthischecked) {
-			selecteds = $.grep(selecteds, function(selected, index) {
-				return selected != thisvalueint;
-			});
+			selected = null;
 		}
 	});
 });
