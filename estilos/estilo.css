@@ -485,6 +485,9 @@ header.compressed .navegacion a.fa {
     box-sizing: border-box;
     text-align: center;
 }
+.seguros .seguro {
+	margin-bottom: 40px;
+}
 .seguros .seguro:first-child,
 .seguros .seguro:not(first-child) {
 	border-left: solid 1px #999;
