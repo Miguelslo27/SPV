@@ -30,7 +30,6 @@ foreach ($categorias as $categoria) {
 }
 ?>
 </div>
-<p class="comentario_seguros">(*) Todos los seguros incluyen emergencias domiciliarias (cerrajeria, vidriería, electricidad, sanitaria)</p>
 <?php
 } else { ?>
 <div class="no-category-content">
