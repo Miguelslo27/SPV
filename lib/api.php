@@ -206,8 +206,8 @@ if (!empty ($accion)) {
 					 id="pago"
 					 data-realname="Forma de Pago"
 					 data-customrequired="true">
-						<option value="">Antel</option>
-						<option value="">CobrosYa</option>
+						<option value="1">Antel</option>
+						<option value="2">CobrosYa</option>
 					</select>
 				</div>
 				<div class="form-line">
@@ -249,6 +249,10 @@ if (!empty ($accion)) {
 					<p>Cobertura: <strong>Protección de Pantalla</strong>.</p>
 				</div>
 				<h3 class="green-style">Solicitud enviada</h3>
+				<div class="push-60-left">
+					<p>Su solicitud ha sido enviada.</p>
+					<p>En 24 horas hábiles sera contactado por el equipo de <strong>Larraura Seguros</strong>.</p>
+				</div>
 				<div class="form-line border-bottom"></div>
 				<h3 class="green-style">Muchas gracias</h3>
 				<div class="push-60-left">
