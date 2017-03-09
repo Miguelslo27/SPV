@@ -82,6 +82,9 @@ $(document).on('ready', function() {
 		$('header .navegacion').find('a.activo').removeClass('activo');
 		$('header .navegacion').find('a[href=' + $this.attr('href') + ']').addClass('activo');
 
+		$('#_seguro').find('.categorias').slideDown();
+		$('#_seguro').find('.formularios').slideUp();
+
 		$('html, body').animate({
 			scrollTop: $('#_' + $this.attr('href').replace('#', '')).offset().top - ($this.attr('href') != '#home' ? 50 : 80)
 		}, 500);
@@ -287,7 +290,6 @@ function processActionHash(hash, $form) {
 	}
 }
 
-// TODO-1
 function checkFieldsPass($form) {
 	var $form_inputs = $form.find('input, select, textarea');
 	var pass = true;
@@ -297,7 +299,6 @@ function checkFieldsPass($form) {
 		errors: []
 	}
 
-	// TODO-1
 	$form_inputs.each(function() {
 		var $this = $(this);
 		
