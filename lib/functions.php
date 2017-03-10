@@ -17,6 +17,7 @@ function getProductsByCategory($catid) {
 	// Traer los seruguros según la categoría
 	$db->where('categoria', $catid);
 	$db->where('estado', 1);
+	$db->orderBy('orden', 'asc');
 
 	$seguros = $db->get('seguro');
 	return $seguros;
