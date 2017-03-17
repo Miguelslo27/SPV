@@ -23,7 +23,7 @@ function getProductsByCategory($catid) {
 	return $seguros;
 }
 
-function getAttributesByParentID($prods) {
+function getAttributesByParentID($prod) {
 	global $db;
 	$db->where('estado', 1);
 	$db->orderBy('orden', 'asc');
@@ -31,12 +31,9 @@ function getAttributesByParentID($prods) {
 	$atributos = $db->get('variable');
 	$atrs_aplicable = array();
 
-	// Traer los atributos según los seguros
-	foreach ($prods as $prod) {
-		foreach ($atributos as $atr) {
-			if (in_array($prod['id'], explode(',', $atr['aplicacion'])) && !in_array($atr, $atrs_aplicable)) {
-				$atrs_aplicable[] = $atr;
-			}
+	foreach ($atributos as $atr) {
+		if (in_array($prod['id'], explode(',', $atr['aplicacion'])) && !in_array($atr, $atrs_aplicable)) {
+			$atrs_aplicable[] = $atr;
 		}
 	}
 	return $atrs_aplicable;
@@ -49,42 +46,47 @@ function getAttributeHTML($atributo) {
 	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
 	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
 	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
+	$modelo      = $atributo['modelo'];
 
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
 	}
 
-	$atributo_san = str_replace(['.',' '], '_', filter_var(strtolower($atributo['atributo']), FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+	$atributo_san = str_replace(['á', 'é', 'í', 'ó', 'ú'], ['a', 'e', 'i', 'o', 'u'], $atributo['atributo']);
+	$atributo_san = str_replace(['.',' '], '_', filter_var(strtolower($atributo_san)));
 
 	?>
 	<div class="form-line border-bottom input-text input-large <?php echo ($requerido == 'true' ? 'input-required' : ''); ?>">
 		<label for="<?php echo $atributo_san; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
-		<?php if ($tipo != 'lista') : ?>
-		<input
-		 type="text"
-		 data-realname="<?php echo $atributo['atributo']; ?>"
-		 data-customtype="<?php echo $tipo; ?>"
-		 data-customdependency="<?php echo $dependencia; ?>"
-		 data-customadd="<?php echo $adhiere; ?>"
-		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
-		 data-customrequired="<?php echo $requerido; ?>"
-		 data-customcheck="<?php echo $atributo['validacion']; ?>"
-		 id="<?php echo $atributo_san; ?>"
-		 name="<?php echo $atributo_san; ?>">
-		<?php else : ?>
+		<?php if ($tipo == 'lista') : ?>
 		<select
 		 data-realname="<?php echo $atributo['atributo']; ?>"
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
 		 data-customadd="<?php echo $adhiere; ?>"
-		 data-customcurrency="<?php echo $moneda; ?>"
-		 data-customsave="<?php echo $cubre;5 ?>"
+		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
+		 data-customcurrency="<?php echo $atributo['moneda'];; ?>"
+		 data-custommodel="<?php echo $modelo; ?>"
 		 id="<?php echo $atributo_san; ?>"
 		 name="<?php echo $atributo_san; ?>">
 		 	<?php foreach ($valores as $key => $val) { ?>
 		 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
 		 	<?php } ?>
 		</select>
+		<?php else : ?>
+		<input
+		 type="text"
+		 data-realname="<?php echo $atributo['atributo']; ?>"
+		 data-customtype="<?php echo $tipo; ?>"
+		 data-customdependency="<?php echo $dependencia; ?>"
+		 data-customadd="<?php echo $adhiere; ?>"
+		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
+		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
+		 data-customrequired="<?php echo $requerido; ?>"
+		 data-customcheck="<?php echo $atributo['validacion']; ?>"
+		 data-custommodel="<?php echo $modelo; ?>"
+		 id="<?php echo $atributo_san; ?>"
+		 name="<?php echo $atributo_san; ?>">
 		<?php endif; ?>
 	</div>
 	<?php

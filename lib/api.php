@@ -6,9 +6,13 @@ require_once './functions.php';
 require_once '../config.php';
 
 // $modelo    = isset ($_POST['modelo']) ? $_POST['modelo'] : null;
-$modelo    = isset ($_POST['data']) && isset ($_POST['data']['modelo']) ? $_POST['data']['modelo'] : null;
-$categoria = isset ($_POST['data']) && isset ($_POST['data']['categoria']) ? $_POST['data']['categoria'] : null;
-$seguros   = isset ($_POST['data']) && isset ($_POST['data']['seguros']) ? $_POST['data']['seguros'] : null;
+$modelo     = isset ($_POST['data']) && isset ($_POST['data']['modelo']) ? $_POST['data']['modelo'] : null;
+$categoria  = isset ($_POST['data']) && isset ($_POST['data']['categoria']) ? $_POST['data']['categoria'] : null;
+$seguro     = isset ($_POST['data']) && isset ($_POST['data']['seguro']) ? $_POST['data']['seguro'] : null;
+$poliza     = isset ($_POST['data']) && isset ($_POST['data']['poliza']) ? $_POST['data']['poliza'] : null;
+$cotizacion = isset ($_POST['data']) && isset ($_POST['data']['cotizacion']) ? $_POST['data']['cotizacion'] : null;
+$usuario    = isset ($_POST['data']) && isset ($_POST['data']['usuario']) ? $_POST['data']['usuario'] : null;
+
 $accion    = isset ($_POST['accion']) ? $_POST['accion'] : null;
 
 $db = new MysqliDb ($dbsettings);
@@ -35,11 +39,18 @@ if (!empty ($accion)) {
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">1</span> Elegí tu seguro y cotizalo</h2>
 				<div class="form-line required-message"></div>
-				<?php foreach ($seguros as $seguro) { ?>
-					<?php $seguro_sano = strtolower (sanear_string(str_replace (' ', '_', $seguro['nombre']))) ?>
+				<?php foreach ($seguros as $seg) { ?>
+					<?php $seg_sano = strtolower (sanear_string(str_replace (' ', '_', $seg['nombre']))) ?>
 					<div class="form-line border-bottom input-check">
-						<input type="checkbox" data-parent="<?php echo $seguro['pertenencia'] ?>" id="<?php echo $seguro_sano ?>" name="<?php echo $seguro_sano ?>" value="<?php echo $seguro['id'] ?>">
-						<label for="<?php echo $seguro_sano ?>"><?php echo $seguro['nombre'] ?></label>
+						<input
+						 type="checkbox"
+						 data-parent="<?php echo $seg['pertenencia'] ?>"
+						 data-price="<?php echo $seg['valor'] ?>"
+						 data-currency="<?php echo $seg['moneda']; ?>"
+						 id="<?php echo $seg_sano ?>"
+						 name="<?php echo $seg_sano ?>"
+						 value="<?php echo $seg['id'] ?>">
+						<label for="<?php echo $seg_sano ?>"><?php echo $seg['nombre'] ?></label>
 					</div>
 				<?php } ?>
 				<div class="form-line">
@@ -56,15 +67,15 @@ if (!empty ($accion)) {
 			<?php endif; ?>
 			<div class="clear"></div>
 		</form>
-		<?php foreach ($seguros as $seguro) { ?>
+		<?php foreach ($seguros as $seg) { ?>
 			<?php
-				$coberturas = json_decode($seguro['coberturas'], true);
-				$premios    = json_decode($seguro['premio_anual'], true);
+				$coberturas = json_decode($seg['coberturas'], true);
+				$premios    = json_decode($seg['premio_anual'], true);
 			?>
 			<?php if (count($coberturas) || count($premios)) : ?>
-			<div id="tablas-seg<?php echo $seguro['id']; ?>" class="tablas">
+			<div id="tablas-seg<?php echo $seg['id']; ?>" class="tablas">
 				<?php if (count($coberturas)) : ?>
-				<div id="cobertura-seg<?php echo $seguro['id']; ?>" class="tabla">
+				<div id="cobertura-seg<?php echo $seg['id']; ?>" class="tabla">
 					<table>
 						<thead>
 							<tr>
@@ -83,7 +94,7 @@ if (!empty ($accion)) {
 				</div>
 				<?php endif; ?>
 				<?php if (count($premios)) : ?>
-				<div id="premios-seg<?php echo $seguro['id']; ?>" class="tabla">
+				<div id="premios-seg<?php echo $seg['id']; ?>" class="tabla">
 					<table>
 						<thead>
 							<tr>
@@ -114,7 +125,7 @@ if (!empty ($accion)) {
 			// Obtener la categoría
 			$categoria      = getCategoryByNameslug($categoria);
 			// Obtener los atributos por id del seguro
-			$atributos      = getAttributesByParentID($seguros);
+			$atributos      = getAttributesByParentID($seguro);
 
 			$atr_usuarios   = array ();
 			$atr_cotizacion = array ();
@@ -210,6 +221,10 @@ if (!empty ($accion)) {
 						<option value="2">CobrosYa</option>
 					</select>
 				</div>
+				<div class="form-line border-bottom input-text input-medium">
+					<label><strong>Costso del seguro:</strong> </label>
+					<label class="upper_text"><strong><span><?php echo $seguro['moneda']; ?></span> <span id="precio_seguro_original" class="hidden"><?php echo $seguro['precio']; ?></span><span id="precio_seguro"><?php echo $seguro['precio']; ?></span></strong></label>
+				</div>
 				<div class="form-line">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/asegurar" class="btn left"><span class="fa fa-angle-left"></span><span>Atrás</span></a>
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
@@ -231,6 +246,7 @@ if (!empty ($accion)) {
 		case 'contratar':
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
+
 ?>
 <div class="center contratar">
 	<div class="content-inner">
@@ -242,15 +258,15 @@ if (!empty ($accion)) {
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">3</span> Confirmá tu pago y <span class="green-style">¡contratalo!</span></h2>
+				<h2><span class="number-globe">3</span> Solicitud procesada</h2>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
-					<p>Seguro contratado: <strong>Seguro <span class="green-style">Móvil</span></strong>.</p>
-					<p>Cobertura: <strong>Protección de Pantalla</strong>.</p>
+					<p>Seguro contratado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
+					<p>Cobertura: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $seguro['nombre']); ?></strong></span>.</p>
+					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.$seguro['precio']; ?></strong></span></p>
 				</div>
 				<h3 class="green-style">Solicitud enviada</h3>
 				<div class="push-60-left">
-					<p>Su solicitud ha sido enviada.</p>
 					<p>En 24 horas hábiles sera contactado por el equipo de <strong>Larraura Seguros</strong>.</p>
 				</div>
 				<div class="form-line border-bottom"></div>

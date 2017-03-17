@@ -35,12 +35,13 @@ $(document).on('ready', function() {
 	// Check hash on load
 	if(document.location.hash != '') {
 		try {
-			$('header .navegacion').find('a[href=' + document.location.hash + ']')
-
+			$('header .navegacion').find('a[href=' + document.location.hash + ']');
 			$('header .navegacion').find('a.activo').removeClass('activo');
 			$('header .navegacion').find('a[href=' + document.location.hash + ']').addClass('activo');
 
 			setTimeout(function() {
+				// Reset cache	
+				localStorage.clear();
 				// reseteo el scroll top
 				$('html, body').scrollTop(0);
 				// Lo envio al hash que viene por url
@@ -134,6 +135,25 @@ $(document).on('ready', function() {
 			selected = null;
 		}
 	});
+
+	$('body').on('blur', '#cotizar input, #cotizar select', function() {
+		var $form = $('#cotizar');
+		var precio_seguro = parseFloat($('#precio_seguro_original').text());
+		var precio_seguro_ = 0;
+
+		$form
+		 .find('input, select')
+		 .each(function () {
+		 	if ($(this).data('customadd') && $(this).data('customadd') != '') {
+		 		var precio_add = $(this).data('customadd');
+		 		var add_in_per = $(this).data('customaddin');
+		 		var add_to_price = (add_in_per ? (!isNaN(parseFloat($(this).val())) ? parseFloat($(this).val()) : precio_seguro) * (precio_add/100) : precio_add);
+		 			precio_seguro_ += add_to_price;
+		 	}
+		 });
+
+		$('#precio_seguro').text(precio_seguro + precio_seguro_);
+	});
 });
 
 $(window).on('scroll', function(e) {
@@ -157,22 +177,23 @@ function processActionHash(hash, $form) {
 	$('header .navegacion').find('a.activo').removeClass('activo');
 	$('header .navegacion').find('a[href=#seguros]').addClass('activo');
 
-	var seguros    = null;
-	var cotizacion = null;
+	var seguro     = null;
 	var usuario    = null;
+	var cotizacion = null;
+	var poliza     = null;
 
 	if ($form && $form.length) {
-		seguros = [];
-		cotizacion = {};
-		usuario = {};
-
 		if ($form.attr('id') == 'asegurar') {
+			seguro     = {};
 			if ($form.find('input:checked').length) {
-				$form.find('input:checked').each(function() {
-					seguros.push({
+				$form.find('.required-message .required-fields-error').remove();
+				$form.find('input:checked:not(:disabled)').each(function() {
+					seguro = {
 						id: $(this).val(),
-						name: $(this).next().text()
-					});
+						nombre: $(this).next().text(),
+						precio: $(this).data('price'),
+						moneda: $(this).data('currency')
+					};
 				});
 			} else {
 				// Show error
@@ -186,14 +207,40 @@ function processActionHash(hash, $form) {
 
 				// Change hash to stay in the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/asegurar';
-
 				return;
 			}
 		}
 
 		if ($form.attr('id') == 'cotizar') {
+			usuario    = {};
+			cotizacion = {};
+			poliza     = {};
 			var status = checkFieldsPass($form);
-			if (status.error) {
+			if (!status.error) {
+				$form.find('.required-message .required-fields-error').remove();
+
+				var precio_seguro = parseFloat($('#precio_seguro').text());
+				var precio_seguro_ = 0;
+
+				// usuario
+				$form
+				 .find('[data-custommodel=usuario]')
+				 .each(function () {
+				 	usuario[$(this).attr('id')] = $(this).val();
+				 });
+
+				$form
+				 .find('[data-custommodel=cotizacion]')
+				 .each(function () {
+				 	cotizacion[$(this).attr('id')] = $(this).val();
+				 });
+
+				$form
+				 .find('[data-custommodel=poliza]')
+				 .each(function () {
+				 	poliza[$(this).attr('id')] = $(this).val();
+				 });
+			} else {
 				// Show error
 				$form.find('.required-message .required-fields-error').remove();
 				$form.find('.required-message').append('<div class="required-fields-error">' + status.errors.join('') + '</div>');
@@ -205,17 +252,14 @@ function processActionHash(hash, $form) {
 
 				// Change hash to stay in the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
-				return;
 			}
 		}
 
 		if ($form.attr('id') == 'contratar') {
-			// TODO - Agarrar los atributos de usuario y crear el objeto
-			// TODO - Agarrar los atributos de cotización y crear el objeto
-			// TODO - Agarrar los atirbutos de póliza y crear el objeto
+			// TODO - Enviar el formulario para procesar 
 			
 			// $form.find('input:checked').each(function() {
-			// 	seguros.push({
+			// 	seguro.push({
 			// 		id: $(this).val(),
 			// 		name: $(this).next().text()
 			// 	});
@@ -229,14 +273,21 @@ function processActionHash(hash, $form) {
 		data      = (localStorage.getItem(modelo + '::' + categoria) ? JSON.parse(localStorage.getItem(modelo + '::' + categoria)) : {
 			'modelo': modelo,
 			'categoria': categoria,
-			'seguros': [],
+			'seguro': {},
+			'usuario': {},
 			'cotizacion': {},
-			'usuario': {}
+			'poliza': {}
 		});
 
-	data.seguros    = seguros ? seguros : data.seguros;
-	data.cotizacion = cotizacion ? cotizacion : data.cotizacion;
+	data.seguro     = seguro ? seguro : data.seguro;
 	data.usuario    = usuario ? usuario : data.usuario;
+	data.cotizacion = cotizacion ? cotizacion : data.cotizacion;
+	data.poliza     = poliza ? poliza : data.poliza;
+
+	data.seguro.precio = !isNaN(parseFloat($('#precio_seguro').text())) ? parseFloat($('#precio_seguro').text()) : data.seguro.precio;
+
+	// TODO DELETE THIS
+	console.log(data);
 
 	// Set storage for this model
 	localStorage.setItem(modelo + '::' + categoria, JSON.stringify(data));
@@ -274,6 +325,9 @@ function processActionHash(hash, $form) {
 		break;
 		case 'cancelar':
 		case 'terminar':
+		default:
+			// Reset cache	
+			localStorage.clear();
 			// Reset hash
 			document.location.hash = '#seguro';
 
@@ -292,7 +346,6 @@ function processActionHash(hash, $form) {
 
 function checkFieldsPass($form) {
 	var $form_inputs = $form.find('input, select, textarea');
-	var pass = true;
 	var status = {
 		ok: true,
 		error: false,
@@ -304,7 +357,6 @@ function checkFieldsPass($form) {
 		
 		// Check if required first
 		if ($this.data('customrequired') && $.trim($this.val()) == '') {
-			pass = false;
 			status.ok = false;
 			status.error = true;
 			if (!status.errors.length) {
@@ -350,6 +402,8 @@ function checkType(fieldname, type, value, status) {
 		case 'text':
 			var text_re = /^[a-zA-Z\.]*$/;
 			if (!text_re.test(value)) {
+				status.ok = false;
+				status.error = true;
 				if (!status.errors.length) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
@@ -362,6 +416,8 @@ function checkType(fieldname, type, value, status) {
 		case 'moneda-dolar':
 			var number_re = /^[0-9]*\,?[0,9]{0,2}$/;
 			if (!number_re.test(value)) {
+				status.ok = false;
+				status.error = true;
 				if (!status.errors.length) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
@@ -379,21 +435,37 @@ function checkValidation(fieldname, validation, value, status) {
 	switch (validation) {
 		case 'ci':
 			if (!verifyDNI(value)) {
+				status.ok = false;
+				status.error = true;
 				if (!status.errors.length) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
 				}
-				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> no es una Cédula de Identidad válida, por favor verifica la información.</li>');
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> no es una Cédula de Identidad válida, por favor verifica la información</li>');
 			}
 		break;
 		case 'numero':
 			var number_re = /^[0-9]*\,?[0,9]{0,2}$/;
 			if (!number_re.test(value)) {
+				status.ok = false;
+				status.error = true;
 				if (!status.errors.length) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
 				}
 				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo numérico y como máximo tener 2 decimales (ejemplo: 1000,00)</li>');
+			}
+		break;
+		case 'email':
+			var email_re = /^.+@.+$/;
+			if (!email_re.test(value)) {
+				status.ok = false;
+				status.error = true;
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser un email válido</li>');
 			}
 		break;
 	}
