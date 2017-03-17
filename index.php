@@ -180,6 +180,6 @@
 
 	<script src="/script/jquery.js"></script>
 	<script src="/script/jquery.jcarousel.min.js"></script>
-	<script src="/script/general.min.js"></script>
+	<script src="/script/general.js"></script>
 </body>
 </html>

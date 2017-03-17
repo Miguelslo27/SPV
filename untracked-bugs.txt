@@ -5,9 +5,6 @@ Tasks a agregar a backlog:
 
 ==========================
 
-- BUG :: YA NO PASA - Siguiendo el proceso de contratación, si el usuario elije un seguro,
-  selecciona continuar y luego hace click en atrás, los seguros se comportan de forma errática
-
 - BUG - Alinear el texto del título de las categorís en todos los lugares donde aparece
 
 - BUG - Si la categoría tiene tres palabras quedan Negrita, Normal, Negrita Verde, si tiene dos queda

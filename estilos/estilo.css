@@ -78,6 +78,9 @@ body {
 	overflow: hidden;
 	clear: both;
 }
+.hidden {
+	display: none;
+}
 .no-padding	{
 	padding: 0 !important;
 }
@@ -169,6 +172,9 @@ body {
 	transform: scale(1, -1);
 }
 .mirror img {}
+.upper_text {
+	font-size: 22px;
+}
 
 .site-title {
 	text-transform: uppercase;
