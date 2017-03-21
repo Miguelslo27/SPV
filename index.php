@@ -80,7 +80,7 @@
 					<div class="paso tercer_paso">
 						<span class="fa rounded">3 <span class="fa fa-check-circle"></span></span>
 						<h3 class="titulo-seguro">
-							<span>Confirmá tu pago y<br><strong>¡ya estás asegurado!</strong></span>
+							<span>Confirmá tu seguro y <br><strong>¡contratalo!</strong></span>
 						</h3>
 					</div>
 					<div class="clear"></div>
