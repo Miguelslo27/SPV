@@ -811,8 +811,14 @@ h3.titulo-seguro span + span + span,
 	width: 25%;
 }
 .content-inner form .form-inputs .form-line.input-text.input-large input,
-.content-inner form .form-inputs .form-line.input-text.input-large select {
+.content-inner form .form-inputs .form-line.input-text.input-large select,
+.content-inner form .form-inputs .form-line.input-text.input-large .field-help {
 	width: 75%;
+}
+.content-inner form .form-inputs .form-line.input-text.input-large .field-help {
+	float: right;
+	font-size: 12px;
+	padding: 5px 0;
 }
 .content-inner form .form-inputs .form-line.input-textarea {
 	border: none;

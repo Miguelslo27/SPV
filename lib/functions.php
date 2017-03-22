@@ -47,6 +47,7 @@ function getAttributeHTML($atributo) {
 	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
 	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
 	$modelo      = $atributo['modelo'];
+	$ayuda       = $atributo['ayuda'];
 
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
@@ -87,6 +88,9 @@ function getAttributeHTML($atributo) {
 		 data-custommodel="<?php echo $modelo; ?>"
 		 id="<?php echo $atributo_san; ?>"
 		 name="<?php echo $atributo_san; ?>">
+		<?php endif; ?>
+		<?php if ($ayuda && $ayuda != '') : ?>
+			<span class="field-help"><?php echo $ayuda; ?></span>
 		<?php endif; ?>
 	</div>
 	<?php
