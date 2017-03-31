@@ -126,6 +126,8 @@ if (!empty ($accion)) {
 			$categoria      = getCategoryByNameslug($categoria);
 			// Obtener los atributos por id del seguro
 			$atributos      = getAttributesByParentID($seguro);
+			// Obtener el objeto seguro
+			$segruro_ob     = getProductById($seguro['id']);
 
 			$atr_usuarios   = array ();
 			$atr_cotizacion = array ();
@@ -199,6 +201,7 @@ if (!empty ($accion)) {
 					 data-realname="Adjuntar Comprobantes"
 					 data-customrequired="true">
 				</div>
+				<?php if (isset($segruro_ob['condiciones']) && $segruro_ob['condiciones'] != '') : ?>
 				<div class="form-line border-bottom input-check right-message input-required">
 					<input
 					 type="checkbox"
@@ -207,8 +210,9 @@ if (!empty ($accion)) {
 					 value="true"
 					 data-realname="Términos y condiciones"
 					 data-customrequired="true">
-					<label for="terminos">Acepto los <a href="javasceript:void();">Términos y condiciones</a> <span class="required">*</span></label>
+					<label for="terminos">Acepto los <a href="http://dev.backoffice.seguroparavos.com.uy/<?php echo $segruro_ob['condiciones']; ?>">Términos y condiciones</a> <span class="required">*</span></label>
 				</div>
+				<?php endif; ?>
 
 				<div class="form-line border-bottom input-text input-medium input-required">
 					<label for="pago">Forma de Pago: <span class="required">*</span></label>
