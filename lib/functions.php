@@ -10,6 +10,12 @@ function getCategoryByNameslug($nameslug) {
 
 function getProductById($id) {
 	// TODO
+	global $db;
+	// Traer la categoría según el nombre del registro
+	$db->where('id', $id);
+	$db->where('estado', 1);
+	$seguro = $db->getOne('seguro');
+	return $seguro;
 }
 
 function getProductsByCategory($catid) {
