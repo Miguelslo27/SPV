@@ -17,8 +17,7 @@
 			<div class="logo_contenedor">
 				<a href="#home">
 					<img class="logo desktop" src="/imagenes/logos/logo.png">
-					<img class="logo_solo tablet" src="/imagenes/logos/logo_solo.png">
-					<img class="logo_iso mobile" src="/imagenes/logos/logo_iso.png">
+					<img class="logo_solo mobile tablet" src="/imagenes/logos/logo_solo.png">
 				</a>
 			</div>
 			<div class="navegacion_contenedor">

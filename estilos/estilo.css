@@ -351,7 +351,7 @@ header .logo_contenedor img.logo,
 header .logo_contenedor img.logo_solo,
 header .logo_contenedor img.logo_iso {
 	margin-top: 12px;
-	width: 100%;
+	max-width: 100%;
 }
 header .navegacion_contenedor {
 	float: right;

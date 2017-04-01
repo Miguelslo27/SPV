@@ -14,17 +14,16 @@ header .logo_contenedor {
 }
 /* small */
 @media (max-width: 380px) {
-  /*header .logo_contenedor {
-    max-width: 300px;
-    width: auto;
+  body {
+    padding-top: 85px;
   }
-  .logo {
-    display: none;
+  header {
+    padding: 0 10px;
+    height: 85px;
   }
-  .logo_solo {
-    display: block !important;
-    width: 100%;
-  }*/
+  header .logo_contenedor {
+    width: 80%;
+  }
 }
 /* some small */
 @media (max-width: 480px) {
@@ -39,9 +38,6 @@ header .logo_contenedor {
 @media (max-width: 600px) {
   .tablet { display: none !important; }
   .mobile, .mobile.tablet { display: initial !important; }
-  header .logo_contenedor {
-    width: 60px !important;
-  }
 }
 
 /* Tablet */
