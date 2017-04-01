@@ -3,25 +3,39 @@
 <head>
 	<title>SeguroParaVos</title>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<link rel="icon" type="image/png" href="/imagenes/logos/favicon.png"/>
-	<link rel="stylesheet" type="text/css" href="/estilos/estilo.css">
 	<link rel="stylesheet" type="text/css" href="/estilos/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/estilos/estilo.css">
+	<link rel="stylesheet" type="text/css" href="/estilos/estilo.res.css">
 </head>
 
 <body id="_home">
 	<header>
 		<div class="center">
 			<div class="logo_contenedor">
-				<a href="#home"><img class="logo" src="/imagenes/logos/logo.png"></a>
-				<a href="#home"><img class="logo_solo" src="/imagenes/logos/logo_solo.png"></a>
+				<a href="#home">
+					<img class="logo desktop" src="/imagenes/logos/logo.png">
+					<img class="logo_solo tablet" src="/imagenes/logos/logo_solo.png">
+					<img class="logo_iso mobile" src="/imagenes/logos/logo_iso.png">
+				</a>
 			</div>
 			<div class="navegacion_contenedor">
-				<nav class="navegacion">
+				<nav class="navegacion desktop">
 					<a class="hover_verde" href="#seguro">Seguros</a>
 					<a class="hover_verde" href="#nosotros">Quiénes somos</a>
 					<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
 					<a class="hover_verde" href="#pagos">Como Pagar</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
+				</nav>
+				<nav class="navegacion tablet">
+					<a class="hover_verde" href="#seguro">Seguros</a>
+					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
+					<a class="hover_verde fa fa-bars"></a>
+				</nav>
+				<nav class="navegacion mobile">
+					<a class="hover_verde fa fa-bars"></a>
 				</nav>
 			</div>
 		</div>	
