@@ -454,6 +454,8 @@ header.compressed .navegacion a.fa {
 }
 .seguros .clear {
 	padding: 40px 0 0;
+  display: flex;
+  flex-direction: row;
 }
 .seguros .seguros_inner {
 	background: rgba(255, 255, 255, .99);
@@ -471,20 +473,24 @@ header.compressed .navegacion a.fa {
 .formularios-seguros {
 	display: none;
 }
-.seguros .seguro,
 .pasos_seguro .paso {
-	position: relative;
-	float: left;
-    width: 33.334%;
-    height: 440px;
-    box-sizing: border-box;
-    text-align: center;
+  float: left;
+  height: 440px;
+  box-sizing: border-box;
+  text-align: center;
 }
 .seguros .seguro {
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
 	margin-bottom: 40px;
+  padding-bottom: 40px;
+  width: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 .seguros .seguro:first-child,
-.seguros .seguro:not(first-child) {
+.seguros .seguro:not(:first-child) {
 	border-left: solid 1px #999;
 }
 .seguros .seguro:last-child {
@@ -517,6 +523,7 @@ h3.titulo-seguro,
 .content-inner form .left-side-title h3 {
 	text-transform: uppercase;
 	margin-bottom: 20px;
+  word-break: break-all;
 }
 h3.titulo-seguro span,
 .seguros .seguro h3.titulo-seguro span,
@@ -538,27 +545,27 @@ h3.titulo-seguro span + span + span,
 	font-family: "Raleway-Medium";
 }
 .seguros .seguro ul {
-    margin: 0;
+  margin: 0;
+  margin-bottom: 30px;
 	list-style: none;
-    padding: 0 30px;
-    text-align: left;
-    font-size: 16px;
+  padding: 0 30px;
+  text-align: left;
+  font-size: 16px;
 }
 .seguros .seguro ul li {}
 .seguros .seguro ul li i {}
 .seguros .seguro ul li .comentario {
 	font-size: 12px;
-    left: 25px;
-    position: relative;
-    top: -10px;
+  left: 25px;
+  position: relative;
+  top: -10px;
 }
 .seguros .seguro .btn {
-	bottom: 0;
-    display: inline-block;
-    left: -50%;
-    margin-left: 80%;
-    position: absolute;
-    width: 40%;
+  position: absolute;
+  width: 50%;
+  left: 50%;
+  bottom: 10px;
+  transform: translate(-50%,0);
 }
 .seguros .comentario_seguros {
 	font-size: 12px;
@@ -598,18 +605,18 @@ h3.titulo-seguro span + span + span,
 }
 .pasos_seguro .paso > .fa > .fa-check-circle {
 	background: #fff none repeat scroll 0 0;
-    border-radius: 50%;
-    color: #666;
-    display: block;
-    font-size: 60px;
-    height: 50px;
-    line-height: 52px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: -8px;
-    top: -8px;
-    width: 50px;
+  border-radius: 50%;
+  color: #666;
+  display: block;
+  font-size: 60px;
+  height: 50px;
+  line-height: 52px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 50px;
 }
 
 .nosotros {
