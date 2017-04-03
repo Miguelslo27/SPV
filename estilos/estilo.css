@@ -234,11 +234,12 @@ body {
 .sombreado:after {
 	content: url('../imagenes/shadow-bg.png');
 	position: absolute;
-	z-index: 10px;
-	max-width: 100%;
+	z-index: 8;
+  left: 50%;
+	transform: translate(50%, 0);
 }
 .sombreado:before {
-	transform: rotate(180deg);
+  transform: rotate(180deg) translate(50%, 0);
 	top: -27px;
 }
 .sombreado:after {
