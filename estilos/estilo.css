@@ -78,9 +78,6 @@ body {
 	overflow: hidden;
 	clear: both;
 }
-.hidden {
-	display: none;
-}
 .no-padding	{
 	padding: 0 !important;
 }
@@ -337,15 +334,15 @@ label:hover:before {
 /* ENCABEZADO */
 header {
 	background: rgba(255, 255, 255, 0.95);
-    box-sizing: border-box;
-    left: 0;
-    overflow: hidden;
-    padding: 10px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 10;
-    transition: all 0.2s ease;
+  box-sizing: border-box;
+  left: 0;
+  overflow: hidden;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 header .logo_contenedor img.logo,
 header .logo_contenedor img.logo_solo,
@@ -357,25 +354,28 @@ header .navegacion_contenedor {
 	float: right;
 	padding: 10px 0;
 }
-header .navegacion a {
+header .navegacion a,
+.nav-menu a {
 	border-left: 1px solid #ddd;
-    color: #666;
-    display: block;
-    float: left;
-    font-size: 18px;
-    height: 65px;
-    line-height: 65px;
-    padding: 0 18px;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: all .2s ease;
+  color: #666;
+  display: block;
+  float: left;
+  font-size: 18px;
+  height: 65px;
+  line-height: 65px;
+  padding: 0 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all .2s ease;
 }
-header .navegacion a.activo {
-	background: #9c3;
-	color: white;
-}
-header .navegacion a.activo:hover {
+header .navegacion a.activo:hover,
+.nav-menu a.activo:hover {
 	color: #666;
+}
+header .navegacion a.activo,
+.nav-menu a.activo  {
+  background: #9c3;
+  color: #fff;
 }
 header .navegacion a.fa {
 	line-height: 65px;

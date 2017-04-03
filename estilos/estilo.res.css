@@ -6,86 +6,43 @@ header .logo_contenedor {
   float: left;
   transform: all .3s ease;
 }
-
-/* Mobile */
-/* smaller */
-@media (max-width: 320px) {
-  body {
-    padding-top: 60px !important;
-  }
-  header,
-  header.compressed {
-    padding: 0 0 0 5px !important;
-    height: 60px !important;
-  }
-  header.compressed {
-    height: 60px;
-  }
-  header .logo_contenedor {
-    max-width: 200px !important;
-  }
-  header .navegacion_contenedor {
+header .navegacion_contenedor {
+  position: relative;
+}
+.nav-menu {
+  position: absolute;
+  background: #fff;
+  padding: 10px;
+}
+.nav-menu a {
+  display: block;
+  border: none;
+  float: none !important;
+  border-left: none !important;
+  border-bottom: 2px solid #9c3;
+  font-size: 18px;
+  height: 65px;
+  line-height: 65px;
+  padding: 0 18px;
+}
+.nav-menu a:hover {}
+header.compressed .nav-menu {
+  top: 60px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+.nav-menu a.close-menu {
+    border: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #9c3;
+    color: #fff;
     padding: 0;
-  }
-}
-/* small */
-@media (max-width: 380px) {
-  header .logo_contenedor {
-    width: 80%;
-  }
-}
-/* some small */
-@media (max-width: 480px) {
-  /*.logo {
-    display: block;
-  }
-  .logo_solo {
-    display: none;
-  }*/
-}
-/* small bigger */
-@media (max-width: 600px) {
-  .tablet { display: none !important; }
-  .mobile, .mobile.tablet { display: initial !important; }
-}
-
-/* Tablet */
-/* medium smaller */
-@media (max-width: 800px) {
-
-}
-/* medium small */
-@media (max-width: 920px) {
-
-}
-/* medium */
-@media (max-width: 1024px) {
-
-}
-/* medium bigger */
-@media (max-width: 1099px) {
-  .tablet { display: initial; }
-  body {
-    padding-top: 85px;
-  }
-  header,
-  header.compressed {
-    padding: 0 10px;
-    height: 85px;
-  }
-  header.compressed {
-    height: 60px;
-  }
-  header .logo_contenedor {
-    max-width: 300px;
-  }
-  /*.desktop {
-    display: none;
-  }
-  .center {
-    width: auto;
-    max-width: 1100px;
-  }*/
+    text-align: center;
+    left: -10px;
+    height: 30px;
+    line-height: 30px;
 }
 
 /* Desktop */
@@ -102,4 +59,125 @@ header .logo_contenedor {
   /*.mobile {
     display: none;
   }*/
+}
+
+/* Tablet */
+/* medium bigger */
+@media (max-width: 1099px) {
+  .tablet { display: initial; }
+  body {
+    padding-top: 85px;
+  }
+  header {
+    overflow: visible;
+  }
+  header,
+  header.compressed {
+    padding: 0 10px;
+    height: 85px;
+  }
+  header.compressed {
+    height: 60px;
+  }
+  header .logo_contenedor {
+    max-width: 300px;
+  }
+
+  header .nav-menu {
+    top: 75px;
+    right: -10px;
+    left: 0;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /*.desktop {
+    display: none;
+  }
+  .center {
+    width: auto;
+    max-width: 1100px;
+  }*/
+}
+/* medium */
+@media (max-width: 1024px) {
+
+}
+/* medium small */
+@media (max-width: 920px) {
+
+}
+/* medium smaller */
+@media (max-width: 800px) {
+
+}
+
+/* Mobile */
+/* small bigger */
+@media (max-width: 600px) {
+  .tablet { display: none !important; }
+  .mobile, .mobile.tablet { display: initial !important; }
+
+  header .navegacion_contenedor {
+    position: static;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0px !important;
+    right: 0 !important;
+    left: 0 !important;
+    bottom: 0;
+    border: none;
+    z-index: 10;
+    visibility: visible;
+    opacity: 1;
+    padding-top: 40px;
+    transition: all 1s ease;
+  }
+}
+/* some medium */
+@media (max-width: 480px) {
+  /*.logo {
+    display: block;
+  }
+  .logo_solo {
+    display: none;
+  }*/
+}
+/* small */
+@media (max-width: 380px) {
+  header .logo_contenedor {
+    width: 80%;
+  }
+}
+/* smaller */
+@media (max-width: 320px) {
+  body {
+    padding-top: 60px !important;
+  }
+  header {
+    overflow: hidden;
+  }
+  header,
+  header.compressed {
+    padding: 0 0 0 5px !important;
+    height: 60px !important;
+  }
+  header.compressed {
+    height: 60px;
+  }
+  header .logo_contenedor {
+    max-width: 200px !important;
+  }
+  header .navegacion_contenedor {
+    padding: 0;
+  }
+}
+
+/* Prevent override styles */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
 }

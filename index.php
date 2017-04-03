@@ -31,14 +31,28 @@
 				<nav class="navegacion tablet">
 					<a class="hover_verde" href="#seguro">Seguros</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
-					<a class="hover_verde fa fa-bars"></a>
+					<a class="hover_verde fa fa-bars" data-target="menu-tablet"></a>
+					<div id="menu-tablet" class="nav-menu hidden">
+						<a class="hover_verde" href="#nosotros">Quiénes somos</a>
+						<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
+						<a class="hover_verde" href="#pagos">Como Pagar</a>
+					</div>
 				</nav>
 				<nav class="navegacion mobile">
-					<a class="hover_verde fa fa-bars"></a>
+					<a class="hover_verde fa fa-bars" data-target="menu-mobile"></a>
 				</nav>
 			</div>
 		</div>	
 	</header>
+
+	<div id="menu-mobile" class="nav-menu mobile hidden">
+		<a class="hover_verde" href="#seguro">Seguros</a>
+		<a class="hover_verde" href="#nosotros">Quiénes somos</a>
+		<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
+		<a class="hover_verde" href="#pagos">Como Pagar</a>
+		<a class="hover_verde" href="#contacto"><span class="fa fa-envelope"></span>Contacto</a>
+		<a class="fa fa-times close-menu" data-target="menu-mobile"></a>
+	</div>
 
 	<section class="pagina">
 		<div id="_quienes_somos" class="center quienes_somos_contenedor">
