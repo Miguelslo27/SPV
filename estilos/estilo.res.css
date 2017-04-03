@@ -65,6 +65,11 @@ header.compressed .nav-menu {
 /* medium bigger */
 @media (max-width: 1099px) {
   .tablet { display: initial; }
+  .center {
+    position: relative;
+    margin: auto;
+    width: auto;
+  }
   body {
     padding-top: 85px;
   }
@@ -91,13 +96,10 @@ header.compressed .nav-menu {
     border-bottom: 1px solid #ddd;
   }
 
-  /*.desktop {
-    display: none;
-  }
-  .center {
+  .slider-banner img {
     width: auto;
-    max-width: 1100px;
-  }*/
+    max-width: 100%;
+  }
 }
 /* medium */
 @media (max-width: 1024px) {
