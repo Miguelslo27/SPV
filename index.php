@@ -51,7 +51,7 @@
 		<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
 		<a class="hover_verde" href="#pagos">Como Pagar</a>
 		<a class="hover_verde" href="#contacto"><span class="fa fa-envelope"></span>Contacto</a>
-		<a class="fa fa-times close-menu" data-target="menu-mobile"></a>
+		<a class="fa fa-times close-menu" href="#" data-target="menu-mobile"></a>
 	</div>
 
 	<section class="pagina">
@@ -86,7 +86,7 @@
 			</div>
 		</div>
 
-		<div class="pasos_seguro_contenedor">
+		<div class="pasos_seguro_contenedor desktop">
 			<div class="center">
 				<h2 class="rotulo_pasos">Pasos para contratar tu seguro</h2>
 				<div class="pasos_seguro">
