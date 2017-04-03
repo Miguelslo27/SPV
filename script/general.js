@@ -4,12 +4,14 @@ String.prototype.replaceAll = function(search, replace) {
 
 $(document).on('ready', function() {
 	showScrollUpCommand();
+	updateSliderResolution();
+
 	// Slideshow de banners
 	$('#slider-banner').jcarousel({
 		transitions: {
-	        transforms3d: true,
-	        easing:       'ease'
-	    }
+			transforms3d: true,
+			easing:       'ease'
+		}
 	});
 
 	// Auto empezar slider
@@ -177,6 +179,10 @@ $(window).on('scroll', function(e) {
 	showScrollUpCommand();
 });
 
+$(window).on('resize', function(e) {
+	updateSliderResolution();
+});
+
 function showScrollUpCommand() {
 	if($(window).scrollTop() > 50) {
 		$('header').addClass('compressed');
@@ -186,6 +192,12 @@ function showScrollUpCommand() {
 		$('#menu-mobile').attr('style', 'top: 85px !important');
 		$('header').removeClass('compressed');
 		$('a.scroll-up').fadeOut();
+	}
+}
+
+function updateSliderResolution() {
+	if ($(window).innerWidth() < 1100) {
+		$('.slider-banner ul > li, .slider-banner ul > li > img').css('width', $(window).innerWidth() + 'px');
 	}
 }
 
