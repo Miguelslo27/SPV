@@ -64,6 +64,11 @@ header.compressed .nav-menu {
 /* Tablet */
 /* medium bigger */
 @media (max-width: 1099px) {
+  p {
+    padding: 0 20px;
+    font-size: 1em;
+    line-height: 1.5em;
+  }
   .tablet { display: initial; }
   .center {
     position: relative;

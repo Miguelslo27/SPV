@@ -31,7 +31,7 @@
 				<nav class="navegacion tablet">
 					<a class="hover_verde" href="#seguro">Seguros</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
-					<a class="hover_verde fa fa-bars" data-target="menu-tablet"></a>
+					<a class="hover_verde fa fa-bars" href="#" data-target="menu-tablet"></a>
 					<div id="menu-tablet" class="nav-menu hidden">
 						<a class="hover_verde" href="#nosotros">Quiénes somos</a>
 						<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
@@ -39,7 +39,7 @@
 					</div>
 				</nav>
 				<nav class="navegacion mobile">
-					<a class="hover_verde fa fa-bars" data-target="menu-mobile"></a>
+					<a class="hover_verde fa fa-bars" href="#" data-target="menu-mobile"></a>
 				</nav>
 			</div>
 		</div>	
