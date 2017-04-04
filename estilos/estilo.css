@@ -374,7 +374,9 @@ header .navegacion a.activo:hover,
 	color: #666;
 }
 header .navegacion a.activo,
-.nav-menu a.activo  {
+header .navegacion a.activo:focus,
+.nav-menu a.activo,
+.nav-menu a.activo:focus {
   background: #9c3;
   color: #fff;
 }
@@ -680,22 +682,22 @@ h3.titulo-seguro span + span + span,
 	font-family: "Raleway-regular";
 }
 .content-inner .left-side-title {
-    border-right: 1px solid #ccc;
-    box-sizing: border-box;
-    display: block;
-    float: left;
-    text-align: center;
-    width: 300px;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  text-align: center;
+  width: 300px;
 }
 .content-inner .left-side-icon {
 	margin: 0 0 20px;
 	background: #9c3;
-    border-radius: 100px;
-    color: #fff;
-    font-size: 90px;
-    height: 200px;
-    line-height: 200px;
-    width: 200px;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 90px;
+  height: 200px;
+  line-height: 200px;
+  width: 200px;
 }
 .content-inner .left-side-icon.fa-mobile {
 	font-size: 130px;
@@ -703,14 +705,16 @@ h3.titulo-seguro span + span + span,
 .content-inner .left-side-title h3 {
 	font-family: "Raleway-Regular";
 	margin: 0;
-    text-transform: uppercase;
-    font-size: 22px;
+  text-transform: uppercase;
+  font-size: 22px;
+  padding: 0;
+  text-align: center;
 }
 .content-inner form .right-side-inputs {
 	border: none;
-    box-sizing: border-box;
-    float: left;
-    padding: 0 50px;
+  box-sizing: border-box;
+  float: left;
+  padding: 0 50px;
 }
 
 .content-inner form .form-inputs {
