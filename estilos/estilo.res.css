@@ -142,6 +142,9 @@ header.compressed .nav-menu {
   .nosotros {
     margin-bottom: 0;
   }
+  footer .center {
+    padding: 20px;
+  }
 }
 /* medium */
 @media (max-width: 1024px) {
@@ -157,6 +160,17 @@ header.compressed .nav-menu {
 @media (max-width: 920px) {
   .seguros .seguro .btn {
     width: 80%;
+  }
+  footer .center {
+    display: flex;
+    flex-direction: column;
+  }
+  footer .center > * {
+    width: auto;
+    text-align: center;
+  }
+  footer .logo_footer img {
+    display: inline-block;
   }
 }
 /* medium smaller */
@@ -202,7 +216,10 @@ header.compressed .nav-menu {
     margin-left: 0;
   }
   .content-inner form .form-inputs {}
-
+  footer .logo_footer img {
+    width: auto;
+    max-width: 100%;
+  }
 }
 @media (max-width: 720px) {
   .seguros .clear {
@@ -214,6 +231,9 @@ header.compressed .nav-menu {
     margin: 0 auto 40px auto;
     width: 90%;
     border: none !important;
+  }
+  .seguros .seguro ul {
+    text-align: center;
   }
   .seguros .seguro:first-child,
   .seguros .seguro:not(:first-child) {

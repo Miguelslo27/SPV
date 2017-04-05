@@ -199,8 +199,11 @@
 				<a class="fa fa-youtube-play hover_blanco" href="http://www.youtube.com" target="blank"></a>
 			</div>
 		</div>
-		<div class="derechos_apssxxi">
+		<div class="derechos_apssxxi tablet desktop">
 			<a class="hover_blanco" href="http://www.appsxxi.com">AppsXXI</a><span> - www.seguroparavos.com - Todos los derechos reservados 2017</span>
+		</div>
+		<div class="derechos_apssxxi mobile">
+			<a class="hover_blanco" href="http://www.appsxxi.com">AppsXXI</a><span> - Todos los derechos reservados 2017</span>
 		</div>
 	</footer>
 
