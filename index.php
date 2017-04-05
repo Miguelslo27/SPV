@@ -148,7 +148,8 @@
 							<h3>Contacto</h3>
 						</div>
 						<div class="form-inputs right-side-inputs">
-							<h2>Envianos tu consulta o comentario</h2>
+							<h2 class="tablet desktop">Envianos tu consulta o comentario</h2>
+							<h2 class="mobile">Envianos tu consulta</h2>
 							<div class="form-line input-text input-large">
 								<label for="nombre">Nombre:</label>
 								<input type="text" id="nombre">

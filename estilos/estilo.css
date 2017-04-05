@@ -869,28 +869,37 @@ h3.titulo-seguro span + span + span,
 .finalizar .content-inner form .right-side-inputs h2 {
 	color: #999;
 }
-.contratar .content-inner form .right-side-inputs h2 strong,
-.asegurar .content-inner form .right-side-inputs h2 strong,
-.finalizar .content-inner form .right-side-inputs h2 strong {
-	color: #9c3;
-}
 .contratar .content-inner form .right-side-inputs h2 span.number-globe,
 .asegurar .content-inner form .right-side-inputs h2 span.number-globe,
 .finalizar .content-inner form .right-side-inputs h2 span.number-globe {
 	background: #9c3 none repeat scroll 0 0;
-    border-radius: 20px;
-    color: #fff;
-    display: inline-block;
-    height: 40px;
-    line-height: 37px;
-    margin-right: 15px;
-    text-align: center;
-    width: 40px;
+  border-radius: 20px;
+  color: #fff;
+  display: block;
+  float: left;
+  height: 40px;
+  line-height: 37px;
+  margin-right: 15px;
+  text-align: center;
+  width: 40px;
+}
+.contratar .content-inner form .right-side-inputs h2 .number-text,
+.asegurar .content-inner form .right-side-inputs h2 .number-text,
+.finalizar .content-inner form .right-side-inputs h2 .number-text {
+  display: block;
+  float: left;
+  width: calc(100% - 55px);
+  line-height: 40px;
+}
+.contratar .content-inner form .right-side-inputs h2 strong,
+.asegurar .content-inner form .right-side-inputs h2 strong,
+.finalizar .content-inner form .right-side-inputs h2 strong {
+  color: #9c3;
 }
 .finalizar .content-inner form .right-side-inputs h2 span.number-globe {
 	line-height: 35px;
 	position: relative;
-    top: -2px;
+  top: -2px;
 }
 .contratar .content-inner form .form-inputs {}
 .contratar .content-inner form .form-inputs .form-line,
