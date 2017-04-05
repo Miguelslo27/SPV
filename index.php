@@ -148,7 +148,8 @@
 							<h3>Contacto</h3>
 						</div>
 						<div class="form-inputs right-side-inputs">
-							<h2>Envianos tu consulta o comentario</h2>
+							<h2 class="tablet desktop">Envianos tu consulta o comentario</h2>
+							<h2 class="mobile">Envianos tu consulta</h2>
 							<div class="form-line input-text input-large">
 								<label for="nombre">Nombre:</label>
 								<input type="text" id="nombre">
@@ -198,8 +199,11 @@
 				<a class="fa fa-youtube-play hover_blanco" href="http://www.youtube.com" target="blank"></a>
 			</div>
 		</div>
-		<div class="derechos_apssxxi">
+		<div class="derechos_apssxxi tablet desktop">
 			<a class="hover_blanco" href="http://www.appsxxi.com">AppsXXI</a><span> - www.seguroparavos.com - Todos los derechos reservados 2017</span>
+		</div>
+		<div class="derechos_apssxxi mobile">
+			<a class="hover_blanco" href="http://www.appsxxi.com">AppsXXI</a><span> - Todos los derechos reservados 2017</span>
 		</div>
 	</footer>
 

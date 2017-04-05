@@ -37,7 +37,8 @@ if (!empty ($accion)) {
 			</div>
 			<?php if (count($seguros)) : ?>
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">1</span> Elegí tu seguro y cotizalo</h2>
+				<h2 class="tablet desktop"><span class="number-globe">1</span> <span class="number-text">Elegí tu seguro y cotizalo</span></h2>
+				<h2 class="mobile"><span class="number-globe">1</span> <span class="number-text">Elegí tu seguro</span></h2>
 				<div class="form-line required-message"></div>
 				<?php foreach ($seguros as $seg) { ?>
 					<?php $seg_sano = strtolower (sanear_string(str_replace (' ', '_', $seg['nombre']))) ?>
@@ -53,7 +54,7 @@ if (!empty ($accion)) {
 						<label for="<?php echo $seg_sano ?>"><?php echo $seg['nombre'] ?></label>
 					</div>
 				<?php } ?>
-				<div class="form-line">
+				<div class="form-line form-buttons">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="btn left"><span class="fa fa-angle-left"></span><span>Cancelar</span></a>
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn" data-objetformid="asegurar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
 				</div>
@@ -158,7 +159,9 @@ if (!empty ($accion)) {
 			</div>
 			<?php if (count($atributos)) : ?> 
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">2</span> Ingresá tus datos y contratalo</h2>
+				<h2 class="tablet desktop"><span class="number-globe">2</span> <span class="number-text">Ingresá tus datos y contratalo</span></h2>
+				<h2 class="mobile"><span class="number-globe">2</span> <span class="number-text">Datos del seguro</span></h2>
+				<div class="clear"></div>
 				<div class="form-line required-message">
 					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
 				</div>
@@ -229,7 +232,7 @@ if (!empty ($accion)) {
 					<label><strong>Costso del seguro:</strong> </label>
 					<label class="upper_text"><strong><span><?php echo $seguro['moneda']; ?></span> <span id="precio_seguro_original" class="hidden"><?php echo $seguro['precio']; ?></span><span id="precio_seguro"><?php echo $seguro['precio']; ?></span></strong></label>
 				</div>
-				<div class="form-line">
+				<div class="form-line form-buttons">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/asegurar" class="btn left"><span class="fa fa-angle-left"></span><span>Atrás</span></a>
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
 				</div>
@@ -262,7 +265,7 @@ if (!empty ($accion)) {
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
-				<h2><span class="number-globe">3</span> Solicitud procesada</h2>
+				<h2><span class="number-globe">3</span> <span class="number-text">Solicitud procesada</span></h2>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
 					<p>Seguro contratado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
@@ -278,7 +281,7 @@ if (!empty ($accion)) {
 				<div class="push-60-left">
 					<p>El equipo de <span class="site-title"><span class="t-seguro">Seguro</span><span class="t-para">Para</span><span class="t-vos">Vos</span></span>.</p>
 				</div>
-				<div class="form-line">
+				<div class="form-line form-buttons">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="contratar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
 				</div>
 			</div>
