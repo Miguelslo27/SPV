@@ -39,6 +39,7 @@ if (!empty ($accion)) {
 			<div class="form-inputs right-side-inputs">
 				<h2 class="tablet desktop"><span class="number-globe">1</span> <span class="number-text">Elegí tu seguro y cotizalo</span></h2>
 				<h2 class="mobile"><span class="number-globe">1</span> <span class="number-text">Elegí tu seguro</span></h2>
+				<div class="clear"></div>
 				<div class="form-line required-message"></div>
 				<?php foreach ($seguros as $seg) { ?>
 					<?php $seg_sano = strtolower (sanear_string(str_replace (' ', '_', $seg['nombre']))) ?>
@@ -266,6 +267,7 @@ if (!empty ($accion)) {
 			</div>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">3</span> <span class="number-text">Solicitud procesada</span></h2>
+				<div class="clear"></div>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
 					<p>Seguro contratado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>

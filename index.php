@@ -196,7 +196,7 @@
 				<a class="fa fa-instagram rounded hover_blanco" href="http://www.instagram.com" target="blank"></a>
 				<a class="fa fa-facebook rounded hover_blanco" href="http://www.facebook.com" target="blank"></a>
 				<a class="fa fa-twitter rounded hover_blanco" href="http://www.twitter.com" target="blank"></a>
-				<a class="fa fa-youtube-play hover_blanco" href="http://www.youtube.com" target="blank"></a>
+				<a class="fa fa-youtube-play rounded hover_blanco" href="http://www.youtube.com" target="blank"></a>
 			</div>
 		</div>
 		<div class="derechos_apssxxi tablet desktop">
