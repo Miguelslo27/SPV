@@ -55,7 +55,7 @@ if (!empty ($accion)) {
 						<label for="<?php echo $seg_sano ?>"><?php echo $seg['nombre'] ?></label>
 					</div>
 				<?php } ?>
-				<div class="form-line form-buttons">
+				<div class="form-line form-buttons tablet desktop">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="btn left"><span class="fa fa-angle-left"></span><span>Cancelar</span></a>
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn" data-objetformid="asegurar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
 				</div>
@@ -114,6 +114,10 @@ if (!empty ($accion)) {
 					</table>
 				</div>
 				<?php endif; ?>
+				<div class="form-line form-buttons mobile">
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="btn left"><span class="fa fa-angle-left"></span><span>Cancelar</span></a>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cotizar" class="btn" data-objetformid="asegurar"><span>Continuar</span><span class="fa fa-angle-right"></span></a>
+				</div>
 			</div>
 			<?php endif; ?>
 		<?php } ?>
@@ -230,7 +234,7 @@ if (!empty ($accion)) {
 					</select>
 				</div>
 				<div class="form-line border-bottom input-text input-medium">
-					<label><strong>Costso del seguro:</strong> </label>
+					<label><strong>Precio del seguro:</strong> </label>
 					<label class="upper_text"><strong><span><?php echo $seguro['moneda']; ?></span> <span id="precio_seguro_original" class="hidden"><?php echo $seguro['precio']; ?></span><span id="precio_seguro"><?php echo $seguro['precio']; ?></span></strong></label>
 				</div>
 				<div class="form-line form-buttons">

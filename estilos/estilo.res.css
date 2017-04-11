@@ -175,6 +175,11 @@ header.compressed .nav-menu {
   }
 }
 /* medium smaller */
+@media (min-width: 800px) {
+  .content-inner form .form-inputs .form-line {
+    display: block !important;
+  }
+}
 @media (max-width: 800px) {
   .content-inner {
     padding: 15px 0;
@@ -210,6 +215,9 @@ header.compressed .nav-menu {
     height: 80px;
     line-height: 80px;
     text-align: left;
+  }
+  .content-inner .tablas {
+    padding: 0 15px;
   }
   .contratar .content-inner form .form-inputs .form-line,
   .asegurar .content-inner form .form-inputs .form-line,
@@ -264,22 +272,60 @@ header.compressed .nav-menu {
     opacity: 1;
     transition: all 1s ease;
   }
+
+  .content-inner .form-buttons {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    background: rgba(255,255,255,.9);
+    padding: 20px;
+  }
+
+  .content-inner .tablas .btn {
+    text-align: center;
+    float: right;
+    margin-top: 10px;
+    background: #9c3;
+    color: #fff;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+  }
+  .content-inner .tablas .btn.left {
+    float: left;
+  }
+  .content-inner .tablas .btn .fa {
+    color: #fff;
+    margin: 0;
+    line-height: 36px;
+  }
+  .content-inner .tablas .btn span:not(.fa) {
+    color: #fff;
+    margin-right: 14px;
+    position: relative;
+    line-height: 40px;
+  }
+  .content-inner .tablas .btn.left span:not(.fa) {
+    margin-right: 0;
+    margin-left: 14px;
+  }
 }
 /* some medium */
 @media (max-width: 480px) {
-  .content-inner form .form-buttons {
-    display: flex;
-    flex-direction: column;
+  .content-inner form .form-buttons,
+  .content-inner .tablas .form-buttons {}
+  .content-inner form .form-inputs .btn,
+  .content-inner .tablas .btn {
+    width: 48%;
   }
-  .content-inner form .form-inputs .btn {
-    width: 100%;
-    float: none !important;
-    text-align: center;
-  }
-  .content-inner form .form-inputs .btn:first-child {
+  .content-inner form .form-inputs .btn:first-child,
+  .content-inner .tablas .btn:first-child {
     order: 2;
   }
-  .content-inner form .form-inputs .btn:last-child {
+  .content-inner form .form-inputs .btn:last-child,
+  .content-inner .tablas .btn:last-child {
     order: 1;
   }
 }
@@ -287,6 +333,12 @@ header.compressed .nav-menu {
 @media (max-width: 380px) {
   header .logo_contenedor {
     width: 80%;
+  }
+  .content-inner .tablas .btn span:not(.fa) {
+    display: none;    
+  }
+  .content-inner .tablas .btn span.fa {
+    font-size: 32px;
   }
 }
 /* smaller */

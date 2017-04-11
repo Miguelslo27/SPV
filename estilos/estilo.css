@@ -173,6 +173,8 @@ body {
 }
 .site-title .seguro,
 .site-title .t-seguro {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 	border: none !important;
 	float: none !important;
 	font-family: 'Raleway-Bold';
@@ -829,19 +831,18 @@ h3.titulo-seguro span + span + span,
 }
 .content-inner form .form-inputs .form-line.input-textarea textarea {
 	background: #ddd;
-    border: none;
-    box-sizing: border-box;
-    height: 150px;
-    margin: 3px 0;
-    width: 100%;
-    padding: 15px;
+  border: none;
+  box-sizing: border-box;
+  height: 150px;
+  margin: 3px 0;
+  width: 100%;
+  padding: 15px;
 }
 .content-inner form .form-inputs .btn {
 	float: right;
 	margin-top: 10px;
 	background: #9c3;
 	color: #fff;
-	padding: 10px 20px;
 }
 .content-inner form .form-inputs .btn.left {
 	float: left;
@@ -851,16 +852,16 @@ h3.titulo-seguro span + span + span,
 }
 .content-inner form .form-inputs .btn span:not(.fa) {
 	color: #fff;
-    display: inline-block;
-    line-height: 10px;
-    margin-right: 14px;
-    position: relative;
-    top: -3px;
+  display: inline-block;
 }
 .content-inner form .form-inputs .btn.left span:not(.fa) {
-	margin-right: 0;
-	margin-left: 14px;
+  margin-right: 0;
+  margin-left: 14px;
 }
+.content-inner form .form-inputs .btn:not(.left) span:not(.fa) {
+  margin-right: 14px;
+}
+
 
 /* PRIMER PASO */
 .contratar .content-inner form .right-side-inputs {}
@@ -910,15 +911,23 @@ h3.titulo-seguro span + span + span,
 .contratar .content-inner form .form-inputs .btn,
 .asegurar .content-inner form .form-inputs .btn,
 .finalizar .content-inner form .form-inputs .btn {
-	padding: 8px 18px;
+  padding: 0 20px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+}
+.contratar .content-inner form .form-inputs .btn span,
+.asegurar .content-inner form .form-inputs .btn span,
+.finalizar .content-inner form .form-inputs .btn span {
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
 }
 .contratar .content-inner form .form-inputs .btn .fa,
 .asegurar .content-inner form .form-inputs .btn .fa,
 .finalizar .content-inner form .form-inputs .btn .fa {
-	margin: 0;
-	font-size: 26px;
+  line-height: 36px;
 }
-
 .pasos {
 	height: 530px;
 }
