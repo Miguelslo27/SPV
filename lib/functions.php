@@ -64,7 +64,7 @@ function getAttributeHTML($atributo) {
 
 	?>
 	<div class="form-line border-bottom input-text input-large <?php echo ($requerido == 'true' ? 'input-required' : ''); ?>">
-		<label for="<?php echo $atributo_san; ?>"><?php echo $atributo['atributo']; ?>: <?php echo ($requerido == 'true' ? '<span class="required">*</span>' : ''); ?></label>
+		<label for="<?php echo $atributo_san; ?>"><?php echo $atributo['atributo']; ?>:</label>
 		<?php if ($tipo == 'lista') : ?>
 		<select
 		 data-realname="<?php echo $atributo['atributo']; ?>"

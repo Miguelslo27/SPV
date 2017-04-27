@@ -170,6 +170,7 @@ if (!empty ($accion)) {
 				<div class="form-line required-message">
 					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
 				</div>
+
 				<?php if (count($atr_usuarios)) : ?>
 				<!-- Atributos modelo usuario -->
 				<h3>Ingresa tus datos personales</h3>
@@ -180,16 +181,7 @@ if (!empty ($accion)) {
 				}
 				?>
 				<?php endif; ?>
-				<?php if (count($atr_cotizacion)) : ?>
-				<!-- Atributos modelo cotizacion -->
-				<h3>Ingresa datos de cotización</h3>
-				<div class="form-line border-bottom"></div>
-				<?php
-				foreach ($atr_cotizacion as $atindx => $atributo) {
-					getAttributeHTML($atributo);
-				}
-				?>
-				<?php endif; ?>
+				
 				<?php if (count($atr_poliza)) : ?>
 				<!-- Atributos modelo poliza -->
 				<h3>Ingresa datos de la póliza</h3>
@@ -200,8 +192,20 @@ if (!empty ($accion)) {
 				}
 				?>
 				<?php endif; ?>
+
+				<?php if (count($atr_cotizacion)) : ?>
+				<!-- Atributos modelo cotizacion -->
+				<h3>Ingresa datos de cotización</h3>
+				<div class="form-line border-bottom"></div>
+				<?php
+				foreach ($atr_cotizacion as $atindx => $atributo) {
+					getAttributeHTML($atributo);
+				}
+				?>
+				<?php endif; ?>
+
 				<div class="form-line border-bottom input-text input-medium input-required">
-					<label for="adjuntar">Adjuntar Comprobantes: <span class="required">*</span></label>
+					<label for="adjuntar">Adjuntar Comprobantes:</label>
 					<input
 					 type="text"
 					 id="adjuntar"
@@ -218,21 +222,10 @@ if (!empty ($accion)) {
 					 value="true"
 					 data-realname="Términos y condiciones"
 					 data-customrequired="true">
-					<label for="terminos">Acepto los <a href="http://dev.backoffice.seguroparavos.com.uy/<?php echo $segruro_ob['condiciones']; ?>">Términos y condiciones</a> <span class="required">*</span></label>
+					<label for="terminos">Acepto los <a href="http://dev.backoffice.seguroparavos.com.uy/<?php echo $segruro_ob['condiciones']; ?>">Términos y condiciones</a></label>
 				</div>
 				<?php endif; ?>
 
-				<div class="form-line border-bottom input-text input-medium input-required">
-					<label for="pago">Forma de Pago: <span class="required">*</span></label>
-					<select
-					 name="pago"
-					 id="pago"
-					 data-realname="Forma de Pago"
-					 data-customrequired="true">
-						<option value="1">Antel</option>
-						<option value="2">CobrosYa</option>
-					</select>
-				</div>
 				<div class="form-line border-bottom input-text input-medium">
 					<label><strong>Precio del seguro:</strong> </label>
 					<label class="upper_text"><strong><span><?php echo $seguro['moneda']; ?></span> <span id="precio_seguro_original" class="hidden"><?php echo $seguro['precio']; ?></span><span id="precio_seguro"><?php echo $seguro['precio']; ?></span></strong></label>

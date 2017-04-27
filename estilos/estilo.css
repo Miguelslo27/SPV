@@ -725,27 +725,38 @@ h3.titulo-seguro span + span + span,
 .content-inner form .form-inputs .form-line {
 	overflow: hidden;
 }
-.content-inner form .form-inputs .form-line.input-required label {
-	color: #b20000;
+.content-inner form .form-inputs .form-line.input-required label {}
+.content-inner form .form-inputs .form-line.input-required.input-check::before,
+.content-inner form .form-inputs .form-line.input-required:not(.input-check) label::after {
+  content: " *";
+  font-size: 22px;
+  font-weight: bold;
+  color: #b20000;
 }
-.content-inner form .form-inputs .form-line.input-required label .required {
-	font-size: 22px;
-	font-weight: bold;
-	color: #b20000;
+.content-inner form .form-inputs .form-line.input-required.input-check {
+  position: relative;
+}
+.content-inner form .form-inputs .form-line.input-required.input-check label {
+  padding-right: 55px !important;
+}
+.content-inner form .form-inputs .form-line.input-required.input-check::before {
+  position: absolute;
+  right: 40px;
+  top: 15px;
 }
 .content-inner form .form-inputs .border-bottom {
 	border-bottom: 2px solid #999;
 }
 .content-inner form .form-inputs .form-line h3 {
 	color: #9c3;
-    font-family: "Raleway-Medium";
-    text-transform: uppercase;
-    text-align: left;
+  font-family: "Raleway-Medium";
+  text-transform: uppercase;
+  text-align: left;
 }
 .content-inner form .form-inputs .form-line p {
 	font-size: 16px;
-    line-height: 28px;
-    padding: 0;
+  line-height: 28px;
+  padding: 0;
 }
 .content-inner form .form-inputs .form-line.required-message p,
 .content-inner form .form-inputs .form-line.required-message ul li {
@@ -772,10 +783,10 @@ h3.titulo-seguro span + span + span,
 .content-inner form .form-inputs .form-line.input-check.right-message {}
 .content-inner form .form-inputs .form-line.input-check.right-message label {
 	font-size: 14px;
-    height: 60px;
-    line-height: 60px;
-    padding-right: 40px;
-    text-align: right;
+  height: 60px;
+  line-height: 60px;
+  padding-right: 40px;
+  text-align: right;
 }
 .content-inner form .form-inputs .form-line.input-check.right-message label a {
 	color: #9c3;
