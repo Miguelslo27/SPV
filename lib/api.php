@@ -267,7 +267,7 @@ if (!empty ($accion)) {
 				<div class="clear"></div>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
-					<p>Seguro contratado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
+					<p>Seguro solicitado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
 					<p>Cobertura: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $seguro['nombre']); ?></strong></span>.</p>
 					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.$seguro['precio']; ?></strong></span></p>
 				</div>
