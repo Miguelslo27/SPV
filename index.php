@@ -100,14 +100,14 @@
 					<div class="paso segundo_paso">
 						<span class="fa rounded">2 <span class="fa fa-check-circle"></span></span>
 						<h3 class="titulo-seguro">
-							<span>Ingresá tus datos y contratalo</span>
+							<span>Ingresá tus datos</span>
 						</h3>
 					</div>
 					<span class="connect mirror"><img src="/imagenes/recursos/flecha-design.png"></span>
 					<div class="paso tercer_paso">
 						<span class="fa rounded">3 <span class="fa fa-check-circle"></span></span>
 						<h3 class="titulo-seguro">
-							<span>Confirmá tu seguro y <br><strong>¡contratalo!</strong></span>
+							<span>¡Contratalo!</span>
 						</h3>
 					</div>
 					<div class="clear"></div>
