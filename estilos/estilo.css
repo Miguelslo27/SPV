@@ -654,6 +654,7 @@ h3.titulo-seguro span + span + span,
 	float: left;
 	margin: 0;
 	margin-right: 20px;
+  margin-bottom: 15px;
 }
 .aseguradoras .content-inner {
 	position: relative;
