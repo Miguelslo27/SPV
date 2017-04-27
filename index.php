@@ -134,15 +134,16 @@
 					<h2 id="_aseguradoras">Compañías que confían en nosotros</h2>
 					<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
 					<p>
-						<!-- <img src="/imagenes/logos/aseguradora_mapfre.jpg" class="aseguradora" alt="Mapfre">
-						<img src="/imagenes/logos/aseguradora_uru-asistencia.jpg" class="aseguradora" alt="Uruguay Asistencia"> -->
 						<img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre">
 						<img src="/imagenes/logos/brands/bse.png" class="aseguradora" alt="Banco de Seguros del Estado">
 					</p>
 					<!-- FORMAS DE PAGO -->
 					<h2 id="_pagos">Formas de pago de acuerdo al producto</h2>
-					<br><br>
-					<p><img src="/imagenes/logos/pago_redpagos.jpg" class="pagos" alt="RedPagos"><img src="/imagenes/logos/pago_antel.jpg" class="pagos" alt="Antel"><img src="/imagenes/logos/pago_cobrosya.jpg" class="pagos" alt="CobrosYa"></p>
+					<p>
+						<img src="/imagenes/logos/brands/redpagos.png" class="pagos" alt="RedPagos">
+						<img src="/imagenes/logos/brands/abitab.png" class="pagos" alt="Abitab">
+						<img src="/imagenes/logos/brands/visa.png" class="pagos" alt="Visa">
+						<img src="/imagenes/logos/brands/master.png" class="pagos" alt="MasterCard">
 				</div>
 			</div>
 		</div>
