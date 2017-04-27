@@ -650,7 +650,6 @@ h3.titulo-seguro span + span + span,
 }
 .nosotros p img.aseguradora,
 .nosotros p img.pagos {
-	height: 30px;
 	display: block;
 	float: left;
 	margin: 0;
