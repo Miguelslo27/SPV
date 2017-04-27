@@ -118,20 +118,28 @@
 		<div class="nosotros sombreado" id="_nosotros">
 			<div class="center">
 				<div class="content-inner">
+					<!-- NOSOTROS -->
 					<h2>Qué hacemos</h2>	
 					<p>Apuntamos a ofrecer una nueva experiencia en la contratación de seguros, sin trámites, en 3 rápidos  pasos y desde la comodidad de tu dispositivo electrónico.</p>
 					<p><span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> brinda una solución integral, para contratar tu seguro de una forma sencilla y ágil, respaldando a sus clientes desde la asesoría para la contratación hasta la gestión de un siniestro. Para esto, contamos con un equipo, listo para ayudarte.</p>
+					<!-- MISION -->
 					<h2>Misión</h2>	
 					<p>Somos líderes en innovación en la industria de seguros, nuestra tecnología nos permite procesos más veloces y eficaces mejorando el servicio brindado al cliente.</p>
 					<p>Todos nuestros esfuerzos se centran en seguir mejorando la interacción con el cliente y aumentar la gama de servicios disponibles bajo este nuevo formato de comercialización de seguros.</p>
+					<!-- VISION -->
 					<h2>Visión</h2>	
 					<p>Queremos ser reconocidos como un equipo de trabajo profesional, enfocados en la mejora continua, con tecnología de punta y satisfaciendo las expectativas de nuestros clientes, por medio de una atención personalizada.</p>
 					<p>Reflejando así las bases de una empresa en continuo desarrollo, para alcanzar los más altos estándares de sinergia con las compañías aseguradoras y  satisfacción con el cliente.</p>
+					<!-- COMPAÑÍAS QUE CONFÍAN EN NOSOTROS -->
 					<h2 id="_aseguradoras">Compañías que confían en nosotros</h2>
-					<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> te ofrecemos el abanico más amplio de compañías aseguradoras para que puedas elegir y comparar con nuestro multicotizador online la que más se adapte a tus necesidades.</p>
-					<p>Contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
-					<br><br>
-					<p><img src="/imagenes/logos/aseguradora_mapfre.jpg" class="aseguradora" alt="Mapfre"><img src="/imagenes/logos/aseguradora_uru-asistencia.jpg" class="aseguradora" alt="Uruguay Asistencia"></p>
+					<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
+					<p>
+						<!-- <img src="/imagenes/logos/aseguradora_mapfre.jpg" class="aseguradora" alt="Mapfre">
+						<img src="/imagenes/logos/aseguradora_uru-asistencia.jpg" class="aseguradora" alt="Uruguay Asistencia"> -->
+						<img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre">
+						<img src="/imagenes/logos/brands/bse.png" class="aseguradora" alt="Banco de Seguros del Estado">
+					</p>
+					<!-- FORMAS DE PAGO -->
 					<h2 id="_pagos">Formas de pago de acuerdo al producto</h2>
 					<br><br>
 					<p><img src="/imagenes/logos/pago_redpagos.jpg" class="pagos" alt="RedPagos"><img src="/imagenes/logos/pago_antel.jpg" class="pagos" alt="Antel"><img src="/imagenes/logos/pago_cobrosya.jpg" class="pagos" alt="CobrosYa"></p>
