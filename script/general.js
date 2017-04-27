@@ -283,11 +283,12 @@ function processActionHash(hash, $form) {
 
 				// Change hash to stay in the current location
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
+				return;
 			}
 		}
 
 		if ($form.attr('id') == 'contratar') {
-			// TODO - Enviar el formulario para procesar 
+			// TODO - Enviar el formulario para procesar
 			
 			// $form.find('input:checked').each(function() {
 			// 	seguro.push({
