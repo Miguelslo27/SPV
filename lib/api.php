@@ -271,21 +271,24 @@ if (!empty ($accion)) {
 			</div>
 			<div class="form-inputs right-side-inputs">
 				<h2><span class="number-globe">3</span> <span class="number-text">Solicitud procesada</span></h2>
-				<div class="clear"></div>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
-					<p>Seguro solicitado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
+					<p>Producto solicitado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
 					<p>Cobertura: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $seguro['nombre']); ?></strong></span>.</p>
 					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.$seguro['precio']; ?></strong></span></p>
 				</div>
 				<h3 class="green-style">Solicitud enviada</h3>
 				<div class="push-60-left">
-					<p>En 24 horas hábiles sera contactado por el equipo de <strong>Larraura Seguros</strong>.</p>
+					<p>En 24 horas hábiles sera contactado por el equipo de <span class="site-title"><span class="t-seguro">Seguro</span><span class="t-para">Para</span><span class="t-vos">Vos</span></span> para completar los datos del producto solicitado</p>
 				</div>
 				<div class="form-line border-bottom"></div>
 				<h3 class="green-style">Muchas gracias</h3>
 				<div class="push-60-left">
 					<p>El equipo de <span class="site-title"><span class="t-seguro">Seguro</span><span class="t-para">Para</span><span class="t-vos">Vos</span></span>.</p>
+				</div>
+				<div class="push-60-left">
+					<p class="small">Se deja constancia que los mencionados servicios no son prestados por la aplicación Segurosparavos, la cual se limita simplemente a ofrecer los mismos siendo la única exclusivamente responsables de la totalidad de las obligaciones que emergen de dicha contratación las empresas que prestan los mencionados servicios contratados.
+					“Las coberturas de seguros incluidas en este producto son proporcionadas por MAPFRE (www.mapfre.com.uy) empresa autorizada a operar en Uruguay por el Banco Central del Uruguay.”</p>
 				</div>
 				<div class="form-line form-buttons">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="contratar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
