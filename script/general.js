@@ -215,7 +215,8 @@ function processActionHash(hash, $form) {
 
 	if ($form && $form.length) {
 		if ($form.attr('id') == 'asegurar') {
-			seguro     = {};
+			seguro = {};
+
 			if ($form.find('input:checked').length) {
 				$form.find('.required-message .required-fields-error').remove();
 				$form.find('input:checked:not(:disabled)').each(function() {
@@ -247,6 +248,7 @@ function processActionHash(hash, $form) {
 			cotizacion = {};
 			poliza     = {};
 			var status = checkFieldsPass($form);
+
 			if (!status.error) {
 				$form.find('.required-message .required-fields-error').remove();
 
@@ -388,7 +390,8 @@ function checkFieldsPass($form) {
 		var $this = $(this);
 		
 		// Check if required first
-		if ($this.data('customrequired') && $.trim($this.val()) == '') {
+		if (($this.data('customrequired') && $.trim($this.val()) == '')
+		    || $this.data('customrequired') && $this.attr('type') == 'checkbox' && !$this.prop('checked')) {
 			status.ok = false;
 			status.error = true;
 			if (!status.errors.length) {
