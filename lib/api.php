@@ -204,15 +204,22 @@ if (!empty ($accion)) {
 				?>
 				<?php endif; ?>
 
+				<?php if ($segruro_ob['comprobar']) : ?>
 				<div class="form-line border-bottom input-text input-medium input-required">
 					<label for="adjuntar">Adjuntar Comprobantes:</label>
+
+					<!-- TODO - Convertir este campo en un multiple file -->
 					<input
 					 type="text"
 					 id="adjuntar"
 					 name="adjuntar"
 					 data-realname="Adjuntar Comprobantes"
 					 data-customrequired="true">
+					<!-- END TODO -->
+
 				</div>
+				<?php endif; ?>
+
 				<?php if (isset($segruro_ob['condiciones']) && $segruro_ob['condiciones'] != '') : ?>
 				<div class="form-line border-bottom input-check right-message input-required">
 					<input
