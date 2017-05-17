@@ -331,6 +331,9 @@ header.compressed .nav-menu {
 }
 /* small */
 @media (max-width: 380px) {
+  h3 {
+    font-size: 22px;
+  }
   header .logo_contenedor {
     width: 80%;
   }
