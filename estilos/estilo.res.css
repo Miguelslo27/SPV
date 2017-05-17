@@ -335,7 +335,9 @@ header.compressed .nav-menu {
     width: 80%;
   }
   .content-inner .tablas .btn span:not(.fa) {
-    display: none;    
+    /*display: none;    */
+    font-size: 14px;
+    top: -4px;
   }
   .content-inner .tablas .btn span.fa {
     font-size: 32px;
