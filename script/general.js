@@ -164,10 +164,65 @@ $(document).on('ready', function() {
 		 .find('input, select')
 		 .each(function () {
 		 	if ($(this).data('customadd') && $(this).data('customadd') != '') {
-		 		var precio_add = $(this).data('customadd');
-		 		var add_in_per = $(this).data('customaddin');
-		 		var add_to_price = (add_in_per ? (!isNaN(parseFloat($(this).val())) ? parseFloat($(this).val()) : precio_seguro) * (precio_add/100) : precio_add);
-		 			precio_seguro_ += add_to_price;
+		 		var current_val  = parseFloat($(this).val());
+		 		var advanced     = $(this).data('customadvanced');
+		 		var precio_add   = $(this).data('customadd');
+		 		var add_in_per   = $(this).data('customaddin');
+		 		var add_to_price = 0;
+
+		 		// console.log('Avanzado:', advanced);
+		 		// console.log('Precio: ', precio_add);
+
+		 		if (advanced) {
+		 			add_to_price = precio_add.reduce(function (result, logic) {
+		 				var valor      = 0;
+		 				var referencia = parseFloat(logic.referencia);
+		 				var resultado  = parseFloat(logic.resultado);
+
+		 				switch (logic.valor_a_comparar) {
+		 					case "seguro.valor":
+		 						valor = precio_seguro;
+		 					break;
+		 					case "variable.value":
+		 						valor = current_val;
+		 					break;
+		 				}
+
+		 				switch (logic.operador) {
+		 					case "=":
+		 						if (valor == referencia) {
+		 							result = resultado;
+		 						}
+		 					break;
+		 					case ">":
+		 						if (valor > referencia) {
+		 							result = resultado;
+		 						}
+		 					break;
+		 					case "<":
+		 						if (valor < referencia) {
+		 							result = resultado;
+		 						}
+		 					break;
+		 					case ">=":
+		 						if (valor >= referencia) {
+		 							result = resultado;
+		 						}
+		 					break;
+		 					case "<=":
+		 						if (valor <= referencia) {
+		 							result = resultado;
+		 						}
+		 					break;
+		 				}
+
+		 				return result;
+		 			}, 0);
+		 		} else {
+		 			add_to_price = (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
+		 		}
+
+		 		precio_seguro_ += add_to_price;
 		 	}
 		 });
 
