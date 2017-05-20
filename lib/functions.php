@@ -50,10 +50,12 @@ function getAttributeHTML($atributo) {
 	$tipo        = $atributo['tipo'];
 	$valores     = null;
 	$dependencia = $atributo['dependencia'] ? $atributo['dependencia'] : null;
-	$adhiere     = $atributo['adhiere'] ? $atributo['adhiere'] : null;
+	$avanzado    = $atributo['avanzado'];
+	$adhiere_adv = $atributo['precios_avanzados'];
 	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
 	$modelo      = $atributo['modelo'];
 	$ayuda       = $atributo['ayuda'];
+	$adhiere     = $avanzado ? $adhiere_adv : ($atributo['adhiere'] ? $atributo['adhiere'] : null);
 
 	if ($tipo == 'lista') {
 		$valores = json_decode($atributo['valores']);
@@ -70,7 +72,8 @@ function getAttributeHTML($atributo) {
 		 data-realname="<?php echo $atributo['atributo']; ?>"
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
-		 data-customadd="<?php echo $adhiere; ?>"
+		 data-customadvanced="<?php echo $avanzado; ?>"
+		 data-customadd='<?php echo $adhiere; ?>'
 		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda'];; ?>"
 		 data-customrequired="<?php echo $requerido; ?>"
@@ -87,7 +90,8 @@ function getAttributeHTML($atributo) {
 		 data-realname="<?php echo $atributo['atributo']; ?>"
 		 data-customtype="<?php echo $tipo; ?>"
 		 data-customdependency="<?php echo $dependencia; ?>"
-		 data-customadd="<?php echo $adhiere; ?>"
+		 data-customadvanced="<?php echo $avanzado; ?>"
+		 data-customadd='<?php echo $adhiere; ?>'
 		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
 		 data-customrequired="<?php echo $requerido; ?>"

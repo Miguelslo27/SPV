@@ -73,9 +73,6 @@ if (!empty ($accion)) {
 			<?php
 				$coberturas = json_decode($seg['coberturas'], true);
 				$premios    = json_decode($seg['premio_anual'], true);
-
-				// var_dump($coberturas);
-				// var_dump($premios);
 			?>
 			<?php if (count($coberturas) || count($premios)) : ?>
 			<div id="tablas-seg<?php echo $seg['id']; ?>" class="tablas">
