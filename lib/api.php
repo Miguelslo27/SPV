@@ -73,6 +73,9 @@ if (!empty ($accion)) {
 			<?php
 				$coberturas = json_decode($seg['coberturas'], true);
 				$premios    = json_decode($seg['premio_anual'], true);
+
+				// var_dump($coberturas);
+				// var_dump($premios);
 			?>
 			<?php if (count($coberturas) || count($premios)) : ?>
 			<div id="tablas-seg<?php echo $seg['id']; ?>" class="tablas">
@@ -85,10 +88,10 @@ if (!empty ($accion)) {
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($coberturas as $key => $value) { ?>
+							<?php foreach ($coberturas as $cob) { ?>
 							<tr>
-								<td class="tabla-label"><?php echo $key; ?></td>
-								<td class="tabla-valor"><?php echo $value; ?></td>
+								<td class="tabla-label"><?php echo $cob['cobertura']; ?></td>
+								<td class="tabla-valor"><?php echo $cob['valor']; ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -104,10 +107,10 @@ if (!empty ($accion)) {
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($premios as $key => $value) { ?>
+							<?php foreach ($premios as $prem) { ?>
 							<tr>
-								<td class="tabla-label"><?php echo $key; ?></td>
-								<td class="tabla-valor"><?php echo $value; ?></td>
+								<td class="tabla-label"><?php echo $prem['premio']; ?></td>
+								<td class="tabla-valor"><?php echo $prem['valor_anual']; ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
