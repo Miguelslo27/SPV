@@ -73,11 +73,12 @@ function getAttributeHTML($atributo) {
 		 data-customadd="<?php echo $adhiere; ?>"
 		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda'];; ?>"
+		 data-customrequired="<?php echo $requerido; ?>"
 		 data-custommodel="<?php echo $modelo; ?>"
 		 id="<?php echo $atributo_san; ?>"
 		 name="<?php echo $atributo_san; ?>">
-		 	<?php foreach ($valores as $key => $val) { ?>
-		 	<option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+		 	<?php foreach ($valores as $val) { ?>
+		 	<option value="<?php echo $val->id; ?>"><?php echo $val->valor; ?></option>
 		 	<?php } ?>
 		</select>
 		<?php else : ?>
