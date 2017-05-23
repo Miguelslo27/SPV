@@ -156,8 +156,8 @@ $(document).on('ready', function() {
 	});
 
 	$('body').on('blur', '#cotizar input, #cotizar select', function() {
-		var $form = $('#cotizar');
-		var precio_seguro = parseFloat($('#precio_seguro_original').text());
+		var $form          = $('#cotizar');
+		var precio_seguro  = parseFloat($('#precio_seguro_original').text());
 		var precio_seguro_ = 0;
 
 		$form
@@ -169,59 +169,36 @@ $(document).on('ready', function() {
 		 		var precio_add   = $(this).data('customadd');
 		 		var add_in_per   = $(this).data('customaddin');
 		 		var add_to_price = 0;
+		 		var advanced_pce;
 
-		 		// console.log('Avanzado:', advanced);
-		 		// console.log('Precio: ', precio_add);
+		 		if (advanced && precio_add.length) {
+		 			advanced_pce = JSON.stringify(precio_add).split('[').join('').split(']').join('');
+					advanced_pce = advanced_pce.split('},');
+					advanced_pce = advanced_pce.map(function (curr) {
+					  var result = [];
+					      result = curr.split('{').join('').split('}').join('');
+					      result = result.split('"valor_a_comparar":').join('');
+					      result = result.split('"variable.value",').join('current_val');
+					      result = result.split('"seguro.valor",').join('precio_seguro');
+					      result = result.split('"operador":"').join(' ');
+					      result = result.split('","referencia":"').join(' ');
+					      result = result.split('","resultado":"').join(' ? ');
+					      result = result.split('"').join('');
+					      result = '(' + result + ' : ';
 
-		 		if (advanced) {
-		 			add_to_price = precio_add.reduce(function (result, logic) {
-		 				var valor      = 0;
-		 				var referencia = parseFloat(logic.referencia);
-		 				var resultado  = parseFloat(logic.resultado);
+					  return result;
+					});
 
-		 				switch (logic.valor_a_comparar) {
-		 					case "seguro.valor":
-		 						valor = precio_seguro;
-		 					break;
-		 					case "variable.value":
-		 						valor = current_val;
-		 					break;
-		 				}
+					for (var exp in advanced_pce) {
+					  if (exp == 0) advanced_pce[advanced_pce.length -1] += 0;
+					  advanced_pce[advanced_pce.length -1] += ')';
+					}
 
-		 				switch (logic.operador) {
-		 					case "=":
-		 						if (valor == referencia) {
-		 							result = resultado;
-		 						}
-		 					break;
-		 					case ">":
-		 						if (valor > referencia) {
-		 							result = resultado;
-		 						}
-		 					break;
-		 					case "<":
-		 						if (valor < referencia) {
-		 							result = resultado;
-		 						}
-		 					break;
-		 					case ">=":
-		 						if (valor >= referencia) {
-		 							result = resultado;
-		 						}
-		 					break;
-		 					case "<=":
-		 						if (valor <= referencia) {
-		 							result = resultado;
-		 						}
-		 					break;
-		 				}
-
-		 				return result;
-		 			}, 0);
-		 		} else {
-		 			add_to_price = (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
+					advanced_pce = advanced_pce.join('');
+					eval('precio_add = ' + advanced_pce);
 		 		}
 
+		 		add_to_price = (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
 		 		precio_seguro_ += add_to_price;
 		 	}
 		 });
