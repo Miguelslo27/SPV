@@ -67,6 +67,9 @@
 					<li>
 						<img src="/imagenes/banners/03.png" usemap="#servicios-express">
 					</li>
+					<li>
+						<img src="/imagenes/banners/04.png" usemap="#servicios-express">
+					</li>
 				</ul>
 			</div>
 			<p><span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> es una plataforma de Larraura Seguros, quien con más de 15 años de experiencia en el mercado asegurador crea <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> para brindar soluciones innovadoras en la contratación de seguros.</p>
