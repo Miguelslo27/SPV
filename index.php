@@ -16,9 +16,13 @@
 		<div class="center">
 			<div class="logo_contenedor">
 				<a href="#home">
-					<img class="logo desktop" src="/imagenes/logos/logo.png">
 					<img class="logo_solo mobile tablet" src="/imagenes/logos/logo_solo.png">
 				</a>
+				<img class="logo desktop" src="/imagenes/logos/logo.png" usemap="#larraura">
+				<map name="larraura">
+					<area shape="rect" coords="0,0,285,65" href="#home" alt="SeguroParaVos">
+					<area shape="rect" coords="310,15,590,65" href="http://www.larrauraseguros.com.uy" alt="Larraura Seguros" target="_blank">
+				</map>
 			</div>
 			<div class="navegacion_contenedor">
 				<nav class="navegacion desktop">
@@ -72,7 +76,7 @@
 					</li>
 				</ul>
 			</div>
-			<p><span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> es una plataforma de Larraura Seguros, quien con más de 15 años de experiencia en el mercado asegurador crea <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> para brindar soluciones innovadoras en la contratación de seguros.</p>
+			<p><span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> es una plataforma de <a href="http://www.larrauraseguros.com.uy" alt="Larraura Seguros" target="_blank">Larraura Seguros</a>, quien con más de 15 años de experiencia en el mercado asegurador crea <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> para brindar soluciones innovadoras en la contratación de seguros.</p>
 		</div>
 
 		<div class="seguros_contenedor sombreado">
@@ -137,16 +141,8 @@
 					<h2 id="_aseguradoras">Compañías que confían en nosotros</h2>
 					<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
 					<p>
-						<img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre">
-						<img src="/imagenes/logos/brands/bse.png" class="aseguradora" alt="Banco de Seguros del Estado">
+						<a href="http://www.mapfre.com.uy/" target="_blank" alt="Mapfre Uruguay"><img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre"></a>
 					</p>
-					<!-- FORMAS DE PAGO -->
-					<h2 id="_pagos">Formas de pago de acuerdo al producto</h2>
-					<p>
-						<img src="/imagenes/logos/brands/redpagos.png" class="pagos" alt="RedPagos">
-						<img src="/imagenes/logos/brands/abitab.png" class="pagos" alt="Abitab">
-						<img src="/imagenes/logos/brands/visa.png" class="pagos" alt="Visa">
-						<img src="/imagenes/logos/brands/master.png" class="pagos" alt="MasterCard">
 				</div>
 			</div>
 		</div>
@@ -195,13 +191,17 @@
 				<a class="hover_verde" href="#contacto">Contacto</a>
 			</div>
 			<div class="logo_footer">
-				<a href="#home"><img src="/imagenes/logos/logo-footer.png"></a>
+				<img src="/imagenes/logos/logo-footer.png" usemap="#larraura_f">
+				<map name="larraura_f">
+					<area shape="rect" coords="0,0,410,77" href="#home" alt="SeguroParaVos">
+					<area shape="rect" coords="450,30,531,70" href="http://www.larrauraseguros.com.uy" alt="Larraura Seguros" target="_blank">
+				</map>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="center">
 			<div class="derechos_reservados">
-				<div>© 2017 / SeguroParaVos/Larraura Seguros. Todos los derechos reservados.</div>
+				<div>© 2017 / SeguroParaVos / <a href="http://www.larrauraseguros.com.uy" alt="Larraura Seguros" target="_blank">Larraura Seguros</a>. Todos los derechos reservados.</div>
 				<div>Términos y condiciones / Declaración de privacidad</div>
 			</div>
 			<div class="redes_sociales">
