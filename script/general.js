@@ -60,7 +60,7 @@ $(document).on('ready', function() {
 	}
 
 	// Check hash on link click
-	$('body').on('click', 'a[href]', function(e) {
+	$('body').on('click', 'a[href], area[href]', function(e) {
 		e.preventDefault();
 		var $this = $(this);
 
@@ -319,17 +319,6 @@ function processActionHash(hash, $form) {
 				document.location.hash = '/' + requestData[1] + '/' + requestData[2] + '/cotizar';
 				return;
 			}
-		}
-
-		if ($form.attr('id') == 'contratar') {
-			// TODO - Enviar el formulario para procesar
-			
-			// $form.find('input:checked').each(function() {
-			// 	seguro.push({
-			// 		id: $(this).val(),
-			// 		name: $(this).next().text()
-			// 	});
-			// });
 		}
 	}
 
