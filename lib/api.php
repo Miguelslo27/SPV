@@ -1,6 +1,8 @@
 <?php
 require_once 'MysqliDb.php';
 require_once './PHPMailer-master/PHPMailerAutoload.php';
+require_once './fpdf.php';
+require_once './fpdfi/fpdi.php';
 require_once './helper.php';
 require_once './functions.php';
 require_once '../config.php';
@@ -259,6 +261,8 @@ if (!empty ($accion)) {
 			// Obtener la categoría
 			$categoria = getCategoryByNameslug($categoria);
 
+			// Crear el PDF
+			$pdf = createPDF($_POST['data']);
 ?>
 <div class="center contratar">
 	<div class="content-inner">
@@ -270,6 +274,7 @@ if (!empty ($accion)) {
 				</h3>
 			</div>
 			<div class="form-inputs right-side-inputs">
+				<?php if ($res) : ?>
 				<h2><span class="number-globe">3</span> <span class="number-text">Solicitud procesada</span></h2>
 				<h3>Resumen de tu seguro</h3>
 				<div class="push-60-left">
@@ -293,6 +298,16 @@ if (!empty ($accion)) {
 				<div class="form-line form-buttons">
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar" class="btn" data-objetformid="contratar"><span>Terminar</span><span class="fa fa-angle-right"></span></a>
 				</div>
+				<?php else: ?>
+				<h2><span class="number-globe">3</span>¡Lo semtimos, hubo un error!</h2>
+				<h3>La solicitud no se procesó correctamente</h3>
+				<div class="push-60-left">
+					<p>Hubo un error en el proceso de la solicitud, por favor, intenta realizar la solucitud nuevamente en unos minutos</p>
+					<p>Si el error persiste, comunícate con nosotros.</p>
+					<p>Gracias y disculpa los inconvenientes.</p>
+					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/terminar">Cerrar</a>
+				</div>
+				<?php endif; ?>
 			</div>
 		</form>
 	</div>

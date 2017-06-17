@@ -9,7 +9,6 @@ function getCategoryByNameslug($nameslug) {
 }
 
 function getProductById($id) {
-	// TODO
 	global $db;
 	// Traer la categoría según el nombre del registro
 	$db->where('id', $id);
@@ -106,4 +105,852 @@ function getAttributeHTML($atributo) {
 	</div>
 	<?php
 }
+
+function savePoliza($data) {
+  global $db;
+
+  date_default_timezone_set('America/Montevideo');
+
+  // Create User first
+  $userData = Array (
+    "nombre" => $data['usuario']['nombre'],
+    "apellido" => $data['usuario']['apellido'],
+    "ci" => $data['usuario']['cedula_de_identidad'],
+    "email" => $data['usuario']['e-mail'],
+    "estado" => 1
+  );
+
+  $userId = $db->insert('usuario', $userData);
+
+  $seguroData = Array (
+    "usuario" => $userId,
+    "fecha" => date("Y-m-d H:m:s"),
+    "seguro" => json_encode($data)
+  );
+
+
+  $seguroId = $db->insert('seguro_registrado', $seguroData);
+
+  return $seguroId ? true : false;
+}
+
+function createPDF($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $pdfName            = time();
+
+  switch ($seguro_nombre_sano) {
+    case 'segurodenotebook':
+      $pdfPaper = paperPDF_1($data);
+    break;
+    case 'segurodedrones':
+      $pdfPaper = paperPDF_2($data);
+    break;
+    case 'coberturadebicibasica':
+      $pdfPaper = paperPDF_3($data);
+    break;
+    case 'coberturadebicitotal':
+      $pdfPaper = paperPDF_4($data);
+    break;
+    case 'asaltoenviapublica':
+      $pdfPaper = paperPDF_5($data);
+    break;
+  }
+
+  printPDF($pdfPaper, '../pdfs/'.@orEmpty($data['usuario']['cedula_de_identidad'], '000').'-'.$pdfName.'.pdf', DEBUG);
+}
+
+// PDF NOTEBOOK
+function paperPDF_1($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
+  $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
+  $pdfPages           = Array();
+
+  $pdfPages = Array(
+    newPDFPage(Array (
+      // Datos del asegurado
+      // Nombre
+      newPDFRow(30, Array (
+        newPDFCell(35, 0, 4.5, @$data['usuario']['nombre'].' '.@$data['usuario']['apellido'])
+      )),
+      // Direccion - CI
+      newPDFRow(0, Array (
+        newPDFCell(35, 110, 4.5, @$data['usuario']['direccion']),
+        newPDFCell( 0, 0, 4.5, @$data['usuario']['cedula_de_identidad'])
+      )),
+      // Email - Cel - TEl
+      newPDFRow(0, Array (
+        newPDFCell(35, 45, 4.5, @$data['usuario']['e-mail']),
+        newPDFCell(10, 28, 4.5, @$data['usuario']['celular']),
+        newPDFCell(27, 0, 4.5, @$data['usuario']['telefono_contacto'])
+      )),
+      // Localidad - CP - Depto
+      newPDFRow(0, Array (
+        newPDFCell(35, 45, 4.5, @$data['usuario']['localidad']),
+        newPDFCell(10, 28, 4.5, @$data['usuario']['cp']),
+        newPDFCell(27, 0, 4.5, @$data['usuario']['departamento'])
+      )),
+      // Dirección Comercial - Tel. Cobro
+      newPDFRow(0, Array (
+        newPDFCell(35, 83, 4.5, @$data['usuario']['direccion_comercial']),
+        newPDFCell(27, 0, 4.5, @$data['usuario']['telefono_de_cobro'])
+      )),
+      // Localidad Comercial - CP - Depto.
+      newPDFRow(0, Array (
+        newPDFCell(35, 45, 4.5, @$data['usuario']['localidad_comercial']),
+        newPDFCell(10, 28, 4.5, @$data['usuario']['cp_comercial']),
+        newPDFCell(27, 0, 4.5, @$data['usuario']['departamento_comercial'])
+      )),
+      // Titular responsable (empresa) - CI
+      newPDFRow(0, Array (
+        newPDFCell(50, 68, 4.5, ''),
+        newPDFCell(27, 0, 4.5, '')
+      )),
+      // Vigencia
+      // Desde - Hasta
+      newPDFRow(16, Array (
+        newPDFCell(11, 18, 4.5, date('d/m/Y')),
+        newPDFCell(26, 18, 4.5, date('d/').date('m/').(date('Y') + 1))
+      )),
+      // Características del equipo asegurad
+      // Marca y Modelo
+      newPDFRow(14.2, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['poliza']['marca_notebook'].' '.@$data['poliza']['modelo'])
+      )),
+      // Número de serie
+      newPDFRow(0, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['poliza']['numero_de_serie'])
+      )),
+      // Vendedor
+      newPDFRow(0, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['poliza']['vendedor'])
+      )),
+      // Número de factura
+      newPDFRow(0, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['poliza']['numero_de_factura'])
+      )),
+      // Fecha de emisión de la factura
+      newPDFRow(0, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['poliza']['fecha_de_emision'])
+      )),
+      // Importe impuestos incluidos según la factura
+      newPDFRow(0, Array (
+        newPDFCell(88.5, 0, 4.5, @$data['seguro']['moneda'].' '.@$data['cotizacion']['suma_asegurada'])
+      )),
+      // Forma de pago
+      // Contado - Financiación (número de cuotas)
+      newPDFRow(45, Array (
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
+        newPDFCell(59, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
+        newPDFCell(65, 0, 4.5, @$data['cotizacion']['cuotas'])
+      )),
+      // Forma de pago
+      // Titular Tarjeta
+      newPDFRow(0, Array (
+        newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['titular_tarjeta'])
+      )),
+      // Número Tarjeta
+      newPDFRow(0, Array (
+        newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['numero_tarjeta'])
+      )),
+      // Vencimiento tarjeta
+      newPDFRow(0, Array (
+        newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['vencimiento_tarjeta'])
+      )),
+      // Tipo tarjeta
+      newPDFRow(0, Array (
+        newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['tipo_tarjeta'])
+      )),
+      // Datos del corredor
+      // Nombre, código, Rut
+      newPDFRow(48.3, Array (
+        newPDFCell(16, 69, 4.5, 'SCUTUM SRL'),
+        newPDFCell(16, 14.5, 4.5, '3947'),
+        newPDFCell(20, 0, 4.5, '217708430012')
+      )),
+      // Dirección, Localidad
+      newPDFRow(0, Array (
+        newPDFCell(16, 99.5, 4.5, 'Joaquin Requena 1175'),
+        newPDFCell(20, 0, 4.5, 'Montevideo')
+      )),
+      // Teléfono, Fax, Correo electrónico
+      newPDFRow(0, Array (
+        newPDFCell(16, 36.5, 4.5, '24018145'),
+        newPDFCell(10, 32.5, 4.5, ''),
+        newPDFCell(34, 0, 4.5, 'dlarraura@larrauraseguros.com.uy')
+      )))
+    ),
+    // Firmas
+    newPDFPage(Array (
+      // Lugar y Fecha
+      newPDFRow(72, Array (
+        newPDFCell(36, 0, 4.5, 'Montevideo, Uruguay, '.date('d/m/Y'))
+      )),
+      // Firma del asegurado, Aclaración, CI
+      newPDFRow(3.8, Array (
+        newPDFCell(36, 35, 4.5, ''),
+        newPDFCell(23, 35, 4.5, @$data['usuario']['nombre'].' '.@$data['usuario']['apellido']),
+        newPDFCell(18, 0, 4.5, @$data['usuario']['cedula_de_identidad'])
+      )),
+      // Firma del corredor
+      newPDFRow(4.4, Array (
+        newPDFCell(36, 35, 4.5, 'SCUTUM SRL')
+      )))
+    )
+  );
+
+  $pdfPaper = newPDFPaper($pdfPages, $pdfDefaults, $template);
+  return $pdfPaper;
+}
+
+// PDF DRONE
+function paperPDF_2($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
+  $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
+  $pdfPages           = Array();
+
+  $pdfPages = Array(
+    newPDFPage(Array (
+      // Vigencia del Seguro
+      // Anual, Vigencia desde
+      newPDFRow(52.5, Array (
+        newPDFCell(22, 3.5, 4, @$data['usuario']['vigencia'] == '1' ? 'X' : ' '),
+        newPDFCell(107, 5, 4, date('d')),
+        newPDFCell(10, 5, 4, date('m')),
+        newPDFCell(15, 10, 4, date('Y')),
+      )),
+      // Otro, Vigencia hasta
+      newPDFRow(2.5, Array (
+        newPDFCell(22, 3.5, 4, @$data['usuario']['vigencia'] != '1' ? 'X' : ' '),
+        newPDFCell(107, 5, 4, date('d')),
+        newPDFCell(10, 5, 4, date('m')),
+        newPDFCell(15, 10, 4, date('Y') + 1),
+      )),
+      // Datos del asegurado
+      // RUT/CI, Fecha Nac.
+      newPDFRow(13.25, Array (
+        newPDFCell(23, 62, 4.47, @$data['usuario']['cedula_de_identidad']),
+        newPDFCell(34.5, 70.5, 4.47, @$data['usuario']['fecha_de_nacimiento']),
+      )),
+      // Apellidos, Teléfono
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, @$data['usuario']['apellido']),
+        newPDFCell(34.5, 70.5, 4.47, @$data['usuario']['telefono_contacto']),
+      )),
+      // Nombres, Código postal
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, @$data['usuario']['nombre']),
+        newPDFCell(34.5, 70.5, 4.47, @$data['usuario']['codigo_postal']),
+      )),
+      // Dirección
+      newPDFRow(0, Array (
+        newPDFCell(23, 0, 4.47, @$data['usuario']['direccion']),
+      )),
+      // Localidad, Teléfono
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, @$data['usuario']['localidad']),
+        newPDFCell(34.5, 70.5, 4.47, @$data['usuario']['telefono']),
+      )),
+      // Ocupación, Correo electrónico
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, @$data['usuario']['ocupacion']),
+        newPDFCell(34.5, 70.5, 4.47, @$data['usuario']['e-mail']),
+      )),
+      // Dirección de envío, Teléfono de envío
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 8.70, ''),
+        newPDFCell(34.5, 70.5, 8.70, ''),
+      )),
+      // Localidad de envío, CP de envío
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 8.70, ''),
+        newPDFCell(34.5, 70.5, 8.70, ''),
+      )),
+      // Código del corredor, Nombre corredor
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 8.70, '3947'),
+        newPDFCell(34.5, 70.5, 8.70, 'SCUTUM SRL'),
+      )),
+      // Datos del representante
+      // CI, Fecha Nac.
+      newPDFRow(13, Array (
+        newPDFCell(23, 62, 4.47, ''),
+        newPDFCell(34.5, 70.5, 4.47, ''),
+      )),
+      // Apellidos, Teléfono
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, ''),
+        newPDFCell(34.5, 70.5, 4.47, ''),
+      )),
+      // Nombres, Nacionalidad
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, ''),
+        newPDFCell(34.5, 70.5, 4.47, ''),
+      )),
+      // Dirección
+      newPDFRow(0, Array (
+        newPDFCell(23, 0, 4.47, ''),
+      )),
+      // Localidad, Teléfono
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, ''),
+        newPDFCell(34.5, 70.5, 4.47, ''),
+      )),
+      // Ocupación, Correo electrónico
+      newPDFRow(0, Array (
+        newPDFCell(23, 62, 4.47, ''),
+        newPDFCell(34.5, 70.5, 4.47, ''),
+      )),
+
+      // Forma de pago
+      // Contado, Cuotas, Cantidad de cuotas
+      newPDFRow(13, Array (
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
+        newPDFCell(20, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
+        newPDFCell(20, 0, 4.5, @$data['cotizacion']['cuotas'])
+      )),
+      // Red de cobranzas
+      newPDFRow(0, Array (
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
+      )),
+      // Débito de tarjeta, Número de tarjeta, Vencimiento
+      newPDFRow(2.4, Array (
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
+        newPDFCell(61, 35, 4.5, 'Xxxxxxxx'),
+        newPDFCell(42, 8, 4.5, 'MM'),
+        newPDFCell(17, 11, 4.5, 'YYYY'),
+      )),
+      // Débito bancario, Banco, Suc., Nº de cuenta
+      newPDFRow(4, Array (
+        newPDFCell(0, 4, 4.5, ''),
+        newPDFCell(45, 30, 4.5, ''),
+        newPDFCell(14, 20, 4.5, ''),
+        newPDFCell(25, 52.1, 4.5, ''),
+      )),
+      // Datos del Dron
+      // Marca
+      newPDFRow(15  , Array(
+        newPDFCell(48, 0, 4.5, @$data['poliza']['marca_drone'])
+      )),
+      // Modelo
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, @$data['poliza']['modelo'])
+      )),
+      // Nº Serie Identificación
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, '')
+      )),
+      // Peso Máximo
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, '')
+      )),
+      // Año de construcción
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, '')
+      )),
+      // Nombre del Operador y RUT
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, '')
+      )),
+      // Uso del Dron
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 4.5, '')
+      )),
+      // Ámbito Geográfico de utilización
+      newPDFRow(0  , Array(
+        newPDFCell(48, 0, 8.8, '')
+      )),
+    ))
+  );
+
+  $pdfPaper = newPDFPaper($pdfPages, $pdfDefaults, $template);
+  return $pdfPaper;
+}
+
+// PDF BICI BASICO
+function paperPDF_3($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
+  $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
+  $pdfPages           = Array();
+
+  $pdfPages = Array(
+    newPDFPage(Array(
+      // Vigencia del seguro
+      // Vigencia desde
+      newPDFRow(27, Array(
+        newPDFCell(93, 34.4, 4, date('d'), 'C'),
+        newPDFCell(0, 28.8, 4, date('m'), 'C'),
+        newPDFCell(0, 34, 4, date('Y'), 'C')
+      )),
+      // Vigencia hasta
+      newPDFRow(0, Array(
+        newPDFCell(93, 34.4, 4, date('d'), 'C'),
+        newPDFCell(0, 28.8, 4, date('m'), 'C'),
+        newPDFCell(0, 34, 4, date('Y') + 1, 'C')
+      )),
+      // Datos del asegurado
+      // RUT/CI, Fecha Nac.
+      newPDFRow(11, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['cedula_de_identidad']),
+        newPDFCell(35, 42.6, 4, @$data['usuario']['nombre']),
+      )),
+      // Apellidos, Celular
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['apellido']),
+        newPDFCell(35, 42.6, 4, @$data['usuario']['telefono_contacto']),
+      )),
+      // Nombres, Teléfono
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['nombre']),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Dirección
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 0, 4, @$data['usuario']['direccion']),
+      )),
+      // Localidad, CP
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Dirección de envío, Teléfono de envío
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Ocupación, Correo electrónico
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // localidad de envío, CP de envío
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Código de corredor, Nombre corredor
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, '3947'),
+        newPDFCell(35, 42.6, 4, 'SCUTUM SRL'),
+      )),
+      // Forma de pago
+      // Contado, Cuotas, Cantidad de cuotas, Moneda Pesos, Moneda Dólares
+      newPDFRow(11.5, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-', 'C'),
+        newPDFCell(21, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-', 'C'),
+        newPDFCell(20, 32.2, 3.95, @$data['cotizacion']['cuotas']),
+        newPDFCell(22, 6, 3.95, @$data['seguro']['moneda'] == '$' ? 'X' : '', 'C'),
+        newPDFCell(40, 6, 3.95, @$data['seguro']['moneda'] == 'USD' ? 'X' : '', 'C'),
+      )),
+      // Red de cobranzas
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '', 'C'),
+      )),
+      // Débito de tarjeta, Nº de tarjeta, Vencimiento
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '', 'C'),
+        newPDFCell(64, 42, 3.95, ''),
+        newPDFCell(38.5, 23, 3.95, '', 'C'),
+        newPDFCell(0, 19, 3.95, '', 'C'),
+      )),
+      // Débito bancario, Banco, Suc., Nº de Cta.
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, '', 'C'),
+        newPDFCell(46, 36, 3.95, ''),
+        newPDFCell(13, 25, 3.95, ''),
+        newPDFCell(24.5, 42, 3.95, ''),
+      )),
+      // Detalles del bien asegurado
+      // Marca, Observaciones
+      newPDFRow(11.3, Array(
+        newPDFCell(42.5, 49.5, 3.95, @$data['poliza']['marca_bicicleta']),
+        newPDFCell(49, 49.5, 3.95, ''),
+      )),
+      // Modelo
+      newPDFRow(0, Array(
+        newPDFCell(42.5, 49.5, 3.95, @$data['poliza']['modelo']),
+      )),
+      // Valor Factura
+      newPDFRow(0, Array(
+        newPDFCell(42.5, 49.5, 3.95, ''),
+      )),
+      // Datos factura (Vendedor, Nº)
+      newPDFRow(-7.8, Array(
+        newPDFCell(141, 49.5, 7.5, ''),
+      )),
+      // Cobertura Básica
+      newPDFRow(72, Array(
+        newPDFCell(101.5, 38.5, 5, 'X', 'C'),
+      )),
+      // Lugar y fecha
+      newPDFRow(33.3, Array(
+        newPDFCell(25, 0, 4.5, 'Montevideo, '.date('d').'/'.date('m').'/'.date('Y')),
+      )),
+      // Aclaracion del asegurado, CI
+      newPDFRow(5, Array(
+        newPDFCell(86, 38.5, 5, @$data['usuario']['nombre'].' '.@$data['usuario']['apellido'], 'C'),
+        newPDFCell(20, 38.5, 5, @$data['usuario']['cedula_de_identidad'], 'C'),
+      )),
+      // Firma del corredor
+      newPDFRow(8, Array(
+        newPDFCell(16, 38.5, 5, 'SCUTUM SRL', 'C'),
+        newPDFCell(31.5, 38.5, 5, 'SCUTUM SRL', 'C'),
+        newPDFCell(20, 38.5, 5, '3947', 'C'),
+      )),
+    )),
+  );
+
+  $pdfPaper = newPDFPaper($pdfPages, $pdfDefaults, $template);
+  return $pdfPaper;
+}
+
+// PDF BICI TOTAL
+function paperPDF_4($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
+  $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
+  $pdfPages           = Array();
+
+  $pdfPages = Array(
+    newPDFPage(Array(
+      // Vigencia del seguro
+      // Vigencia desde
+      newPDFRow(27, Array(
+        newPDFCell(93, 34.4, 4, date('d'), 'C'),
+        newPDFCell(0, 28.8, 4, date('m'), 'C'),
+        newPDFCell(0, 34, 4, date('Y'), 'C')
+      )),
+      // Vigencia hasta
+      newPDFRow(0, Array(
+        newPDFCell(93, 34.4, 4, date('d'), 'C'),
+        newPDFCell(0, 28.8, 4, date('m'), 'C'),
+        newPDFCell(0, 34, 4, date('Y') + 1, 'C')
+      )),
+      // Datos del asegurado
+      // RUT/CI, Fecha Nac.
+      newPDFRow(11, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['cedula_de_identidad']),
+        newPDFCell(35, 42.6, 4, @$data['usuario']['nombre']),
+      )),
+      // Apellidos, Celular
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['apellido']),
+        newPDFCell(35, 42.6, 4, @$data['usuario']['telefono_contacto']),
+      )),
+      // Nombres, Teléfono
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, @$data['usuario']['nombre']),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Dirección
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 0, 4, @$data['usuario']['direccion']),
+      )),
+      // Localidad, CP
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Dirección de envío, Teléfono de envío
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Ocupación, Correo electrónico
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // localidad de envío, CP de envío
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, ''),
+        newPDFCell(35, 42.6, 4, ''),
+      )),
+      // Código de corredor, Nombre corredor
+      newPDFRow(0, Array(
+        newPDFCell(35.5, 77, 4, '3947'),
+        newPDFCell(35, 42.6, 4, 'SCUTUM SRL'),
+      )),
+      // Forma de pago
+      // Contado, Cuotas, Cantidad de cuotas, Moneda Pesos, Moneda Dólares
+      newPDFRow(11.5, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-', 'C'),
+        newPDFCell(21, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-', 'C'),
+        newPDFCell(20, 32.2, 3.95, @$data['cotizacion']['cuotas']),
+        newPDFCell(22, 6, 3.95, @$data['seguro']['moneda'] == '$' ? 'X' : '', 'C'),
+        newPDFCell(40, 6, 3.95, @$data['seguro']['moneda'] == 'USD' ? 'X' : '', 'C'),
+      )),
+      // Red de cobranzas
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '', 'C'),
+      )),
+      // Débito de tarjeta, Nº de tarjeta, Vencimiento
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '', 'C'),
+        newPDFCell(64, 42, 3.95, ''),
+        newPDFCell(38.5, 23, 3.95, '', 'C'),
+        newPDFCell(0, 19, 3.95, '', 'C'),
+      )),
+      // Débito bancario, Banco, Suc., Nº de Cta.
+      newPDFRow(0, Array(
+        newPDFCell(0, 4, 3.95, '', 'C'),
+        newPDFCell(46, 36, 3.95, ''),
+        newPDFCell(13, 25, 3.95, ''),
+        newPDFCell(24.5, 42, 3.95, ''),
+      )),
+      // Detalles del bien asegurado
+      // Marca, Observaciones
+      newPDFRow(11.3, Array(
+        newPDFCell(42.5, 49.5, 3.95, @$data['poliza']['marca_bicicleta']),
+        newPDFCell(49, 49.5, 3.95, ''),
+      )),
+      // Modelo
+      newPDFRow(0, Array(
+        newPDFCell(42.5, 49.5, 3.95, @$data['poliza']['modelo']),
+      )),
+      // Valor Factura
+      newPDFRow(0, Array(
+        newPDFCell(42.5, 49.5, 3.95, ''),
+      )),
+      // Datos factura (Vendedor, Nº)
+      newPDFRow(-7.8, Array(
+        newPDFCell(141, 49.5, 7.5, ''),
+      )),
+      // Cobertura Total
+      newPDFRow(72, Array(
+        newPDFCell(141, 49.5, 5, 'X', 'C'),
+      )),
+      // Lugar y fecha
+      newPDFRow(33.3, Array(
+        newPDFCell(25, 0, 4.5, 'Montevideo, '.date('d').'/'.date('m').'/'.date('Y')),
+      )),
+      // Aclaracion del asegurado, CI
+      newPDFRow(5, Array(
+        newPDFCell(86, 38.5, 5, @$data['usuario']['nombre'].' '.@$data['usuario']['apellido'], 'C'),
+        newPDFCell(20, 38.5, 5, @$data['usuario']['cedula_de_identidad'], 'C'),
+      )),
+      // Firma del corredor
+      newPDFRow(8, Array(
+        newPDFCell(16, 38.5, 5, 'SCUTUM SRL', 'C'),
+        newPDFCell(31.5, 38.5, 5, 'SCUTUM SRL', 'C'),
+        newPDFCell(20, 38.5, 5, '3947', 'C'),
+      )),
+    )),
+  );
+
+  $pdfPaper = newPDFPaper($pdfPages, $pdfDefaults, $template);
+  return $pdfPaper;
+}
+
+// PDF ASALTO EN LA VIA PUBLICA
+function paperPDF_5($data) {
+  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
+  $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
+  $pdfPages           = Array();
+
+  $pdfPages = Array(
+    newPDFPage(Array(
+      // Datos del asegurado
+      // Nombre, CI
+      newPDFRow(45.5, Array(
+        newPDFCell(38, 87, 5.5, @$data['usuario']['nombre']),
+        newPDFCell(28, 36, 5.5, @$data['usuario']['cedula_de_identidad'])
+      )),
+      // Direción, Teléfono
+      newPDFRow(0, Array(
+        newPDFCell(38, 87, 5.5, ''),
+        newPDFCell(28, 36, 5.5, @$data['usuario']['telefono_contacto'])
+      )),
+      // Localidad, CP, Departamento
+      newPDFRow(0, Array(
+        newPDFCell(38, 45, 5.5, ''),
+        newPDFCell(10, 32, 5.5, ''),
+        newPDFCell(28, 36, 5.5, '')
+      )),
+      // Fecha de nacimiento
+      newPDFRow(0, Array(
+        newPDFCell(38, 151, 5.5, ''),
+      )),
+      // Correo electrónico
+      newPDFRow(0, Array(
+        newPDFCell(38, 151, 5.5, @$data['usuario']['e-mail']),
+      )),
+      // Código Corredor, Nombre Corredor
+      newPDFRow(0, Array(
+        newPDFCell(38, 23, 5.5, '3947'),
+        newPDFCell(34, 94, 5.5, 'SCUTUM SRL')
+      )),
+      // Nuevo Cliente
+      newPDFRow(7.5, Array(
+        newPDFCell(82.5, 43, 5.5, 'X', 'C'),
+      )),
+    ))
+  );
+
+  $pdfPaper = newPDFPaper($pdfPages, $pdfDefaults, $template);
+  return $pdfPaper;
+}
+
+function newPDFPaper($pages, $defaults = null, $template = null) {
+  $paper = Array (
+    'pages' => $pages
+  );
+
+  if ($template)
+    $paper['template'] = $template;
+
+  if ($defaults)
+    $paper['defaults'] = $defaults;
+
+  return $paper;
+}
+
+function newPDFPage($rows) {
+  return Array (
+    'rows' => $rows
+  );
+}
+
+function newPDFRow($marginTop = 0, $cells) {
+  return Array (
+    'margin-top' => $marginTop,
+    'cells' => $cells
+  );
+}
+
+function newPDFCell($marginLeft = 0, $width = 0, $height = 0, $content = null, $align = null, $font = null) {
+  $cell = Array ();
+  $cell['width'] = $width;
+
+  if ($marginLeft)
+    $cell['margin-left'] = $marginLeft;
+
+  if ($height)
+    $cell['height'] = $height;
+
+  if ($content)
+    $cell['content'] = $content;
+
+  if ($align)
+    $cell['align'] = $align;
+
+  if ($font)
+    $cell['font-style'] = $font;
+  
+  return $cell;
+}
+
+function newPDFFontStyle($family = 'Arial', $size = 12, $style = '') {
+  return Array (
+    'family' => $family,
+    'style' => $style,
+    'size' => $size
+  );
+}
+
+function printPDF($pdfObj, $dest, $test = false) {
+  // Start a new PDF
+  $pdf       = new FPDI();
+  // Import template
+  $pageCount = $pdf->setSourceFile('../pdfs/templates/'.$pdfObj['template']);
+  $tmplPages = Array ();
+
+  // Get template pages
+  for ($i = 1; $i <= $pageCount; $i++) {
+    $tmplPages[] = $pdf->importPage($i, '/MediaBox');
+  }
+
+  // Set font styles
+  $pdf->SetFont($pdfObj['defaults']['font-style']['family'], $pdfObj['defaults']['font-style']['style'], $pdfObj['defaults']['font-style']['size']);
+  $pdf->SetFillColor('230');
+  $pdf->SetAutoPageBreak(false, 0);
+
+  // For each page in pdfObj
+  foreach ($pdfObj['pages'] as $index => $page) {
+    if (!isset ($tmplPages[$index]))
+      break;
+
+    // Add new page to final PDF file
+    $pdf->AddPage();
+
+    // Use corresponding template
+    $pdf->useTemplate($tmplPages[$index]);
+
+    // For each row in current page
+    foreach ($page['rows'] as $row) {
+      // Set the margin top
+      $pdf->Ln($row['margin-top']);
+
+      // For each cell in current row
+      foreach ($row['cells'] as $cell) {
+        // Override font if required
+        if (isset ($cell['font-style'])) {
+          $pdf->SetFont($cell['font-style']['family'], $cell['font-style']['style'], $cell['font-style']['size']);
+        }
+  
+        // Print margin-left if required
+        if (isset ($cell['margin-left']) && $cell['margin-left'] > 0) {
+          $pdf->Cell($cell['margin-left']);
+        }
+
+        if ($test)
+          $pdf->Cell($cell['width'], $cell['height'], @orEmpty($cell['content'], '---'), 1, 0, @$cell['align'], true);
+        else
+          $pdf->Cell($cell['width'], $cell['height'], @orEmpty($cell['content'], ''), 0, 0, @$cell['align']);
+
+        // Get back to default font
+        if (isset ($cell['font-style'])) {
+          $pdf->SetFont($pdfObj['defaults']['font-style']['family'], $pdfObj['defaults']['font-style']['style'], $pdfObj['defaults']['font-style']['size']);
+        }
+      }
+
+      $pdf->Ln();
+    }
+  }
+
+  if ($test)
+    $pdf->Output('F', '../pdfs/tests/'.$pdfObj['template']);
+  else
+    $pdf->Output('F', $dest);
+}
+
+function callAPI($method, $url, $data = false) {
+  $curl = curl_init();
+
+  switch ($method) {
+    case "POST":
+      curl_setopt($curl, CURLOPT_POST, 1);
+
+      if ($data) {
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      }
+    break;
+    case "PUT":
+      curl_setopt($curl, CURLOPT_PUT, 1);
+    break;
+    default:
+      if ($data) {
+        $url = sprintf("%s?%s", $url, http_build_query($data));
+      }
+    break;
+  }
+
+  // Optional Authentication:
+  curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+  curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+  $result = curl_exec($curl);
+  $error = curl_exec($curl);
+
+  curl_close($curl);
+
+  return array ("result" => $result, "error" => $error);
+}
+
 ?>
