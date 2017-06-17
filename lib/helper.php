@@ -63,4 +63,8 @@ function sanear_string($string) {
 
     return $string;
 }
+
+function orEmpty($string, $empty = '') {
+    return $string ? $string : $empty;
+}
 ?>
