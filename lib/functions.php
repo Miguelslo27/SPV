@@ -106,7 +106,7 @@ function getAttributeHTML($atributo) {
 	<?php
 }
 
-function savePoliza($data) {
+function savePoliza($data, $pdfRoute) {
   global $db;
 
   date_default_timezone_set('America/Montevideo');
@@ -122,20 +122,93 @@ function savePoliza($data) {
 
   $userId = $db->insert('usuario', $userData);
 
+  $data['pdf'] = $pdfRoute;
+
   $seguroData = Array (
     "usuario" => $userId,
     "fecha" => date("Y-m-d H:m:s"),
     "seguro" => json_encode($data)
   );
 
-
   $seguroId = $db->insert('seguro_registrado', $seguroData);
 
   return $seguroId ? true : false;
 }
 
+function sendEmail($dest, $data, $pdfRoute) {
+  $serverhost = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'];
+  $pdf = $serverhost.$pdfRoute;
+  $logo = $serverhost.'/imagenes/logos/logo.png';
+  $categoria = $data['categoria'];
+  $categoria = getCategoryByNameslug($categoria)['nombre'];
+  $seguro = $data['seguro']['nombre'];
+  $precio = $data['seguro']['moneda'].' '.$data['seguro']['precio'];
+
+  $mail = new PHPMailer;
+
+  $mail->setFrom('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
+  $mail->addAddress($dest['email'], $dest['name']);
+  $mail->addReplyTo('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
+  // $mail->addCC('cc@example.com');
+  // $mail->addBCC('bcc@example.com');
+
+  // Solo para test en local ===========================================================
+  // $mail->isSMTP();
+  // $mail->Host = 'smtp.gmail.com';
+  // $mail->SMTPAuth = true;
+  // $mail->Username = 'miguelmail2006@gmail.com';
+  // $mail->Password = 'admimiguel220506pg';
+  // $mail->SMTPSecure = 'tls';
+  // $mail->Port = 587;
+  // Eliminar luego de hacer los tests en local ========================================
+
+  $mail->addStringAttachment(file_get_contents($pdf), 'seguroparavos-poliza.pdf');
+  $mail->isHTML(true);
+
+  $mail->Subject = 'Email SeguroParaVos.com.uy';
+  $mail->Body    = '
+  <table width="100%" style="border: 1px solid #888;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 40px; border-bottom: 2px solid #9c3">
+          <img src="'.$logo.'">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 40px;">
+          <h2 style="color: #9c3;">Solicitud procesada</h2>
+          <h3>Resumen de tu seguro</h3>
+          <div>
+            <p>Producto solicitado: <span><strong>'.$categoria.'</strong></span>.</p>
+            <p>Cobertura: <span><strong>'.$seguro.'</strong></span>.</p>
+            <p>Precio de la cotización: <span><strong>'.$precio.'</strong></span></p>
+          </div>
+          <h3 class="green-style">Solicitud enviada</h3>
+          <div class="push-60-left">
+            <p>En 24 horas hábiles sera contactado por el equipo de <a href="'.$serverhost.'"><span style="text-transform: uppercase;"><span style="color: #666; font-weight: bolder;">Seguro</span><span style="font-weight: light; color: #666;">Para</span><span style="font-weight: bold; color: #9c3;">Vos</span></span></a> para completar los datos del producto solicitado</p>
+          </div>
+          <div class="form-line border-bottom"></div>
+          <h3 class="green-style">Muchas gracias</h3>
+          <div class="push-60-left">
+            <p>El equipo de <a href="'.$serverhost.'"><span style="text-transform: uppercase;"><span style="color: #666; font-weight: bolder;">Seguro</span><span style="font-weight: light; color: #666;">Para</span><span style="font-weight: bold; color: #9c3;">Vos</span></span></a>.</p>
+          </div>
+          <div class="push-60-left">
+            <p class="small">Se deja constancia que los mencionados servicios no son prestados por la aplicación Segurosparavos, la cual se limita simplemente a ofrecer los mismos siendo la única exclusivamente responsables de la totalidad de las obligaciones que emergen de dicha contratación las empresas que prestan los mencionados servicios contratados.
+            “Las coberturas de seguros incluidas en este producto son proporcionadas por MAPFRE (www.mapfre.com.uy) empresa autorizada a operar en Uruguay por el Banco Central del Uruguay.”</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  ';
+
+  $mail->send();
+}
+
 function createPDF($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $pdfName            = time();
 
   switch ($seguro_nombre_sano) {
@@ -157,11 +230,13 @@ function createPDF($data) {
   }
 
   printPDF($pdfPaper, '../pdfs/'.@orEmpty($data['usuario']['cedula_de_identidad'], '000').'-'.$pdfName.'.pdf', DEBUG);
+
+  return '/pdfs/'.@orEmpty($data['usuario']['cedula_de_identidad'], '000').'-'.$pdfName.'.pdf';
 }
 
 // PDF NOTEBOOK
 function paperPDF_1($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
@@ -305,7 +380,7 @@ function paperPDF_1($data) {
 
 // PDF DRONE
 function paperPDF_2($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
@@ -470,7 +545,7 @@ function paperPDF_2($data) {
 
 // PDF BICI BASICO
 function paperPDF_3($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
@@ -608,7 +683,7 @@ function paperPDF_3($data) {
 
 // PDF BICI TOTAL
 function paperPDF_4($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
@@ -746,7 +821,7 @@ function paperPDF_4($data) {
 
 // PDF ASALTO EN LA VIA PUBLICA
 function paperPDF_5($data) {
-  $seguro_nombre_sano = str_replace(['.',' '], '', sanear_string(strtolower($data['seguro']['nombre'])));
+  $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
