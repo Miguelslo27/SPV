@@ -1,5 +1,5 @@
 <?php
-define('DEBUG', false);
+define('DEBUG', true);
 
 $dbsettings = Array (
 	'host'     => 'localhost',

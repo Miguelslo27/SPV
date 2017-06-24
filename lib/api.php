@@ -262,7 +262,16 @@ if (!empty ($accion)) {
 			$categoria = getCategoryByNameslug($categoria);
 
 			// Crear el PDF
-			$pdf = createPDF($_POST['data']);
+			$pdfRoute = createPDF($_POST['data']);
+
+			// Guardar la informacion de la póliza en la DB
+			$res = savePoliza($_POST['data'], $pdfRoute);
+
+			// Enviar el email
+			$mail = sendEmail(array (
+				'email' => $_POST['data']['usuario']['e-mail'],
+				'name' => $_POST['data']['usuario']['nombre'].' '.$_POST['data']['usuario']['apellido']
+      ), $_POST['data'], $pdfRoute);
 ?>
 <div class="center contratar">
 	<div class="content-inner">
