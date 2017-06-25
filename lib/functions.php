@@ -150,9 +150,9 @@ function sendEmail($dest, $data, $pdfRoute) {
   $mail->addReplyTo('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
   $mail->addAddress($dest['email'], $dest['name']);
 
-  $mail->addBCC('miguelmail2006@gmail.com');
-  $mail->addBCC('dlarraura@larrauraseguros.com.uy');
-  $mail->addBCC('jppando101@gmail.com');
+  $mail->addCC('miguelmail2006@gmail.com');
+  $mail->addCC('dlarraura@larrauraseguros.com.uy');
+  $mail->addCC('jppando101@gmail.com');
 
   $mail->addStringAttachment(file_get_contents($pdf), 'seguroparavos-poliza.pdf');
   $mail->CharSet = 'UTF-8';
