@@ -147,25 +147,17 @@ function sendEmail($dest, $data, $pdfRoute) {
   $mail = new PHPMailer;
 
   $mail->setFrom('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
-  $mail->addAddress($dest['email'], $dest['name']);
   $mail->addReplyTo('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
-  // $mail->addCC('cc@example.com');
-  // $mail->addBCC('bcc@example.com');
+  $mail->addAddress($dest['email'], $dest['name']);
 
-  // Solo para test en local ===========================================================
-  // $mail->isSMTP();
-  // $mail->Host = 'smtp.gmail.com';
-  // $mail->SMTPAuth = true;
-  // $mail->Username = 'miguelmail2006@gmail.com';
-  // $mail->Password = 'admimiguel220506pg';
-  // $mail->SMTPSecure = 'tls';
-  // $mail->Port = 587;
-  // Eliminar luego de hacer los tests en local ========================================
+  $mail->addBCC('miguelmail2006@gmail.com');
+  $mail->addBCC('dlarraura@larrauraseguros.com.uy');
+  $mail->addBCC('jppando101@gmail.com');
 
   $mail->addStringAttachment(file_get_contents($pdf), 'seguroparavos-poliza.pdf');
   $mail->isHTML(true);
 
-  $mail->Subject = 'Email SeguroParaVos.com.uy';
+  $mail->Subject = 'Resumen de su póliza - SeguroParaVos.com.uy';
   $mail->Body    = '
   <table width="100%" style="border: 1px solid #888;">
     <thead>
