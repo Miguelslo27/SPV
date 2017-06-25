@@ -136,7 +136,7 @@ function savePoliza($data, $pdfRoute) {
 }
 
 function sendEmail($dest, $data, $pdfRoute) {
-  $serverhost = '://'.$_SERVER['HTTP_HOST'];
+  $serverhost = 'http://'.$_SERVER['HTTP_HOST'];
   $pdf = $serverhost.$pdfRoute;
   $logo = $serverhost.'/imagenes/logos/logo.png';
   $categoria = $data['categoria'];
