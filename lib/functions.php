@@ -155,6 +155,7 @@ function sendEmail($dest, $data, $pdfRoute) {
   $mail->addBCC('jppando101@gmail.com');
 
   $mail->addStringAttachment(file_get_contents($pdf), 'seguroparavos-poliza.pdf');
+  $mail->CharSet = 'UTF-8';
   $mail->isHTML(true);
 
   $mail->Subject = 'Resumen de su póliza - SeguroParaVos.com.uy';
