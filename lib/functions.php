@@ -158,7 +158,7 @@ function sendEmail($dest, $data, $pdfRoute) {
   $mail->CharSet = 'UTF-8';
   $mail->isHTML(true);
 
-  $mail->Subject = 'Resumen de su póliza - SeguroParaVos.com.uy';
+  $mail->Subject = 'Estado de la solicitud - SeguroParaVos.com.uy';
   $mail->Body    = '
   <table width="100%" style="border: 1px solid #888;">
     <thead>
@@ -171,8 +171,7 @@ function sendEmail($dest, $data, $pdfRoute) {
     <tbody>
       <tr>
         <td style="padding: 40px;">
-          <h2 style="color: #9c3;">Solicitud procesada</h2>
-          <h3>Resumen de tu seguro</h3>
+          <h2 style="color: #9c3;">Solicitud</h2>
           <div>
             <p>Producto solicitado: <span><strong>'.$categoria.'</strong></span>.</p>
             <p>Cobertura: <span><strong>'.$seguro.'</strong></span>.</p>
@@ -181,6 +180,7 @@ function sendEmail($dest, $data, $pdfRoute) {
           <h3 class="green-style">Solicitud enviada</h3>
           <div class="push-60-left">
             <p>En 24 horas hábiles sera contactado por el equipo de <a href="'.$serverhost.'"><span style="text-transform: uppercase;"><span style="color: #666; font-weight: bolder;">Seguro</span><span style="font-weight: light; color: #666;">Para</span><span style="font-weight: bold; color: #9c3;">Vos</span></span></a> para completar los datos del producto solicitado</p>
+            <p>La cobertura no entrará en vigor hasta no ser inspeccionado y aceptado el riesgo por el asegurador.</p>
           </div>
           <div class="form-line border-bottom"></div>
           <h3 class="green-style">Muchas gracias</h3>
