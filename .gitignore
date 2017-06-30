@@ -1,2 +1,4 @@
 config.php
-pdfs/
+pdfs/*
+pdfs/templates/*
+pdfs/tests/*

@@ -137,12 +137,12 @@ function savePoliza($data, $pdfRoute) {
 
 function sendEmail($dest, $data, $pdfRoute) {
   $serverhost = 'http://'.$_SERVER['HTTP_HOST'];
-  $pdf = $serverhost.$pdfRoute;
-  $logo = $serverhost.'/imagenes/logos/logo.png';
-  $categoria = $data['categoria'];
-  $categoria = getCategoryByNameslug($categoria)['nombre'];
-  $seguro = $data['seguro']['nombre'];
-  $precio = $data['seguro']['moneda'].' '.$data['seguro']['precio'];
+  $pdf        = $serverhost.$pdfRoute;
+  $logo       = $serverhost.'/imagenes/logos/logo.png';
+  $categoria  = $data['categoria'];
+  $categoria  = getCategoryByNameslug($categoria)['nombre'];
+  $seguro     = $data['seguro']['nombre'];
+  $precio     = $data['seguro']['moneda'].' '.$data['seguro']['precio'];
 
   $mail = new PHPMailer;
 
@@ -786,8 +786,22 @@ function paperPDF_4($data) {
       newPDFRow(-7.8, Array(
         newPDFCell(141, 49.5, 7.5, ''),
       )),
+
+      // USD 130
+      newPDFRow(57.3, Array(
+        newPDFCell(141, 49.5, 5, (@$data['seguro']['precio'] <= '130' ? 'X' : ''), 'C'),
+      )),
+      // USD 275
+      newPDFRow(0, Array(
+        newPDFCell(141, 49.5, 5, (@$data['seguro']['precio'] <= '275' ? 'X' : ''), 'C'),
+      )),
+      // USD 362
+      newPDFRow(0, Array(
+        newPDFCell(141, 49.5, 5, (@$data['seguro']['precio'] >= '362' ? 'X' : ''), 'C'),
+      )),
+
       // Cobertura Total
-      newPDFRow(72, Array(
+      newPDFRow(0, Array(
         newPDFCell(141, 49.5, 5, 'X', 'C'),
       )),
       // Lugar y fecha
