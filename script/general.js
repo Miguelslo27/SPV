@@ -195,15 +195,18 @@ $(document).on('ready', function() {
 					}
 
 					advanced_pce = advanced_pce.join('');
+					advanced_pce = advanced_pce.split('##seguro.valor##').join(precio_seguro);
+					advanced_pce = advanced_pce.split('##atributo.valor##').join(current_val || 0);
+
 					eval('precio_add = ' + advanced_pce);
 		 		}
 
-		 		add_to_price = (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
+		 		add_to_price = advanced ? precio_add : (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
 		 		precio_seguro_ += add_to_price;
 		 	}
 		 });
 
-		$('#precio_seguro').text(precio_seguro + precio_seguro_);
+		$('#precio_seguro').text((precio_seguro + precio_seguro_).toFixed(2));
 	});
 });
 
