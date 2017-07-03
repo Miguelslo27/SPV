@@ -1,5 +1,5 @@
 config.php
-pdfs/
+
 pdfs/*
 pdfs/tests/
 pdfs/tests/*
