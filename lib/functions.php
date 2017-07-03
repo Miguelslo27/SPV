@@ -229,7 +229,15 @@ function createPDF($data) {
 
 // PDF NOTEBOOK
 function paperPDF_1($data) {
+  echo '<pre>';
+  print_r($data);
+  echo '</pre>';
+
   $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
+  $seguro_precio      = @$data['seguro']['precio'];
+  $seguro_imp_oc      = $seguro_precio * 0.12;
+  $seguro_imp_iva     = ($seguro_precio + $seguro_imp_oc) * 0.22;
+  $seguro_precio_ttl  = $seguro_precio + $seguro_imp_oc + $seguro_imp_iva;
   $template           = $data['categoria'].'-'.$seguro_nombre_sano.'.pdf';
   $pdfDefaults        = Array('font-style' => newPDFFontStyle('Arial', 9, 'B'));
   $pdfPages           = Array();
@@ -305,14 +313,31 @@ function paperPDF_1($data) {
       newPDFRow(0, Array (
         newPDFCell(88.5, 0, 4.5, @$data['seguro']['moneda'].' '.@$data['cotizacion']['suma_asegurada'])
       )),
+      // Cobertura contratada
+      // Suma asegurada
+      newPDFRow(13.5, Array(
+        newPDFCell(72.8, 74.5, 4.5, @$data['seguro']['moneda'].' '.number_format(@$data['cotizacion']['suma_asegurada'], 2), 'R'),
+        newPDFCell(0, 42, 4.5, @$data['seguro']['moneda'].' '.number_format(@$data['seguro']['precio'], 2), 'R')
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(147.3, 42, 4.5, @$data['seguro']['moneda'].' '.number_format($seguro_precio, 2), 'R')
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(147.3, 42, 4.5, @$data['seguro']['moneda'].' '.number_format($seguro_imp_oc, 2), 'R')
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(147.3, 42, 4.5, @$data['seguro']['moneda'].' '.number_format($seguro_imp_iva, 2), 'R')
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(147.3, 42, 4.5, @$data['seguro']['moneda'].' '.number_format($seguro_precio_ttl, 2), 'R')
+      )),
       // Forma de pago
       // Contado - Financiación (número de cuotas)
-      newPDFRow(45, Array (
+      newPDFRow(9, Array (
         newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
         newPDFCell(59, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
         newPDFCell(65, 0, 4.5, @$data['cotizacion']['cuotas'])
       )),
-      // Forma de pago
       // Titular Tarjeta
       newPDFRow(0, Array (
         newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['titular_tarjeta'])
