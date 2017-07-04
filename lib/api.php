@@ -157,7 +157,7 @@ if (!empty ($accion)) {
 
 <div class="center asegurar" id="_contratar">
 	<div class="content-inner">
-		<form id="cotizar">
+		<form id="cotizar" data-product="<?php echo strtolower(sanear_string($seguro['nombre'])); ?>">
 			<div class="left-side-title">
 				<span class="fa <?php echo $categoria['icono'] ?> left-side-icon"></span>
 				<h3>
@@ -289,7 +289,7 @@ if (!empty ($accion)) {
 				<div class="push-60-left">
 					<p>Producto solicitado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
 					<p>Cobertura: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $seguro['nombre']); ?></strong></span>.</p>
-					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.$seguro['precio']; ?></strong></span></p>
+					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.($seguro['producto'] == 'segurodenotebook' ? $seguro['precio_imp_inc'] : $seguro['precio']); ?></strong></span></p>
 				</div>
 				<h3 class="green-style">Solicitud enviada</h3>
 				<div class="push-60-left">

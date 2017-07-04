@@ -157,6 +157,7 @@ $(document).on('ready', function() {
 
 	$('body').on('blur', '#cotizar input, #cotizar select', function() {
 		var $form          = $('#cotizar');
+		var $form_product  = $form.data('product');
 		var precio_seguro  = parseFloat($('#precio_seguro_original').text());
 		var precio_seguro_ = 0;
 
@@ -206,7 +207,17 @@ $(document).on('ready', function() {
 		 	}
 		 });
 
-		$('#precio_seguro').text((precio_seguro + precio_seguro_).toFixed(2));
+		var precio_final = precio_seguro + precio_seguro_;
+
+		if ($form_product == 'segurodenotebook') {
+		 var imp_op = precio_final * 0.12;
+		 var imp_iva = (precio_final + imp_op) * 0.22;
+		 
+		 precio_final += imp_op + imp_iva;
+		}
+
+		$('#precio_seguro').data('preciooriginal', precio_seguro + precio_seguro_);
+		$('#precio_seguro').text(precio_final.toFixed(2));
 	});
 });
 
@@ -239,6 +250,7 @@ function updateSliderResolution() {
 function processActionHash(hash, $form) {
 	document.location.hash = hash;
 	var requestData = hash.split('/');
+	var $form_product = $form ? $form.data('product') : null;
 
 	$('header .navegacion, .nav-menu').find('a.activo').removeClass('activo');
 	$('header .navegacion, .nav-menu').find('a[href=#seguros]').addClass('activo');
@@ -287,7 +299,7 @@ function processActionHash(hash, $form) {
 			if (!status.error) {
 				$form.find('.required-message .required-fields-error').remove();
 
-				var precio_seguro = parseFloat($('#precio_seguro').text());
+				var precio_seguro = $form_product == 'segurodenotebook' ? parseFloat($('#precio_seguro').data('preciooriginal')) : parseFloat($('#precio_seguro').text());
 				var precio_seguro_ = 0;
 
 				// usuario
@@ -337,15 +349,14 @@ function processActionHash(hash, $form) {
 			'poliza': {}
 		});
 
-	data.seguro     = seguro ? seguro : data.seguro;
-	data.usuario    = usuario ? usuario : data.usuario;
-	data.cotizacion = cotizacion ? cotizacion : data.cotizacion;
-	data.poliza     = poliza ? poliza : data.poliza;
+	data.seguro                = seguro ? seguro : data.seguro;
+	data.usuario               = usuario ? usuario : data.usuario;
+	data.cotizacion            = cotizacion ? cotizacion : data.cotizacion;
+	data.poliza                = poliza ? poliza : data.poliza;
 
-	data.seguro.precio = !isNaN(parseFloat($('#precio_seguro').text())) ? parseFloat($('#precio_seguro').text()) : data.seguro.precio;
-
-	// TODO DELETE THIS
-	console.log(data);
+	data.seguro.producto       = $form_product;
+	data.seguro.precio         = !isNaN(parseFloat($('#precio_seguro').data('preciooriginal'))) ? parseFloat($('#precio_seguro').data('preciooriginal')) : data.seguro.precio;
+	data.seguro.precio_imp_inc = !isNaN(parseFloat($('#precio_seguro').text())) ? parseFloat($('#precio_seguro').text()) : data.seguro.precio_imp_inc;
 
 	// Set storage for this model
 	localStorage.setItem(modelo + '::' + categoria, JSON.stringify(data));

@@ -229,10 +229,6 @@ function createPDF($data) {
 
 // PDF NOTEBOOK
 function paperPDF_1($data) {
-  echo '<pre>';
-  print_r($data);
-  echo '</pre>';
-
   $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $seguro_precio      = @$data['seguro']['precio'];
   $seguro_imp_oc      = $seguro_precio * 0.12;
@@ -499,20 +495,20 @@ function paperPDF_2($data) {
       // Forma de pago
       // Contado, Cuotas, Cantidad de cuotas
       newPDFRow(13, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
-        newPDFCell(20, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : ''),
+        newPDFCell(20, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : ''),
         newPDFCell(20, 0, 4.5, @$data['cotizacion']['cuotas'])
       )),
       // Red de cobranzas
       newPDFRow(0, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : ''),
       )),
       // Débito de tarjeta, Número de tarjeta, Vencimiento
       newPDFRow(2.4, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
-        newPDFCell(61, 35, 4.5, 'Xxxxxxxx'),
-        newPDFCell(42, 8, 4.5, 'MM'),
-        newPDFCell(17, 11, 4.5, 'YYYY'),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : ''),
+        newPDFCell(61, 35, 4.5, ''),
+        newPDFCell(42, 8, 4.5, ''),
+        newPDFCell(17, 11, 4.5, ''),
       )),
       // Débito bancario, Banco, Suc., Nº de cuenta
       newPDFRow(4, Array (
@@ -818,7 +814,7 @@ function paperPDF_4($data) {
       )),
       // USD 275
       newPDFRow(0, Array(
-        newPDFCell(141, 49.5, 5, (@$data['seguro']['precio'] <= '275' ? 'X' : ''), 'C'),
+        newPDFCell(141, 49.5, 5, (@$data['seguro']['precio'] > '130' && @$data['seguro']['precio'] <= '275' ? 'X' : ''), 'C'),
       )),
       // USD 362
       newPDFRow(0, Array(
