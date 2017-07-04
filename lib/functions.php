@@ -142,7 +142,12 @@ function sendEmail($dest, $data, $pdfRoute) {
   $categoria  = $data['categoria'];
   $categoria  = getCategoryByNameslug($categoria)['nombre'];
   $seguro     = $data['seguro']['nombre'];
-  $precio     = $data['seguro']['moneda'].' '.$data['seguro']['precio'];
+
+  if ($data['seguro']['producto'] == 'segurodenotebook') {
+    $precio = $data['seguro']['moneda'].' '.$data['seguro']['precio_imp_inc'];
+  } else {
+    $precio = $data['seguro']['moneda'].' '.$data['seguro']['precio'];
+  }
 
   $mail = new PHPMailer;
 
