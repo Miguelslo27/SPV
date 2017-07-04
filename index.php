@@ -29,7 +29,6 @@
 					<a class="hover_verde" href="#seguro">Seguros</a>
 					<a class="hover_verde" href="#nosotros">Que Hacemos</a>
 					<a class="hover_verde" href="#aseguradora">Aseguradora</a>
-					<a class="hover_verde" href="#pagos">Como Pagar</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
 				</nav>
 				<nav class="navegacion tablet">
