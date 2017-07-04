@@ -36,9 +36,8 @@
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
 					<a class="hover_verde fa fa-bars" href="#" data-target="menu-tablet"></a>
 					<div id="menu-tablet" class="nav-menu hidden">
-						<a class="hover_verde" href="#nosotros">Quiénes somos</a>
+						<a class="hover_verde" href="#nosotros">Que Hacemos</a>
 						<a class="hover_verde" href="#aseguradora">Aseguradora</a>
-						<a class="hover_verde" href="#pagos">Como Pagar</a>
 					</div>
 				</nav>
 				<nav class="navegacion mobile">
@@ -50,9 +49,8 @@
 
 	<div id="menu-mobile" class="nav-menu mobile hidden">
 		<a class="hover_verde" href="#seguro">Seguros</a>
-		<a class="hover_verde" href="#nosotros">Quiénes somos</a>
+		<a class="hover_verde" href="#nosotros">Que Hacemos</a>
 		<a class="hover_verde" href="#aseguradora">Aseguradora</a>
-		<a class="hover_verde" href="#pagos">Como Pagar</a>
 		<a class="hover_verde" href="#contacto"><span class="fa fa-envelope"></span>Contacto</a>
 		<a class="fa fa-times close-menu" href="#" data-target="menu-mobile"></a>
 	</div>
