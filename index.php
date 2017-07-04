@@ -139,8 +139,7 @@
 					<p>Reflejando así las bases de una empresa en continuo desarrollo, para alcanzar los más altos estándares de sinergia con las compañías aseguradoras y  satisfacción con el cliente.</p>
 					<!-- COMPAÑÍAS QUE CONFÍAN EN NOSOTROS -->
 					<h2 id="_aseguradora">Mapfre en Uruguay</h2>
-					<!-- <p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p> -->
-					<p>MAPFRE se estableció en 1995,siendo la primera aseguradora privada extranjera en obtener permiso para operar en el país luego de la desmonopolización de los seguros.</p>
+					<p>MAPFRE se estableció en 1995, siendo la primera aseguradora privada extranjera en obtener permiso para operar en el país luego de la desmonopolización de los seguros.</p>
 					<p>Desde entonces ha crecido en forma continua, sumando beneficios y servicios a sus asegurados e innovando en diferentes áreas con coberturas de alto nivel y a la medida de los uruguayos.</p>
 					<p>
 						<a href="http://www.mapfre.com.uy/" target="_blank" alt="Mapfre Uruguay"><img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre"></a>
