@@ -27,8 +27,8 @@
 			<div class="navegacion_contenedor">
 				<nav class="navegacion desktop">
 					<a class="hover_verde" href="#seguro">Seguros</a>
-					<a class="hover_verde" href="#nosotros">Quiénes somos</a>
-					<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
+					<a class="hover_verde" href="#nosotros">Que Hacemos</a>
+					<a class="hover_verde" href="#aseguradora">Aseguradora</a>
 					<a class="hover_verde" href="#pagos">Como Pagar</a>
 					<a class="fa fa-envelope hover_verde" href="#contacto"></a>
 				</nav>
@@ -38,7 +38,7 @@
 					<a class="hover_verde fa fa-bars" href="#" data-target="menu-tablet"></a>
 					<div id="menu-tablet" class="nav-menu hidden">
 						<a class="hover_verde" href="#nosotros">Quiénes somos</a>
-						<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
+						<a class="hover_verde" href="#aseguradora">Aseguradora</a>
 						<a class="hover_verde" href="#pagos">Como Pagar</a>
 					</div>
 				</nav>
@@ -52,7 +52,7 @@
 	<div id="menu-mobile" class="nav-menu mobile hidden">
 		<a class="hover_verde" href="#seguro">Seguros</a>
 		<a class="hover_verde" href="#nosotros">Quiénes somos</a>
-		<a class="hover_verde" href="#aseguradoras">Aseguradoras</a>
+		<a class="hover_verde" href="#aseguradora">Aseguradora</a>
 		<a class="hover_verde" href="#pagos">Como Pagar</a>
 		<a class="hover_verde" href="#contacto"><span class="fa fa-envelope"></span>Contacto</a>
 		<a class="fa fa-times close-menu" href="#" data-target="menu-mobile"></a>
@@ -63,16 +63,16 @@
 			<div class="slider-banner" id="slider-banner">
 				<ul>
 					<li>
-						<img src="/imagenes/banners/01.png" usemap="#servicios-express">
+						<a href="#/seguro/segurosdebici/asegurar"><img src="/imagenes/banners/01.png"></a>
 					</li>
 					<li>
-						<img src="/imagenes/banners/02.png" usemap="#servicios-express">
+						<a href="#/seguro/segurodetecnologia/asegurar"><img src="/imagenes/banners/02.png"></a>
 					</li>
 					<li>
-						<img src="/imagenes/banners/03.png" usemap="#servicios-express">
+						<a href="#/seguro/segurodetecnologia/asegurar"><img src="/imagenes/banners/03.png"></a>
 					</li>
 					<li>
-						<img src="/imagenes/banners/04.png" usemap="#servicios-express">
+						<a href="#/seguro/segurodeemergencia/asegurar"><img src="/imagenes/banners/04.png"></a>
 					</li>
 				</ul>
 			</div>
@@ -138,8 +138,9 @@
 					<p>Queremos ser reconocidos como un equipo de trabajo profesional, enfocados en la mejora continua, con tecnología de punta y satisfaciendo las expectativas de nuestros clientes, por medio de una atención personalizada.</p>
 					<p>Reflejando así las bases de una empresa en continuo desarrollo, para alcanzar los más altos estándares de sinergia con las compañías aseguradoras y  satisfacción con el cliente.</p>
 					<!-- COMPAÑÍAS QUE CONFÍAN EN NOSOTROS -->
-					<h2 id="_aseguradoras">Compañías que confían en nosotros</h2>
-					<p>En <span class="site-title"><span class="seguro">Seguro</span><span class="para">Para</span><span class="vos">Vos</span></span> contamos con el mayor respaldo financiero de todas las compañias aseguradoras que solo te puede brindar el broker online lider del país.</p>
+					<h2 id="_aseguradora">Mapfre en Uruguay</h2>
+					<p>MAPFRE se estableció en 1995, siendo la primera aseguradora privada extranjera en obtener permiso para operar en el país luego de la desmonopolización de los seguros.</p>
+					<p>Desde entonces ha crecido en forma continua, sumando beneficios y servicios a sus asegurados e innovando en diferentes áreas con coberturas de alto nivel y a la medida de los uruguayos.</p>
 					<p>
 						<a href="http://www.mapfre.com.uy/" target="_blank" alt="Mapfre Uruguay"><img src="/imagenes/logos/brands/mapfre.png" class="aseguradora" alt="Mapfre"></a>
 					</p>
