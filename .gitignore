@@ -1,1 +1,7 @@
 config.php
+
+pdfs/*
+pdfs/tests/
+pdfs/tests/*
+
+!pdfs/templates/

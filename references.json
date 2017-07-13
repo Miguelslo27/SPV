@@ -1,0 +1,57 @@
+array(6) {
+  ["modelo"]=> string(6) "seguro"
+  ["categoria"]=> string(13) "segurosdebici"
+  ["seguro"]=> array(4) {
+    ["id"]=> string(2) "15"
+    ["nombre"]=> string(23) "Cobertura de Bici Total"
+    ["precio"]=> string(3) "260"
+    ["moneda"]=> string(3) "USD"
+  }
+  ["usuario"]=> array(5) {
+    ["vigencia"]=> string(1) "1"
+    ["nombre"]=> string(6) "Miguel"
+    ["apellido"]=> string(4) "Sosa"
+    ["cedula_de_identidad"]=> string(8) "34900078"
+    ["e-mail"]=> string(24) "miguelmail2006@gmail.com"
+  }
+  ["cotizacion"]=> array(3) {
+    ["suma_asegurada"]=> string(3) "600"
+    ["forma_de_pago"]=> string(1) "3"
+    ["cuotas"]=> string(1) "6"
+  }
+  ["poliza"]=> array(2) {
+    ["marca_bicicleta"]=> string(5) "Treck"
+    ["modelo"]=> string(7) "SUM2017"
+  }
+}
+
+PDF Object
+
+$pdfOBj = Array (
+  'pages' => Array (
+    Array (
+      'rows' => Array (
+        Array (
+          'margin-top' => 0,
+          'cells' => Array (
+            Array (
+              'margin-left' => 0,
+              'width' => 0,
+              'height' => 0,
+              'font-style' => '',
+              'content' => ''
+            ),
+            // .. multiple cells
+            Array (),
+          )
+        ),
+        // ... multiple rows
+        Array (),
+      )
+    ),
+    // ... multiple pages
+    Array (
+      'rows' => Array ()
+    ),
+  )
+);
