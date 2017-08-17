@@ -448,6 +448,9 @@ header.compressed .navegacion a.fa {
 }
 
 /* Seguros */
+.categorias {
+  padding: 40px 0 0;
+}
 .seguros_contenedor {
     margin-bottom: 30px;
     position: relative;
@@ -457,7 +460,6 @@ header.compressed .navegacion a.fa {
 	position: relative;
 }
 .seguros .clear {
-	padding: 40px 0 0;
   display: flex;
   flex-direction: row;
 }
@@ -558,7 +560,7 @@ h3.titulo-seguro span + span + span,
 }
 .seguros .seguro ul li {}
 .seguros .seguro ul li i {}
-.seguros .seguro ul li .comentario {
+ul li .comentario {
 	font-size: 12px;
   left: 25px;
   position: relative;
@@ -723,7 +725,12 @@ h3.titulo-seguro span + span + span,
 	width: 800px;
 }
 .content-inner form .form-inputs .form-line {
-	overflow: hidden;
+  overflow: hidden;
+}
+.content-inner form .form-inputs .form-line ul {
+  margin: 20px 0;
+  padding: 0 2px;
+  list-style: none;
 }
 .content-inner form .form-inputs .form-line.input-required label {}
 .content-inner form .form-inputs .form-line.input-required.input-check::before,
