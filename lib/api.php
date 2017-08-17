@@ -83,14 +83,18 @@ if (!empty ($accion)) {
 					<table>
 						<thead>
 							<tr>
-								<!-- <th colspan="2">Coberturas</th> -->
 								<th colspan="2"><?php echo ($seg['titulo_cobertura'] != '' ? $seg['titulo_cobertura'] : 'Coberturas'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ($coberturas as $cob) { ?>
 							<tr>
-								<td class="tabla-label"><?php echo $cob['cobertura']; ?></td>
+								<td class="tabla-label">
+									<?php echo $cob['cobertura']; ?>
+									<div class="mobile">
+										<?php echo $cob['valor']; ?>
+									</div>	
+								</td>
 								<td class="tabla-valor"><?php echo $cob['valor']; ?></td>
 							</tr>
 							<?php } ?>
@@ -103,14 +107,18 @@ if (!empty ($accion)) {
 					<table>
 						<thead>
 							<tr>
-								<!-- <th colspan="2">Premio anual a pagar</th> -->
 								<th colspan="2"><?php echo ($seg['titulo_premioanual'] != '' ? $seg['titulo_premioanual'] : 'Premio anual a pagar'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ($premios as $prem) { ?>
 							<tr>
-								<td class="tabla-label"><?php echo $prem['premio']; ?></td>
+								<td class="tabla-label">
+									<?php echo $prem['premio']; ?>
+									<div class="mobile">
+										<?php echo $prem['valor_anual']; ?>
+									</div>		
+								</td>
 								<td class="tabla-valor"><?php echo $prem['valor_anual']; ?></td>
 							</tr>
 							<?php } ?>
