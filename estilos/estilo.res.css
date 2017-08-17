@@ -311,6 +311,17 @@ header.compressed .nav-menu {
     margin-right: 0;
     margin-left: 14px;
   }
+  .content-inner .tablas tr td:first-child {
+    border-right: none;
+  }
+  .content-inner .tablas tr td:first-child .mobile {
+    display: block !important;
+    color: #888;
+    padding: 10px;
+  }
+  .content-inner .tablas tr td:last-child {
+    display: none;
+  }
 }
 /* some medium */
 @media (max-width: 480px) {
