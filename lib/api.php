@@ -145,7 +145,7 @@ if (!empty ($accion)) {
 			// Obtener los atributos por id del seguro
 			$atributos      = getAttributesByParentID($seguro);
 			// Obtener el objeto seguro
-			$segruro_ob     = getProductById($seguro['id']);
+			$seguro_ob     = getProductById($seguro['id']);
 
 			$atr_usuarios   = array ();
 			$atr_cotizacion = array ();
@@ -178,6 +178,18 @@ if (!empty ($accion)) {
 			<div class="form-inputs right-side-inputs">
 				<h2 class="tablet desktop"><span class="number-globe">2</span> <span class="number-text">Ingresá tus datos y contratalo</span></h2>
 				<h2 class="mobile"><span class="number-globe">2</span> <span class="number-text">Datos del seguro</span></h2>
+
+				<?php if ($seguro_ob['descripcion'] != '') : ?>
+				<div class="clear"></div>
+				<div class="form-line">
+					<ul>
+						<li>
+							<i class="fa fa-check-circle"></i><?php echo str_replace (array (', ', '[', ']'), array ('</li><li><i class="fa fa-check-circle"></i>', '<br><span class="comentario">', '</span>'), $seguro_ob['descripcion']); ?>
+						</li>
+					</ul>
+				</div>
+				<?php endif; ?>
+
 				<div class="clear"></div>
 				<div class="form-line required-message">
 					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
@@ -216,7 +228,7 @@ if (!empty ($accion)) {
 				?>
 				<?php endif; ?>
 
-				<?php if ($segruro_ob['comprobar']) : ?>
+				<?php if ($seguro_ob['comprobar']) : ?>
 				<div class="form-line border-bottom input-text input-medium input-required">
 					<label for="adjuntar">Adjuntar Comprobantes:</label>
 
@@ -232,7 +244,7 @@ if (!empty ($accion)) {
 				</div>
 				<?php endif; ?>
 
-				<?php if (isset($segruro_ob['condiciones']) && $segruro_ob['condiciones'] != '') : ?>
+				<?php if (isset($seguro_ob['condiciones']) && $seguro_ob['condiciones'] != '') : ?>
 				<div class="form-line border-bottom input-check right-message input-required">
 					<input
 					 type="checkbox"
@@ -241,7 +253,7 @@ if (!empty ($accion)) {
 					 value="true"
 					 data-realname="Términos y condiciones"
 					 data-customrequired="true">
-					<label for="terminos">Acepto los <a href="http://dev.backoffice.seguroparavos.com.uy/<?php echo $segruro_ob['condiciones']; ?>">Términos y condiciones</a></label>
+					<label for="terminos">Acepto los <a href="http://dev.backoffice.seguroparavos.com.uy/<?php echo $seguro_ob['condiciones']; ?>">Términos y condiciones</a></label>
 				</div>
 				<?php endif; ?>
 
