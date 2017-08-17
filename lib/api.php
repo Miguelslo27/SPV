@@ -83,7 +83,8 @@ if (!empty ($accion)) {
 					<table>
 						<thead>
 							<tr>
-								<th colspan="2">Coberturas</th>
+								<!-- <th colspan="2">Coberturas</th> -->
+								<th colspan="2"><?php echo ($seg['titulo_cobertura'] != '' ? $seg['titulo_cobertura'] : 'Coberturas'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -102,7 +103,8 @@ if (!empty ($accion)) {
 					<table>
 						<thead>
 							<tr>
-								<th colspan="2">Premio anual a pagar</th>
+								<!-- <th colspan="2">Premio anual a pagar</th> -->
+								<th colspan="2"><?php echo ($seg['titulo_premioanual'] != '' ? $seg['titulo_premioanual'] : 'Premio anual a pagar'); ?></th>
 							</tr>
 						</thead>
 						<tbody>
