@@ -728,7 +728,7 @@ ul li .comentario {
   overflow: hidden;
 }
 .content-inner form .form-inputs .form-line ul {
-  margin: 0;
+  margin: 20px 0;
   padding: 0 2px;
   list-style: none;
 }
