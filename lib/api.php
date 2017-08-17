@@ -179,22 +179,6 @@ if (!empty ($accion)) {
 				<h2 class="tablet desktop"><span class="number-globe">2</span> <span class="number-text">Ingresá tus datos y contratalo</span></h2>
 				<h2 class="mobile"><span class="number-globe">2</span> <span class="number-text">Datos del seguro</span></h2>
 
-				<?php if ($seguro_ob['descripcion'] != '') : ?>
-				<div class="clear"></div>
-				<div class="form-line">
-					<ul>
-						<li>
-							<i class="fa fa-check-circle"></i><?php echo str_replace (array (', ', '[', ']'), array ('</li><li><i class="fa fa-check-circle"></i>', '<br><span class="comentario">', '</span>'), $seguro_ob['descripcion']); ?>
-						</li>
-					</ul>
-				</div>
-				<?php endif; ?>
-
-				<div class="clear"></div>
-				<div class="form-line required-message">
-					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
-				</div>
-
 				<?php if (count($atr_usuarios)) : ?>
 				<!-- Atributos modelo usuario -->
 				<h3>Ingresa tus datos personales</h3>
@@ -265,6 +249,23 @@ if (!empty ($accion)) {
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/asegurar" class="btn left"><span class="fa fa-angle-left"></span><span>Atrás</span></a>
 					<a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/contratar" class="btn" data-objetformid="cotizar"><span>Finalizar</span><span class="fa fa-angle-right"></span></a>
 				</div>
+
+				<br><br>
+
+				<div class="form-line required-message">
+					<p>* Los campos marcados como requeridos (*) son obligatorios</p>
+				</div>
+				<?php if ($seguro_ob['descripcion'] != '') : ?>
+				<div class="clear"></div>
+				<div class="form-line">
+					<ul>
+						<li>
+							<i class="fa fa-check-circle"></i><?php echo str_replace (array (', ', '[', ']'), array ('</li><li><i class="fa fa-check-circle"></i>', '<br><span class="comentario">', '</span>'), $seguro_ob['descripcion']); ?>
+						</li>
+					</ul>
+				</div>
+				<?php endif; ?>
+				
 			</div>
 			<?php else : ?>
 			<div class="no-category-content">
@@ -273,7 +274,9 @@ if (!empty ($accion)) {
 				<p><a href="#/seguro/<?php echo strtolower (sanear_string($categoria['nombre'])) ?>/cancelar" class="green-style">Click aquí para cerrar</a>.</p>
 			</div>
 			<?php endif; ?>
+
 			<div class="clear"></div>
+			
 		</form>
 	</div>
 </div>
