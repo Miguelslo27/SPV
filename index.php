@@ -148,7 +148,7 @@
 		<div class="contacto" id="_contacto">
 			<div class="center">
 				<div class="content-inner">
-					<form action="/send-email.php">
+					<form action="/send-email.php" method="POST">
 						<div class="left-side-title">
 							<span class="fa fa-envelope left-side-icon"></span>
 							<h3>Contacto</h3>
@@ -156,23 +156,30 @@
 						<div class="form-inputs right-side-inputs">
 							<h2 class="tablet desktop">Envianos tu consulta o comentario</h2>
 							<h2 class="mobile">Envianos tu consulta</h2>
-							<div class="form-line input-text input-large">
+
+							<br><br>
+							<div class="form-line required-message">
+								<p>* Los campos marcados como requeridos (*) son obligatorios</p>
+							</div>
+							<br><br>
+
+							<div class="form-line input-text input-large input-required">
 								<label for="nombre">Nombre:</label>
-								<input type="text" id="nombre">
+								<input type="text" id="nombre" name="nombre">
 							</div>
 							<div class="form-line input-text input-large">
 								<label for="apellido">Apellido:</label>
-								<input type="text" id="apellido">
+								<input type="text" id="apellido" name="apellido">
 							</div>
-							<div class="form-line input-text input-large">
+							<div class="form-line input-text input-large input-required">
 								<label for="email">e-Mail:</label>
-								<input type="text" id="email">
+								<input type="text" id="email" name="email">
 							</div>
-							<div class="form-line input-textarea">
+							<div class="form-line input-textarea input-required">
 								<label for="message">Consulta o Comentario:</label>
-								<textarea id="message"></textarea>
+								<textarea id="message" name="message"></textarea>
 							</div>
-							<a href="/" class="btn">Enviar <span class="fa fa-angle-right"></span></a>
+							<button type="submit" class="btn">Enviar <span class="fa fa-angle-right"></span></button>
 						</div>
 						<div class="clear"></div>
 					</form>

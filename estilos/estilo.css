@@ -669,8 +669,11 @@ ul li .comentario {
 	margin-bottom: 30px;
 }
 .contacto .content-inner {
-	position: relative;
-	background: #fff;
+  position: relative;
+  background: #fff;
+}
+.contacto .content-inner button.btn {
+  font-size: 16px;
 }
 
 /* FORMULARIOS */
