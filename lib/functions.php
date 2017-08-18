@@ -216,8 +216,8 @@ function sendEmailContact($dest, $message) {
   $mail->addAddress($dest['email'], $dest['name']);
 
   $mail->addCC('miguelmail2006@gmail.com');
-  // $mail->addCC('dlarraura@larrauraseguros.com.uy');
-  // $mail->addCC('jppando101@gmail.com');
+  $mail->addCC('dlarraura@larrauraseguros.com.uy');
+  $mail->addCC('jppando101@gmail.com');
 
   $mail->CharSet = 'UTF-8';
   $mail->isHTML(true);
