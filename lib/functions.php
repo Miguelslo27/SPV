@@ -205,6 +205,62 @@ function sendEmail($dest, $data, $pdfRoute) {
   $mail->send();
 }
 
+function sendEmailContact($dest, $message) {
+  $serverhost = 'http://'.$_SERVER['HTTP_HOST'];
+  $logo       = $serverhost.'/imagenes/logos/logo.png';
+
+  $mail = new PHPMailer;
+
+  $mail->setFrom('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
+  $mail->addReplyTo('noreply@seguroparavos.com.uy', 'SeguroParaVos | Larraura Seguros');
+  $mail->addAddress($dest['email'], $dest['name']);
+
+  $mail->addCC('miguelmail2006@gmail.com');
+  // $mail->addCC('dlarraura@larrauraseguros.com.uy');
+  // $mail->addCC('jppando101@gmail.com');
+
+  $mail->CharSet = 'UTF-8';
+  $mail->isHTML(true);
+
+  $mail->Subject = 'Contacto Web - SeguroParaVos.com.uy';
+  $mail->Body    = '
+  <table width="100%" style="border: 1px solid #888;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 40px; border-bottom: 2px solid #9c3">
+          <img src="'.$logo.'">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 40px;">
+          <h2 style="color: #9c3;">Mensaje enviado desde la web</h2>
+          <div>
+            <p>
+              <strong>Nombre:</strong> <span>'.$dest['name'].'</span>
+            </p>
+            <p>
+              <strong>Email:</strong> <span>'.$dest['email'].'</span>
+            </p>
+          </div>
+          <div>
+            <p>'.$message.'</p>
+            <p>Dentro de las próximas 24 horas hábiles sera contactado por el equipo de <a href="'.$serverhost.'"><span style="text-transform: uppercase;"><span style="color: #666; font-weight: bolder;">Seguro</span><span style="font-weight: light; color: #666;">Para</span><span style="font-weight: bold; color: #9c3;">Vos</span></span></a>.</p>
+          </div>
+          <h3>Muchas gracias</h3>
+          <div class="push-60-left">
+            <p>El equipo de <a href="'.$serverhost.'"><span style="text-transform: uppercase;"><span style="color: #666; font-weight: bolder;">Seguro</span><span style="font-weight: light; color: #666;">Para</span><span style="font-weight: bold; color: #9c3;">Vos</span></span></a>.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  ';
+
+  return $mail->send();
+}
+
 function createPDF($data) {
   $seguro_nombre_sano = strtolower(sanear_string($data['seguro']['nombre']));
   $pdfName            = time();
