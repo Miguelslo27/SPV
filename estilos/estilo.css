@@ -831,12 +831,12 @@ ul li .comentario {
 	width: 50%;
 }
 .content-inner form .form-inputs .form-line.input-text.input-large label {
-	width: 25%;
+	width: 28%;
 }
 .content-inner form .form-inputs .form-line.input-text.input-large input,
 .content-inner form .form-inputs .form-line.input-text.input-large select,
 .content-inner form .form-inputs .form-line.input-text.input-large .field-help {
-	width: 75%;
+	width: 72%;
 }
 .content-inner form .form-inputs .form-line.input-text.input-large .field-help {
 	float: right;
