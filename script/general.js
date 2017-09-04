@@ -504,6 +504,16 @@ function checkType(fieldname, type, min, max, value, status) {
 			min = parseInt(min);
 			max = parseInt(max);
 
+			if (value === 0) {
+				status.ok = false;
+				status.error = true;
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser mayor que cero (0).</li>');
+			}
+
 			if (value < min) {
 				status.ok = false;
 				status.error = true;
@@ -511,7 +521,7 @@ function checkType(fieldname, type, min, max, value, status) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
 				}
-				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser mayor a ' + min + '</li>');
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser mayor o igual a ' + min + '</li>');
 			}
 
 			if (max > 0 && value > max) {
@@ -521,7 +531,7 @@ function checkType(fieldname, type, min, max, value, status) {
 					status.errors.push('Hay campos con errores:');
 					status.errors.push('<ul>');
 				}
-				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser menor a ' + max + '</li>');
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser menor o igual a ' + max + '</li>');
 			} 
 		default:
 		break;
