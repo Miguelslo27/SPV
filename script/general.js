@@ -205,6 +205,12 @@ $(document).on('ready', function() {
 		 		add_to_price = advanced ? precio_add : (add_in_per ? (!isNaN(current_val) ? current_val : precio_seguro) * (precio_add/100) : precio_add);
 		 		precio_seguro_ += add_to_price;
 		 	}
+
+		 	if ($(this).data('customcheck') == 'telefono') {
+		 		$(this).val(function () {
+		 			return $(this).val().split(' ').join('');
+		 		});
+		 	}
 		 });
 
 		var precio_final = precio_seguro + precio_seguro_;
@@ -438,7 +444,7 @@ function checkFieldsPass($form) {
 
 		// Check the type here
 		if ($this.data('customtype')) {
-			status = checkType($this.data('realname'), $this.data('customtype'), $this.val(), status);
+			status = checkType($this.data('realname'), $this.data('customtype'), $this.data('custommin'), $this.data('custommax'), $this.val(), status);
 		}
 
 		// Check the customcheck here
@@ -467,7 +473,7 @@ function getFormAction(accion, data) {
 	});
 }
 
-function checkType(fieldname, type, value, status) {
+function checkType(fieldname, type, min, max, value, status) {
 	switch (type) {
 		case 'text':
 			var text_re = /^[a-zA-Z\.]*$/;
@@ -494,6 +500,29 @@ function checkType(fieldname, type, value, status) {
 				}
 				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo numérico y como máximo tener 2 decimales (ejemplo: 1000,00)</li>');
 			}
+
+			min = parseInt(min);
+			max = parseInt(max);
+
+			if (value < min) {
+				status.ok = false;
+				status.error = true;
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser mayor a ' + min + '</li>');
+			}
+
+			if (max > 0 && value > max) {
+				status.ok = false;
+				status.error = true;
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser menor a ' + max + '</li>');
+			} 
 		default:
 		break;
 	}
@@ -524,6 +553,18 @@ function checkValidation(fieldname, validation, value, status) {
 					status.errors.push('<ul>');
 				}
 				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser sólo numérico y como máximo tener 2 decimales (ejemplo: 1000,00)</li>');
+			}
+		break;
+		case 'telefono':
+			var phone_re = /^([\d]{8,9})$/;
+			if (!phone_re.test(value)) {
+				status.ok = false;
+				status.error = true;
+				if (!status.errors.length) {
+					status.errors.push('Hay campos con errores:');
+					status.errors.push('<ul>');
+				}
+				status.errors.push('<li>El campo <strong>"' + fieldname + '"</strong> debe ser un número de teléfono válido de 8 o 9 dígitos.</li>');
 			}
 		break;
 		case 'email':
