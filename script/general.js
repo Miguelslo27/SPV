@@ -223,7 +223,7 @@ $(document).on('ready', function() {
 		}
 
 		$('#precio_seguro').data('preciooriginal', precio_seguro + precio_seguro_);
-		$('#precio_seguro').text(precio_final.toFixed(2));
+		$('#precio_seguro').text(precio_final.toFixed(0));
 	});
 });
 
