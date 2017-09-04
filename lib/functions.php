@@ -53,7 +53,9 @@ function getAttributeHTML($atributo) {
 	$adhiere_adv = $atributo['precios_avanzados'];
 	$requerido   = $atributo['requerido'] != '' ? 'true' : 'false';
 	$modelo      = $atributo['modelo'];
-	$ayuda       = $atributo['ayuda'];
+  $ayuda       = $atributo['ayuda'];
+  $min         = $atributo['minimo'];
+	$max         = $atributo['maximo'];
 	$adhiere     = $avanzado ? $adhiere_adv : ($atributo['adhiere'] ? $atributo['adhiere'] : null);
 
 	if ($tipo == 'lista') {
@@ -75,7 +77,9 @@ function getAttributeHTML($atributo) {
 		 data-customadd='<?php echo $adhiere; ?>'
 		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda'];; ?>"
-		 data-customrequired="<?php echo $requerido; ?>"
+     data-customrequired="<?php echo $requerido; ?>"
+     data-custommin="<?php echo $min; ?>"
+		 data-custommax="<?php echo $max; ?>"
 		 data-custommodel="<?php echo $modelo; ?>"
 		 id="<?php echo $atributo_san; ?>"
 		 name="<?php echo $atributo_san; ?>">
@@ -93,7 +97,9 @@ function getAttributeHTML($atributo) {
 		 data-customadd='<?php echo $adhiere; ?>'
 		 data-customaddin="<?php echo $atributo['porcentaje']; ?>"
 		 data-customcurrency="<?php echo $atributo['moneda']; ?>"
-		 data-customrequired="<?php echo $requerido; ?>"
+     data-customrequired="<?php echo $requerido; ?>"
+     data-custommin="<?php echo $min; ?>"
+		 data-custommax="<?php echo $max; ?>"
 		 data-customcheck="<?php echo $atributo['validacion']; ?>"
 		 data-custommodel="<?php echo $modelo; ?>"
 		 id="<?php echo $atributo_san; ?>"
