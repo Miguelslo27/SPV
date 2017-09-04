@@ -503,6 +503,7 @@ function checkType(fieldname, type, min, max, value, status) {
 
 			min = parseInt(min);
 			max = parseInt(max);
+			value = parseInt(value);
 
 			if (value === 0) {
 				status.ok = false;
