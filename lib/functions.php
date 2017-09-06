@@ -616,7 +616,25 @@ function paperPDF_2($data) {
       // Ámbito Geográfico de utilización
       newPDFRow(0  , Array(
         newPDFCell(48, 0, 8.8, '')
+      ))
+    )),
+    newPDFPage(Array(
+      // Límite de Indemnización
+      // Suma Asegurada
+      newPDFRow(37.6, Array (
+        newPDFCell(58, 0, 4, @$data['cotizacion']['suma_asegurada'])
       )),
+      // Datos del corredor
+      // Nombre, código, Rut
+      newPDFRow(69.4, Array (
+        newPDFCell(44.5, 0, 4.5, 'SCUTUM SRL'),
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(44.5, 0, 4.5, '3947'),
+      )),
+      newPDFRow(0, Array(
+        newPDFCell(44.5, 0, 4.5, '217708430012')
+      ))
     ))
   );
 
