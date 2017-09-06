@@ -314,7 +314,7 @@ if (!empty ($accion)) {
 				<div class="push-60-left">
 					<p>Producto solicitado: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $categoria['nombre']); ?></strong></span>.</p>
 					<p>Cobertura: <span><strong><?php echo str_replace(' ', '</strong> <strong>', $seguro['nombre']); ?></strong></span>.</p>
-					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.($seguro['producto'] == 'segurodenotebook' ? $seguro['precio_imp_inc'] : $seguro['precio']); ?></strong></span></p>
+					<p>Precio de la cotización: <span><strong><?php echo $seguro['moneda'].' '.($seguro['producto'] == 'segurodenotebook' ? number_format($seguro['precio_imp_inc'], 2) : number_format($seguro['precio'], 2)); ?></strong></span></p>
 				</div>
 				<h3 class="green-style">Solicitud enviada</h3>
 				<div class="push-60-left">

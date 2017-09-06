@@ -213,7 +213,7 @@ $(document).on('ready', function() {
 		 	}
 		 });
 
-		var precio_final = precio_seguro + precio_seguro_;
+		var precio_final = Math.ceil(precio_seguro + precio_seguro_);
 
 		if ($form_product == 'segurodenotebook') {
 		 var imp_op = precio_final * 0.12;
@@ -222,8 +222,8 @@ $(document).on('ready', function() {
 		 precio_final += imp_op + imp_iva;
 		}
 
-		$('#precio_seguro').data('preciooriginal', precio_seguro + precio_seguro_);
-		$('#precio_seguro').text(precio_final.toFixed(0));
+		$('#precio_seguro').data('preciooriginal', Math.ceil(precio_seguro + precio_seguro_));
+		$('#precio_seguro').text(precio_final.toFixed(2));
 	});
 });
 
