@@ -397,13 +397,14 @@ function paperPDF_1($data) {
       // Forma de pago
       // Contado - Financiación (número de cuotas)
       newPDFRow(9, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-'),
-        newPDFCell(59, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-'),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : '' ? 'X' : '-'),
+        newPDFCell(59, 4, 4.5, @$data['cotizacion']['cuotas'] != 1 ? 'X' : '-'),
         newPDFCell(65, 0, 4.5, @$data['cotizacion']['cuotas'])
       )),
       // Titular Tarjeta
       newPDFRow(0, Array (
-        newPDFCell(77.5, 0, 4.5, @$data['cotizacion']['titular_tarjeta'])
+        newPDFCell(0, 3, 4.5, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : ''),
+        newPDFCell(70, 0, 4.5, @$data['cotizacion']['titular_tarjeta'])
       )),
       // Número Tarjeta
       newPDFRow(0, Array (
@@ -562,17 +563,17 @@ function paperPDF_2($data) {
       // Forma de pago
       // Contado, Cuotas, Cantidad de cuotas
       newPDFRow(13, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '1' || @$data['cotizacion']['cuotas'] == 1 ? 'X' : ''),
-        newPDFCell(20, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['cuotas'] != 1 ? 'X' : ''),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : ''),
+        newPDFCell(20, 4, 4.5, @$data['cotizacion']['cuotas'] != 1 ? 'X' : ''),
         newPDFCell(20, 0, 4.5, @$data['cotizacion']['cuotas'])
       )),
       // Red de cobranzas
       newPDFRow(0, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '1' || @$data['cotizacion']['cuotas'] == 1 ? 'X' : ''),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : ''),
       )),
       // Débito de tarjeta, Número de tarjeta, Vencimiento
       newPDFRow(2.4, Array (
-        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['cuotas'] 1= 1 ? 'X' : ''),
+        newPDFCell(0, 4, 4.5, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['forma_de_pago'] == '3' || @$data['cotizacion']['cuotas'] != 1 ? 'X' : ''),
         newPDFCell(61, 35, 4.5, ''),
         newPDFCell(42, 8, 4.5, ''),
         newPDFCell(17, 11, 4.5, ''),
@@ -712,19 +713,19 @@ function paperPDF_3($data) {
       // Forma de pago
       // Contado, Cuotas, Cantidad de cuotas, Moneda Pesos, Moneda Dólares
       newPDFRow(11.5, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-', 'C'),
-        newPDFCell(21, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : '' ? 'X' : '-', 'C'),
+        newPDFCell(21, 4, 3.95, @$data['cotizacion']['cuotas'] != 1 ? 'X' : '-', 'C'),
         newPDFCell(20, 32.2, 3.95, @$data['cotizacion']['cuotas']),
         newPDFCell(22, 6, 3.95, @$data['seguro']['moneda'] == '$' ? 'X' : '', 'C'),
         newPDFCell(40, 6, 3.95, @$data['seguro']['moneda'] == 'USD' ? 'X' : '', 'C'),
       )),
       // Red de cobranzas
       newPDFRow(0, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : '', 'C'),
       )),
       // Débito de tarjeta, Nº de tarjeta, Vencimiento
       newPDFRow(0, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['forma_de_pago'] == '3' || @$data['cotizacion']['cuotas'] ? 'X' : '', 'C'),
         newPDFCell(64, 42, 3.95, ''),
         newPDFCell(38.5, 23, 3.95, '', 'C'),
         newPDFCell(0, 19, 3.95, '', 'C'),
@@ -850,19 +851,19 @@ function paperPDF_4($data) {
       // Forma de pago
       // Contado, Cuotas, Cantidad de cuotas, Moneda Pesos, Moneda Dólares
       newPDFRow(11.5, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '-', 'C'),
-        newPDFCell(21, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '-', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : '' ? 'X' : '-', 'C'),
+        newPDFCell(21, 4, 3.95, @$data['cotizacion']['cuotas'] != 1 ? 'X' : '-', 'C'),
         newPDFCell(20, 32.2, 3.95, @$data['cotizacion']['cuotas']),
         newPDFCell(22, 6, 3.95, @$data['seguro']['moneda'] == '$' ? 'X' : '', 'C'),
         newPDFCell(40, 6, 3.95, @$data['seguro']['moneda'] == 'USD' ? 'X' : '', 'C'),
       )),
       // Red de cobranzas
       newPDFRow(0, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '3' ? 'X' : '', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '1' && @$data['cotizacion']['cuotas'] == 1 ? 'X' : '', 'C'),
       )),
       // Débito de tarjeta, Nº de tarjeta, Vencimiento
       newPDFRow(0, Array(
-        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == 'b' ? 'X' : '', 'C'),
+        newPDFCell(0, 4, 3.95, @$data['cotizacion']['forma_de_pago'] == '2' || @$data['cotizacion']['forma_de_pago'] == '3' || @$data['cotizacion']['cuotas'] ? 'X' : '', 'C'),
         newPDFCell(64, 42, 3.95, ''),
         newPDFCell(38.5, 23, 3.95, '', 'C'),
         newPDFCell(0, 19, 3.95, '', 'C'),
