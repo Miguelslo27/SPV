@@ -3,7 +3,9 @@ config.php
 #Symbolic links
 backoffice
 dev
-stage
+demo
+bo_dev
+bo_stage
 
 pdfs/*
 pdfs/tests/
