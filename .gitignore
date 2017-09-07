@@ -1,5 +1,10 @@
 config.php
 
+#Symbolic links
+backoffice
+dev
+stage
+
 pdfs/*
 pdfs/tests/
 pdfs/tests/*
